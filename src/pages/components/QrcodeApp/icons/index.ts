@@ -1,31 +1,31 @@
-import svg_p5em4h from './svg_p5em4h.svg?raw';
-import svg_cpbwzi from './svg_cpbwzi.svg?raw';
-import svg_wfou0u from './svg_wfou0u.svg?raw';
-import svg_kyd049 from './svg_kyd049.svg?raw';
-import svg_7m7w27 from './svg_7m7w27.svg?raw';
-import svg_la1ub9 from './svg_la1ub9.svg?raw';
-import svg_mkn8kk from './svg_mkn8kk.svg?raw';
-import svg_8hoy2a from './svg_8hoy2a.svg?raw';
-import svg_ot8ecz from './svg_ot8ecz.svg?raw';
-import svg_veoh6e from './svg_veoh6e.svg?raw';
-import svg_60wlqr from './svg_60wlqr.svg?raw';
-import svg_c95y7l from './svg_c95y7l.svg?raw';
-import svg_vh85f5 from './svg_vh85f5.svg?raw';
-import svg_dk0gj9 from './svg_dk0gj9.svg?raw';
+import svg_kazbhg from './svg_kazbhg.svg?raw';
+import svg_vmhfnu from './svg_vmhfnu.svg?raw';
+import svg_s23y3t from './svg_s23y3t.svg?raw';
+import svg_8jx84h from './svg_8jx84h.svg?raw';
+import svg_cbsn2x from './svg_cbsn2x.svg?raw';
+import svg_93xm15 from './svg_93xm15.svg?raw';
+import svg_8h2tbq from './svg_8h2tbq.svg?raw';
+import svg_yingdc from './svg_yingdc.svg?raw';
+import svg_wp6cfq from './svg_wp6cfq.svg?raw';
+import svg_skmi1k from './svg_skmi1k.svg?raw';
+import svg_6pck81 from './svg_6pck81.svg?raw';
+import svg_mgnhag from './svg_mgnhag.svg?raw';
+import svg_jqzy9g from './svg_jqzy9g.svg?raw';
+import svg_qlvagg from './svg_qlvagg.svg?raw';
 const ICONS = {
-  svg_p5em4h,
-  svg_cpbwzi,
-  svg_wfou0u,
-  svg_kyd049,
-  svg_7m7w27,
-  svg_la1ub9,
-  svg_mkn8kk,
-  svg_8hoy2a,
-  svg_ot8ecz,
-  svg_veoh6e,
-  svg_60wlqr,
-  svg_c95y7l,
-  svg_vh85f5,
-  svg_dk0gj9,
+  svg_kazbhg,
+  svg_vmhfnu,
+  svg_s23y3t,
+  svg_8jx84h,
+  svg_cbsn2x,
+  svg_93xm15,
+  svg_8h2tbq,
+  svg_yingdc,
+  svg_wp6cfq,
+  svg_skmi1k,
+  svg_6pck81,
+  svg_mgnhag,
+  svg_jqzy9g,
+  svg_qlvagg,
 }
 export default ICONS;

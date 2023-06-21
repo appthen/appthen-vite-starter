@@ -1,9 +1,9 @@
-import svg_shoabc from './svg_shoabc.svg?raw';
-import svg_2po9fe from './svg_2po9fe.svg?raw';
-import svg_t37vld from './svg_t37vld.svg?raw';
+import svg_4mfnvb from './svg_4mfnvb.svg?raw';
+import svg_imgfvk from './svg_imgfvk.svg?raw';
+import svg_93khn6 from './svg_93khn6.svg?raw';
 const ICONS = {
-  svg_shoabc,
-  svg_2po9fe,
-  svg_t37vld,
+  svg_4mfnvb,
+  svg_imgfvk,
+  svg_93khn6,
 }
 export default ICONS;

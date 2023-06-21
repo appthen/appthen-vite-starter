@@ -144,6 +144,16 @@
   color: #eaeaea;
   margin-right: 3px;
 }
+.QrcodeApp__vw__vw2__vw1 {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 15px;
+}
+.QrcodeApp__vw__vw2__vw1__tx {
+  font-size: 17px;
+  color: #ff1717;
+  line-height: 23px;
+}
 .QrcodeApp__vw__vw3 {
   display: flex;
   flex-direction: row;
@@ -438,7 +448,7 @@
   align-items: center;
   width: 95px;
   height: 95px;
-  padding-bottom: 14px;
+  padding-bottom: 18px;
 }
 .QrcodeApp__vw_2__vw__vw__vw {
   display: flex;
@@ -449,6 +459,7 @@
 .QrcodeApp__tx {
   font-size: 14px;
   color: #ef7515;
+  font-weight: 600;
 }
 .QrcodeApp__vw_2__vw1 {
   display: flex;

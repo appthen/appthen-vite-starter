@@ -1,5 +1,5 @@
 import LoadingOrError from "./components/LoadingOrError";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
 import { history } from "@/utils/router";
 
@@ -12,8 +12,8 @@ const ProjectManagement = lazy(async () => import("./pages/projectManagement"));
 //   import("./pages/employeeManagement")
 // );
 
-const isHttps = document.location.protocol === 'https:';
-if (import.meta?.env?.MODE !== 'development' && !isHttps) {
+const isHttps = document.location.protocol === "https:";
+if (import.meta?.env?.MODE !== "development" && !isHttps) {
   window.location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
 }
 

@@ -215,7 +215,7 @@ class Register$Page extends React.Component {
               </View>
               <View className='register__vw__vw1__vw__vw2'>
                 <View className='register__vw__vw1__vw__vw2__vw'>
-                  <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_shoabc"]} />
+                  <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_4mfnvb"]} />
                 </View>
                 <View className='register__vw__vw1__vw__vw2__vw1 M-flex-item'>
                   <Input placeholder='用户名' bordered={false} disabled={false} allowClear={true} value={$eval(() => this.state.account)} onChange={function () {
@@ -228,7 +228,7 @@ class Register$Page extends React.Component {
               </View>
               <View className='register__vw__vw1__vw__vw3'>
                 <View className='register__vw__vw1__vw__vw3__vw'>
-                  <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_2po9fe"]} />
+                  <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_imgfvk"]} />
                 </View>
                 <View className='register__vw__vw1__vw__vw3__vw1 M-flex-item'>
                   <Input.Password bordered={false} disabled={false} visibilityToggle={true} placeholder='密码' value={$eval(() => this.state.password)} onChange={function () {
@@ -243,7 +243,7 @@ class Register$Page extends React.Component {
               </View>
               {!!false && <View ref={this._refsManager.linkRef('view-4c3d5e36')} className='register__vw__vw1__vw__vw4'>
                   <View className='register__vw__vw1__vw__vw4__vw'>
-                    <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_t37vld"]} />
+                    <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_93khn6"]} />
                   </View>
                   <View className='register__vw__vw1__vw__vw4__vw1 M-flex-item'>
                     <Input placeholder='验证码' bordered={false} disabled={false} allowClear={true} value={$eval(() => this.state.code)} onChange={function () {

@@ -1,5 +1,5 @@
-import svg_yxk6m3 from './svg_yxk6m3.svg?raw';
+import svg_h6s8tp from './svg_h6s8tp.svg?raw';
 const ICONS = {
-  svg_yxk6m3,
+  svg_h6s8tp,
 }
 export default ICONS;

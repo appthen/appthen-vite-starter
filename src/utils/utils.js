@@ -1,30 +1,32 @@
-import { createRef } from 'react';
-import { preload, getStorage, dataSource } from "@disscode/react/lib/utils/index.js";
+import { createRef } from "react";
+import {
+  preload,
+  getStorage,
+  dataSource,
+} from "@disscode/react/lib/utils/index.js";
 import { requestHandle } from "./dataSource";
 import constants from "./constants";
 export const checkForLogin = async function () {
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = localStorage.getItem("accessToken");
 
   if (accessToken) {
-    setGlobalData('accessToken', accessToken);
-    const userInfo = await reloadGlobalData('userInfo');
+    setGlobalData("accessToken", accessToken);
+    const userInfo = await reloadGlobalData("userInfo");
   } else {
-    throw new Error('未登录');
+    throw new Error("未登录");
   }
 };
 export const accessToPersonalData = function () {
-  console.log('accessToPersonalData');
+  console.log("accessToPersonalData");
 };
 export const getLaf = async function () {
-  let laf = preload('LAF_INSTANSE');
+  let laf = preload("LAF_INSTANSE");
   if (laf) return laf;
-  let access_token = '';
+  let access_token = "";
 
   try {
-    const {
-      data
-    } = await getStorage({
-      key: 'access_token'
+    const { data } = await getStorage({
+      key: "access_token",
     });
 
     if (data) {
@@ -38,15 +40,15 @@ export const getLaf = async function () {
   // })
   // this.utils.preload('LAF_INSTANSE', laf);
 
-
   return laf;
 };
 export const __beforeRequest = function (options) {
-  const accessToken = getGlobalData('accessToken');
+  const accessToken = getGlobalData("accessToken");
 
   if (accessToken) {
-    options.headers = { ...options.headers,
-      Authorization: 'Bearer ' + accessToken
+    options.headers = {
+      ...options.headers,
+      Authorization: "Bearer " + accessToken,
     };
   }
 
@@ -66,10 +68,11 @@ export const compressAndConvertToBase64 = function (file) {
       const image = new Image();
 
       image.onload = function () {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        const MAX_WIDTH = 1000;
-        const MAX_HEIGHT = 800;
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        const MAX_WIDTH = 400;
+        const MAX_HEIGHT = 400;
         let width = image.width;
         let height = image.height;
 
@@ -87,100 +90,119 @@ export const compressAndConvertToBase64 = function (file) {
 
         canvas.width = width;
         canvas.height = height;
-        ctx.drawImage(image, 0, 0, width, height);
-        canvas.toBlob(blob => {
-          const reader = new FileReader();
-          reader.readAsDataURL(blob);
 
-          reader.onloadend = () => resolve(reader.result);
-        }, 'image/jpeg', 0.7);
+        ctx.drawImage(image, 0, 0, width, height);
+
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+          const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+          const value = avg > 180 ? 245 : 0;
+          data[i] = value;
+          data[i + 1] = value;
+          data[i + 2] = value;
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+
+        canvas.toBlob(
+          (blob) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = () => resolve(reader.result);
+          },
+          "image/jpeg",
+          1
+        );
       };
 
       image.src = URL.createObjectURL(blob);
     };
 
-    reader.onerror = error => reject(error);
+    reader.onerror = (error) => reject(error);
   });
 };
 export const __afterRequest = function (response) {
   return response;
 };
 
-    class DataSourceStore {
-      constructor() {
-        this.state = constants;
-        this.constants = constants;
-      }
+class DataSourceStore {
+  constructor() {
+    this.state = constants;
+    this.constants = constants;
+  }
 
-      state = {};
-      setState(state) {
-        this.state = {
-          ...this.state,
-          ...state,
-        };
-      }
+  state = {};
+  setState(state) {
+    this.state = {
+      ...this.state,
+      ...state,
+    };
+  }
 
-      get = (key) => {
-        return this.state[key];
-      };
-
-      set = (key, value) => {
-        this.setState({
-          ...this.state,
-          [key]: value
-        })
-      };
-
-      _dataSourceConfig = this._defineDataSourceConfig();
-      _dataSourceEngine = dataSource(
-        this._dataSourceConfig,
-        this,
-        {
-          runtimeConfig: true,
-          requestHandlersMap: {
-            fetch: requestHandle()
-          }
-        }
-      );
-
-      get dataSourceMap() {
-        return this._dataSourceEngine.dataSourceMap || {};
-      }
-
-      reloadDataSource = async () => {
-        await this._dataSourceEngine.reloadDataSource();
-      }
-
-      _defineDataSourceConfig() {
-        const _this = this;
-        return ({"list": [{"id": "userInfo",
-"isInit": function () {
-  return false;
-},
-"isSync": false,
-"type": "fetch",
-"options": function () {
-  return {
-    "uri": _this.constants.HostDomain + "/system_user_userinfo",
-    "contentType": "JSON",
-    "method": "POST"
+  get = (key) => {
+    return this.state[key];
   };
-},
-"dataHandler": function dataHandler(res) {
-  return res.data?.data?.[0];
-}}]});
-      }
 
-      reloadGlobalData = (key, options) => {
-        if (key) {
-          return this.dataSourceMap[key]?.load?.(options);
-        }
-        return this.reloadDataSource();
-      };
+  set = (key, value) => {
+    this.setState({
+      ...this.state,
+      [key]: value,
+    });
+  };
+
+  _dataSourceConfig = this._defineDataSourceConfig();
+  _dataSourceEngine = dataSource(this._dataSourceConfig, this, {
+    runtimeConfig: true,
+    requestHandlersMap: {
+      fetch: requestHandle(),
+    },
+  });
+
+  get dataSourceMap() {
+    return this._dataSourceEngine.dataSourceMap || {};
+  }
+
+  reloadDataSource = async () => {
+    await this._dataSourceEngine.reloadDataSource();
+  };
+
+  _defineDataSourceConfig() {
+    const _this = this;
+    return {
+      list: [
+        {
+          id: "userInfo",
+          isInit: function () {
+            return false;
+          },
+          isSync: false,
+          type: "fetch",
+          options: function () {
+            return {
+              uri: _this.constants.HostDomain + "/system_user_userinfo",
+              contentType: "JSON",
+              method: "POST",
+            };
+          },
+          dataHandler: function dataHandler(res) {
+            return res.data?.data?.[0];
+          },
+        },
+      ],
+    };
+  }
+
+  reloadGlobalData = (key, options) => {
+    if (key) {
+      return this.dataSourceMap[key]?.load?.(options);
     }
-    const globalData = new DataSourceStore();
-    export const setGlobalData = globalData.set;
-    export const getGlobalData = globalData.get;
-    export const reloadGlobalData = globalData.reloadGlobalData;
-    export const globalDataSourceMap = globalData.dataSourceMap;
-    
+    return this.reloadDataSource();
+  };
+}
+const globalData = new DataSourceStore();
+export const setGlobalData = globalData.set;
+export const getGlobalData = globalData.get;
+export const reloadGlobalData = globalData.reloadGlobalData;
+export const globalDataSourceMap = globalData.dataSourceMap;

@@ -22,6 +22,6 @@ export default defineConfig({
       },
     },
   },
-  publicDir: './public',
-  base: 'https://qn.iruddock.com/hysli/',
+  // publicDir: './public',
+  // base: 'https://qn.iruddock.com/hysli/',
 })
