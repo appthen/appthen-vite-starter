@@ -1,0 +1,47 @@
+.MyHeader__vw {
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+  width: 100vw;
+  border-bottom-width: 1px;
+  border-bottom-color: #cccccc;
+  border-bottom-style: solid;
+  background-color: #001cb5;
+}
+.MyHeader__vw__vw {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.MyHeader__vw__vw1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.MyHeader__vw__vw1__tx {
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 500;
+}
+.MyHeader__vw__vw2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10px;
+  padding-right: 15px;
+  position: relative;
+}
+.MyHeader__vw__vw2__Badge {
+  position: absolute;
+  top: 10px;
+  right: 4px;
+}
+.MyHeader__vw__vw3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10px;
+  padding-right: 15px;
+}

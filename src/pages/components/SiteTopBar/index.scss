@@ -1,0 +1,73 @@
+.SiteTopBar__vw {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.SiteTopBar__vw__vw {
+  display: flex;
+  flex-direction: row;
+  height: 80px;
+  width: 1158px;
+}
+.SiteTopBar__vw__vw__vw {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.SiteTopBar__vw__vw__vw__Image {
+  width: 146px;
+  height: 36px;
+}
+.SiteTopBar__vw__vw__vw1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.SiteTopBar__vw__vw__vw2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10px;
+  padding-right: 5px;
+  align-items: center;
+}
+.SiteTopBar__vw__vw__vw2__vw {
+  height: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: #373737;
+  border-radius: 10px;
+}
+.SiteTopBar__vw__vw__vw2__vw__tx {
+  font-size: 14px;
+  color: #ffffff;
+}
+.SiteTopBar__vw__vw__vw3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10px;
+  padding-right: 5px;
+  align-items: center;
+}
+.SiteTopBar__vw__vw__vw3__vw {
+  height: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: #3400d9;
+  border-radius: 10px;
+}
+.SiteTopBar__vw__vw__vw3__vw__tx {
+  font-size: 14px;
+  color: #ffffff;
+}
