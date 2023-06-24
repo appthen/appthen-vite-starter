@@ -1,7 +1,7 @@
-import svg_iqep8n from './svg_iqep8n.svg?raw';
-import svg_v7goji from './svg_v7goji.svg?raw';
+import svg_mwx6nn from './svg_mwx6nn.svg?raw';
+import svg_j0your from './svg_j0your.svg?raw';
 const ICONS = {
-  svg_iqep8n,
-  svg_v7goji,
+  svg_mwx6nn,
+  svg_j0your,
 }
 export default ICONS;

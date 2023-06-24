@@ -150,7 +150,7 @@ class ApplicationList$Page extends React.Component {
                             <View className='ApplicationList__vw_2__vw2__vw M-flex-item' />
                             <View className='ApplicationList__vw_2__vw2__vw1' />
                             <View className='ApplicationList__vw_2__vw2__vw2'>
-                              <AtIcon color='#333333' size={17} svg={ICONS["svg_h6s8tp"]} />
+                              <AtIcon color='#333333' size={17} svg={ICONS["svg_0b9sat"]} />
                             </View>
                           </View>
                         </View>

@@ -281,34 +281,36 @@ class QrcodeApp$Page extends React.Component {
       }
 
       try {
-        const base64 = await this.utils.compressAndConvertToBase64(originFileObj);
-        const qrcode_base64 = base64.split(';base64,')[1]; // const reader = new FileReader();
-        // 设置回调函数，当读取完成后触发该函数
-        // reader.onload = () => {
-        // 将文件内容转换成base64编码
-        // const qrcode_base64 = reader.result.replace(/^data:.+;base64,/, '');
-        // 显示base64字符串
+        // const base64 = await this.utils.compressAndConvertToBase64(originFileObj);
+        // const qrcode_base64 = base64.split(';base64,')[1];
+        const reader = new FileReader(); // 设置回调函数，当读取完成后触发该函数
 
-        this.setState({
-          qrcode_base64,
-          lock: true,
-          start: 60
-        }, async () => {
-          // 优化二维码
-          const requestEditCode = await this.dataSourceMap['requestEditCode']?.load();
+        reader.onload = () => {
+          // 将文件内容转换成base64编码
+          const qrcode_base64 = reader.result.replace(/^data:.+;base64,/, ''); // 显示base64字符串
 
-          if (requestEditCode) {
-            this.setState({
-              qrcode_base64: requestEditCode.split(';base64,')[1]
-            });
-            this.utils.message.success('已对您的二维码进行优化');
-          }
-        }); // };
+          this.setState({
+            qrcode_base64,
+            lock: true,
+            start: 60
+          }, async () => {
+            // 优化二维码
+            const requestEditCode = await this.dataSourceMap['requestEditCode']?.load();
+
+            if (requestEditCode) {
+              this.setState({
+                qrcode_base64: requestEditCode.split(';base64,')[1]
+              });
+              this.utils.message.success('已对您的二维码进行优化');
+            }
+          });
+        }; // 开始读取文件
+
+
+        reader.readAsDataURL(originFileObj);
       } catch (e) {
         this.utils.message.success('二维码校验失败');
-      } // 开始读取文件
-      // reader.readAsDataURL(originFileObj);
-
+      }
     }
   }
 
@@ -545,7 +547,7 @@ class QrcodeApp$Page extends React.Component {
                 <View className='QrcodeApp__vw__vw1__vw'>
                   <View ref={this._refsManager.linkRef('view-f1dd3381')} className='QrcodeApp__vw__vw1__vw__vw'>
                     <View className='QrcodeApp__vw__vw1__vw__vw__vw'>
-                      <AtIcon color='#573de7' size={22} svg={ICONS["svg_kazbhg"]} />
+                      <AtIcon color='#573de7' size={22} svg={ICONS["svg_hfuh3v"]} />
                       <Text className='QrcodeApp__vw__vw1__vw__vw__vw__tx1'>
                         二维码强调程度（推荐：60-80）
                       </Text>
@@ -595,7 +597,7 @@ class QrcodeApp$Page extends React.Component {
                 });
               }} className='QrcodeApp__vw__vw2__vw__vw__vw1'>
                       <View className='QrcodeApp__vw__vw2__vw__vw__vw1__vw'>
-                        <AtIcon color={$eval(() => _this.state.lock ? '#fff' : '#666')} size={15} svg={ICONS["svg_vmhfnu"]} className='QrcodeApp__vw__vw2__vw__vw__vw1__vw__AtIcon' />
+                        <AtIcon color={$eval(() => _this.state.lock ? '#fff' : '#666')} size={15} svg={ICONS["svg_u9z9fa"]} className='QrcodeApp__vw__vw2__vw__vw__vw1__vw__AtIcon' />
                         <Text inlineStyle={[{
                     enable: $eval(() => !_this.state.lock),
                     name: '动态样式1',
@@ -642,7 +644,7 @@ class QrcodeApp$Page extends React.Component {
                 <View className='QrcodeApp__vw_1__vw1__vw'>
                   <View ref={this._refsManager.linkRef('view-f1dd3381')} className='QrcodeApp__vw_1__vw1__vw__vw'>
                     <View className='QrcodeApp__vw_1__vw1__vw__vw__vw'>
-                      <AtIcon color='#573de7' size={22} svg={ICONS["svg_s23y3t"]} />
+                      <AtIcon color='#573de7' size={22} svg={ICONS["svg_kmppdt"]} />
                       <Text className='QrcodeApp__vw_1__vw1__vw__vw__vw__tx1'>
                         二维码强调程度（推荐：60-80）
                       </Text>
@@ -692,7 +694,7 @@ class QrcodeApp$Page extends React.Component {
                 });
               }} className='QrcodeApp__vw_1__vw2__vw__vw__vw1'>
                       <View className='QrcodeApp__vw_1__vw2__vw__vw__vw1__vw'>
-                        <AtIcon color={$eval(() => _this.state.lock ? '#fff' : '#666')} size={15} svg={ICONS["svg_8jx84h"]} className='QrcodeApp__vw_1__vw2__vw__vw__vw1__vw__AtIcon' />
+                        <AtIcon color={$eval(() => _this.state.lock ? '#fff' : '#666')} size={15} svg={ICONS["svg_8fpr59"]} className='QrcodeApp__vw_1__vw2__vw__vw__vw1__vw__AtIcon' />
                         <Text inlineStyle={[{
                     enable: $eval(() => !_this.state.lock),
                     name: '动态样式1',
@@ -747,7 +749,7 @@ class QrcodeApp$Page extends React.Component {
                         }} ref={this._refsManager.linkRef('view-ec050aaa')} className='QrcodeApp__vw_2__vw'>
                               {!!$eval(() => this.state.status === 'begin') && <View className='QrcodeApp__vw_2__vw__vw M-gb-click' ref={this._refsManager.linkRef('view-6c2bb9f8')}>
                                   <View ref={this._refsManager.linkRef('view-5ff3e1bb')} className='QrcodeApp__vw_2__vw__vw__vw M-flex-item'>
-                                    <AtIcon color='#f98425' size={30} svg={ICONS["svg_cbsn2x"]} />
+                                    <AtIcon color='#f98425' size={30} svg={ICONS["svg_gqgv7g"]} />
                                   </View>
                                   <View ref={this._refsManager.linkRef('view-295df367')}>
                                     <Text ref={this._refsManager.linkRef('text-4ee23d1f')} className='QrcodeApp__tx'>
@@ -808,7 +810,7 @@ class QrcodeApp$Page extends React.Component {
                                       return false;
                                     }}>
                                           <View className='QrcodeApp__vw_4 M-gb-click' ref={this._refsManager.linkRef('view-915dfecf')}>
-                                            <AtIcon color='#666' size={22} svg={ICONS["svg_93xm15"]} />
+                                            <AtIcon color='#666' size={22} svg={ICONS["svg_fo6xfn"]} />
                                             <Text className='QrcodeApp__vw_4__tx1'>
                                               上传二维码
                                             </Text>
@@ -993,7 +995,7 @@ class QrcodeApp$Page extends React.Component {
                                   }]));
                                 }.bind(this)}>
                                         <View ref={this._refsManager.linkRef('view-5ff3e1bb')} className='QrcodeApp__vw_9__vw__vw1__vw M-flex-item'>
-                                          <AtIcon color='#ffffff' size={30} svg={ICONS["svg_8h2tbq"]} ref={this._refsManager.linkRef('aticon-69c1ac27')} />
+                                          <AtIcon color='#ffffff' size={30} svg={ICONS["svg_8fnniv"]} ref={this._refsManager.linkRef('aticon-69c1ac27')} />
                                         </View>
                                         <View ref={this._refsManager.linkRef('view-295df367')}>
                                           <Text ref={this._refsManager.linkRef('text-4ee23d1f')} className='QrcodeApp__tx_10'>
@@ -1019,7 +1021,7 @@ class QrcodeApp$Page extends React.Component {
                               </View>
                               {!!false && <View ref={this._refsManager.linkRef('view-f1dd3381')} className='QrcodeApp__vw1_11'>
                                   <View className='QrcodeApp__vw1_11__vw'>
-                                    <AtIcon color='#573de7' size={22} svg={ICONS["svg_yingdc"]} />
+                                    <AtIcon color='#573de7' size={22} svg={ICONS["svg_i03lvw"]} />
                                     <Text className='QrcodeApp__vw1_11__vw__tx1'>
                                       二维码强调程度（推荐：60-80）
                                     </Text>
@@ -1057,7 +1059,7 @@ class QrcodeApp$Page extends React.Component {
                                   }]));
                                 }.bind(this)}>
                                       <View className='QrcodeApp__vw2__vw__vw__vw M-flex-item'>
-                                        <AtIcon color='#519c03' size={24} svg={ICONS["svg_wp6cfq"]} />
+                                        <AtIcon color='#519c03' size={24} svg={ICONS["svg_yjjmfx"]} />
                                       </View>
                                       <View>
                                         <Text className='QrcodeApp__tx_12'>
@@ -1071,7 +1073,7 @@ class QrcodeApp$Page extends React.Component {
                                   }]));
                                 }.bind(this)}>
                                       <View className='QrcodeApp__vw2__vw__vw1__vw M-flex-item'>
-                                        <AtIcon color='#5249ff' size={30} svg={ICONS["svg_skmi1k"]} />
+                                        <AtIcon color='#5249ff' size={30} svg={ICONS["svg_axoizy"]} />
                                       </View>
                                       <View>
                                         <Text className='QrcodeApp__tx_13'>
@@ -1083,7 +1085,7 @@ class QrcodeApp$Page extends React.Component {
                                   this.downloadPicture(this.state.check?.data?.fileUrl);
                                 }}>
                                       <View className='QrcodeApp__vw2__vw__vw2__vw M-flex-item'>
-                                        <AtIcon color='#ff9b42' size={28} svg={ICONS["svg_6pck81"]} />
+                                        <AtIcon color='#ff9b42' size={28} svg={ICONS["svg_65yre2"]} />
                                       </View>
                                       <View>
                                         <Text className='QrcodeApp__tx_14'>
@@ -1097,7 +1099,7 @@ class QrcodeApp$Page extends React.Component {
                                   this.$(this.props.isMobile ? 'youhua_mobile' : 'modal1')?.open();
                                 }}>
                                       <View className='QrcodeApp__vw2__vw1__vw__vw M-flex-item'>
-                                        <AtIcon color='#5249ff' size={30} svg={ICONS["svg_mgnhag"]} />
+                                        <AtIcon color='#5249ff' size={30} svg={ICONS["svg_hgk58t"]} />
                                       </View>
                                       <View>
                                         <Text className='QrcodeApp__tx_15'>
@@ -1109,7 +1111,7 @@ class QrcodeApp$Page extends React.Component {
                                   this.downloadPicture(this.state.check?.data?.fileUrl);
                                 }}>
                                       <View className='QrcodeApp__vw2__vw1__vw1__vw M-flex-item'>
-                                        <AtIcon color='#ff9b42' size={28} svg={ICONS["svg_jqzy9g"]} />
+                                        <AtIcon color='#ff9b42' size={28} svg={ICONS["svg_hp75zg"]} />
                                       </View>
                                       <View>
                                         <Text className='QrcodeApp__tx_16'>
@@ -1146,7 +1148,7 @@ class QrcodeApp$Page extends React.Component {
                   <View className='QrcodeApp__two-dimensional_code__vw2__vw1__vw__vw__vw1 M-gb-click' ref={this._refsManager.linkRef('view-e3ed6a0f')} onClick={e => {
                 this.$('autolist')?.refresh();
               }}>
-                    <AtIcon color='#666' size={24} svg={ICONS["svg_qlvagg"]} ref={this._refsManager.linkRef('aticon-d4e959d0')} />
+                    <AtIcon color='#666' size={24} svg={ICONS["svg_bxqsf8"]} ref={this._refsManager.linkRef('aticon-d4e959d0')} />
                   </View>
                 </View>
               </View>

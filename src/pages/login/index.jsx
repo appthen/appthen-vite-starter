@@ -182,7 +182,7 @@ class Login$Page extends React.Component {
               </View>
               <View ref={this._refsManager.linkRef('view-6d99607f')} className='login__vw__vw1__vw__vw2'>
                 <View className='login__vw__vw1__vw__vw2__vw'>
-                  <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_qi09zu"]} />
+                  <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_xlc0iy"]} />
                 </View>
                 <View ref={this._refsManager.linkRef('view-6c65f6d1')} className='login__vw__vw1__vw__vw2__vw1 M-flex-item'>
                   <Input placeholder='用户名' bordered={false} disabled={false} allowClear={true} value={$eval(() => this.state.account)} onChange={function () {
@@ -195,7 +195,7 @@ class Login$Page extends React.Component {
               </View>
               <View ref={this._refsManager.linkRef('view-8c39348d')} className='login__vw__vw1__vw__vw3'>
                 <View className='login__vw__vw1__vw__vw3__vw'>
-                  <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_3nlef3"]} />
+                  <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_0fgdcw"]} />
                 </View>
                 <View ref={this._refsManager.linkRef('view-45020ec7')} className='login__vw__vw1__vw__vw3__vw1 M-flex-item'>
                   <Input.Password bordered={false} disabled={false} visibilityToggle={true} placeholder='密码' value={$eval(() => this.state.password)} onChange={function () {

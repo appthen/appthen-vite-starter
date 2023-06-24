@@ -71,7 +71,7 @@ class HomePage$Page extends React.Component {
                 this.$('modal-ad5c55ea')?.open();
               }} ref={this._refsManager.linkRef('view-04d71741')} className='homePage__card__vw3__vw M-gb-click'>
                   <View className='homePage__card__vw3__vw__vw'>
-                    <AtIcon color='#cbcbcb' size={20} svg={ICONS["svg_6sezth"]} />
+                    <AtIcon color='#cbcbcb' size={20} svg={ICONS["svg_rxe835"]} />
                   </View>
                   <Text ref={this._refsManager.linkRef('text-bd2f6c27')} className='homePage__card__vw3__vw__tx1'>
                     3分钟速览开发

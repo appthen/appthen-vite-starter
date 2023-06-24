@@ -378,7 +378,7 @@
   display: flex;
   flex-direction: row;
   flex: 1;
-  min-height: 100vh-40;
+  min-height: calc(100vh- 40px);
 }
 .QrcodeApp__two-dimensional_code__vw2__vw {
   display: flex;
