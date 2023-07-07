@@ -3,7 +3,7 @@
   flex-direction: column;
 }
 .ApplicationList__application_list__vw {
-  min-height: 500px;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
 }
@@ -77,7 +77,7 @@
   padding-right: 15px;
 }
 .ApplicationList__application_list__vw__sv1__vw2__vw {
-  background-color: #f6f6f6;
+  background-color: rgba(246, 246, 246, 0.5);
   border-radius: 12px;
   padding-top: 15px;
   padding-left: 15px;
@@ -87,6 +87,7 @@
 .ApplicationList__vw_2 {
   background-color: #fff;
   border-radius: 12px;
+  box-shadow: 0 1px 8px 1px rgba(0, 0, 0, 0.04);
 }
 .ApplicationList__vw_2__vw {
   display: flex;
@@ -125,13 +126,22 @@
   flex-direction: row;
   padding-left: 12px;
   padding-right: 10px;
-  padding-top: 10px;
-  min-height: 100px;
+  padding-top: 5px;
 }
 .ApplicationList__vw_2__vw__vw__vw1__vw1__tx {
   font-size: 14px;
   color: #666666;
   line-height: 18px;
+}
+.ApplicationList__vw_2__vw__vw__vw1__vw2 {
+  display: flex;
+  flex-direction: row;
+  padding-left: 12px;
+  padding-right: 10px;
+  padding-top: 10px;
+}
+.ApplicationList__vw_2__vw__vw__vw1__vw2__Image {
+  width: 100%;
 }
 .ApplicationList__vw_2__vw1 {
   display: flex;
@@ -144,6 +154,14 @@
   padding-bottom: 12px;
 }
 .ApplicationList__vw_2__vw2__vw {
+  padding-left: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.ApplicationList__vw_2__vw2__vw__tx {
+  font-size: 14px;
+  color: #6320ff;
 }
 .ApplicationList__vw_2__vw2__vw1 {
   padding-right: 5px;
@@ -153,8 +171,9 @@
 .ApplicationList__vw_2__vw2__vw2 {
   padding-right: 10px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
 }
 .ApplicationList__vw_3 {
   padding-top: 30px;
@@ -164,6 +183,269 @@
   align-items: center;
 }
 .ApplicationList__vw_3__AtActivityIndicator {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.ApplicationList__application_list__vw__sv1__vw3 {
+  margin-top: 30px;
+  padding-left: 20px;
+  padding-right: 15px;
+}
+.ApplicationList__application_list__vw__sv1__vw3__tx {
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+}
+.ApplicationList__application_list__vw__sv1__vw3__vw1 {
+  width: 32px;
+  height: 8px;
+  border-radius: 4px;
+  margin-top: 10px;
+  margin-left: 6px;
+  background-color: #3415fe;
+}
+.ApplicationList__application_list__vw__sv1__vw4 {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 15px;
+}
+.ApplicationList__application_list__vw__sv1__vw4__vw {
+  background-color: rgba(246, 246, 246, 0.5);
+  border-radius: 12px;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+}
+.ApplicationList__vw_4 {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px 1px rgba(0, 0, 0, 0.04);
+}
+.ApplicationList__vw_4__vw {
+  display: flex;
+  flex-direction: row;
+}
+.ApplicationList__vw_4__vw__vw {
+  display: flex;
+  flex-direction: row;
+}
+.ApplicationList__vw_4__vw__vw__vw {
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+}
+.ApplicationList__vw_4__vw__vw__vw__ibg {
+  width: 129px;
+  height: 69px;
+  border-radius: 10px;
+}
+.ApplicationList__vw_4__vw__vw__vw1 {
+}
+.ApplicationList__vw_4__vw__vw__vw1__vw {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 12px;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  padding-right: 15px;
+}
+.ApplicationList__vw_4__vw__vw__vw1__vw__tx {
+  font-size: 16px;
+  color: #333;
+  line-height: 21px;
+  font-weight: 500;
+}
+.ApplicationList__vw_4__vw__vw__vw1__vw1 {
+  display: flex;
+  flex-direction: row;
+  padding-left: 12px;
+  padding-right: 10px;
+}
+.ApplicationList__vw_4__vw__vw__vw1__vw1__tx {
+  font-size: 12px;
+  color: #666666;
+  line-height: 18px;
+}
+.ApplicationList__vw_4__vw1 {
+  display: flex;
+  flex-direction: row;
+}
+.ApplicationList__vw_5 {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px 1px rgba(0, 0, 0, 0.04);
+}
+.ApplicationList__vw_5__vw {
+  display: flex;
+  flex-direction: row;
+}
+.ApplicationList__vw_5__vw__vw {
+  display: flex;
+  flex-direction: row;
+}
+.ApplicationList__vw_5__vw__vw__vw {
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+}
+.ApplicationList__vw_5__vw__vw__vw__ibg {
+  width: 129px;
+  height: 69px;
+  border-radius: 10px;
+}
+.ApplicationList__vw_5__vw__vw__vw1 {
+}
+.ApplicationList__vw_5__vw__vw__vw1__vw {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 12px;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  padding-right: 15px;
+}
+.ApplicationList__vw_5__vw__vw__vw1__vw__tx {
+  font-size: 16px;
+  color: #333;
+  line-height: 21px;
+  font-weight: 500;
+}
+.ApplicationList__vw_5__vw__vw__vw1__vw1 {
+  display: flex;
+  flex-direction: row;
+  padding-left: 12px;
+  padding-right: 10px;
+}
+.ApplicationList__vw_5__vw__vw__vw1__vw1__tx {
+  font-size: 12px;
+  color: #666666;
+  line-height: 18px;
+}
+.ApplicationList__vw_5__vw1 {
+  display: flex;
+  flex-direction: row;
+}
+.ApplicationList__vw_6 {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px 1px rgba(0, 0, 0, 0.04);
+}
+.ApplicationList__vw_6__vw {
+  display: flex;
+  flex-direction: row;
+}
+.ApplicationList__vw_6__vw__vw {
+  display: flex;
+  flex-direction: row;
+}
+.ApplicationList__vw_6__vw__vw__vw {
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+}
+.ApplicationList__vw_6__vw__vw__vw__ibg {
+  width: 129px;
+  height: 69px;
+  border-radius: 10px;
+}
+.ApplicationList__vw_6__vw__vw__vw1 {
+}
+.ApplicationList__vw_6__vw__vw__vw1__vw {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 12px;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  padding-right: 15px;
+}
+.ApplicationList__vw_6__vw__vw__vw1__vw__tx {
+  font-size: 16px;
+  color: #333;
+  line-height: 21px;
+  font-weight: 500;
+}
+.ApplicationList__vw_6__vw__vw__vw1__vw1 {
+  display: flex;
+  flex-direction: row;
+  padding-left: 12px;
+  padding-right: 10px;
+}
+.ApplicationList__vw_6__vw__vw__vw1__vw1__tx {
+  font-size: 12px;
+  color: #666666;
+  line-height: 18px;
+}
+.ApplicationList__vw_6__vw1 {
+  display: flex;
+  flex-direction: row;
+}
+.ApplicationList__vw_7 {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px 1px rgba(0, 0, 0, 0.04);
+}
+.ApplicationList__vw_7__vw {
+  display: flex;
+  flex-direction: row;
+}
+.ApplicationList__vw_7__vw__vw {
+  display: flex;
+  flex-direction: row;
+}
+.ApplicationList__vw_7__vw__vw__vw {
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+}
+.ApplicationList__vw_7__vw__vw__vw__ibg {
+  width: 129px;
+  height: 69px;
+  border-radius: 10px;
+}
+.ApplicationList__vw_7__vw__vw__vw1 {
+}
+.ApplicationList__vw_7__vw__vw__vw1__vw {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 12px;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  padding-right: 15px;
+}
+.ApplicationList__vw_7__vw__vw__vw1__vw__tx {
+  font-size: 16px;
+  color: #333;
+  line-height: 21px;
+  font-weight: 500;
+}
+.ApplicationList__vw_7__vw__vw__vw1__vw1 {
+  display: flex;
+  flex-direction: row;
+  padding-left: 12px;
+  padding-right: 10px;
+}
+.ApplicationList__vw_7__vw__vw__vw1__vw1__tx {
+  font-size: 12px;
+  color: #666666;
+  line-height: 18px;
+}
+.ApplicationList__vw_7__vw1 {
+  display: flex;
+  flex-direction: row;
+}
+.ApplicationList__vw_8 {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.ApplicationList__vw_8__AtActivityIndicator {
   flex-direction: column;
   justify-content: center;
   align-items: center;

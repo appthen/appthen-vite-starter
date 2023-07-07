@@ -112,6 +112,10 @@ export const compressAndConvertToBase64 = function (file) {
     reader.onerror = error => reject(error);
   });
 };
+export const isWeChatBrowser = function () {
+  var userAgent = window.navigator?.userAgent?.toLowerCase?.();
+  return /micromessenger/.test(userAgent);
+};
 export const __afterRequest = function (response) {
   return response;
 };
@@ -178,6 +182,22 @@ export const __afterRequest = function (response) {
 },
 "dataHandler": function dataHandler(res) {
   return res.data?.data?.[0];
+}},{"id": "getOpenId",
+"isInit": function () {
+  return false;
+},
+"isSync": false,
+"type": "fetch",
+"options": function () {
+  return {
+    "uri": _this.constants.HostDomain + "/system_weixin-h5-login",
+    "contentType": "JSON",
+    "method": "POST",
+    "params": {
+      "code": "0818FGFa1MFmCF0aV9Ja1MxGG848FGFj"
+    },
+    "timeout": 10000
+  };
 }}]});
       }
 

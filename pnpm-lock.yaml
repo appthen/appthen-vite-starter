@@ -25,6 +25,7 @@ specifiers:
   react-router-dom: 5.3.4
   sass: ^1.62.1
   sass-loader: ^13.3.1
+  vconsole: ^3.15.1
   vite: ^4.3.9
   vite-svg-loader: ^4.0.0
 
@@ -43,6 +44,7 @@ dependencies:
   react: registry.npmmirror.com/react/16.14.0
   react-dom: registry.npmmirror.com/react-dom/16.14.0_react@16.14.0
   react-router-dom: registry.npmmirror.com/react-router-dom/5.3.4_react@16.14.0
+  vconsole: registry.npmmirror.com/vconsole/3.15.1
 
 devDependencies:
   '@types/react': registry.npmmirror.com/@types/react/18.2.7
@@ -2400,6 +2402,13 @@ packages:
       is-what: registry.npmmirror.com/is-what/3.14.1
     dev: true
 
+  registry.npmmirror.com/copy-text-to-clipboard/3.2.0:
+    resolution: {integrity: sha512-RnJFp1XR/LOBDckxTib5Qjr/PMfkatD0MUCQgdpqS8MdKiNUzBjAQBEN6oUy+jW7LI93BBG3DtMB2KOOKpGs2Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/copy-text-to-clipboard/-/copy-text-to-clipboard-3.2.0.tgz}
+    name: copy-text-to-clipboard
+    version: 3.2.0
+    engines: {node: '>=12'}
+    dev: false
+
   registry.npmmirror.com/copy-to-clipboard/3.3.3:
     resolution: {integrity: sha512-2KV8NhB5JqC3ky0r9PMCAZKbUHSwtEo4CwCs0KXgruG43gX5PMqDEBbVU4OUzw2MuAWUfsuFmWvEKG5QRfSnJA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/copy-to-clipboard/-/copy-to-clipboard-3.3.3.tgz}
     name: copy-to-clipboard
@@ -2413,6 +2422,13 @@ packages:
     name: core-js
     version: 2.6.12
     deprecated: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
+    requiresBuild: true
+    dev: false
+
+  registry.npmmirror.com/core-js/3.31.1:
+    resolution: {integrity: sha512-2sKLtfq1eFST7l7v62zaqXacPc7uG8ZAya8ogijLhTtaKNcpzpB4TMoTw2Si+8GYKRwFPMMtUT0263QFWFfqyQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/core-js/-/core-js-3.31.1.tgz}
+    name: core-js
+    version: 3.31.1
     requiresBuild: true
     dev: false
 
@@ -4009,6 +4025,12 @@ packages:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ms/-/ms-2.1.2.tgz}
     name: ms
     version: 2.1.2
+
+  registry.npmmirror.com/mutation-observer/1.0.3:
+    resolution: {integrity: sha512-M/O/4rF2h776hV7qGMZUH3utZLO/jK7p8rnNgGkjKUw8zCGjRQPxB8z6+5l8+VjRUQ3dNYu4vjqXYLr+U8ZVNA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/mutation-observer/-/mutation-observer-1.0.3.tgz}
+    name: mutation-observer
+    version: 1.0.3
+    dev: false
 
   registry.npmmirror.com/nanoid/3.3.6:
     resolution: {integrity: sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/nanoid/-/nanoid-3.3.6.tgz}
@@ -5871,6 +5893,17 @@ packages:
     resolution: {integrity: sha512-NOJ6JZCAWr0zlxZt+xqCHNTEKOsrks2HQd4MqhP1qy4z1SkbEP467eNx6TgDKXMvUOb+OENfJCZwM+16n7fRfw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/value-equal/-/value-equal-1.0.1.tgz}
     name: value-equal
     version: 1.0.1
+    dev: false
+
+  registry.npmmirror.com/vconsole/3.15.1:
+    resolution: {integrity: sha512-KH8XLdrq9T5YHJO/ixrjivHfmF2PC2CdVoK6RWZB4yftMykYIaXY1mxZYAic70vADM54kpMQF+dYmvl5NRNy1g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vconsole/-/vconsole-3.15.1.tgz}
+    name: vconsole
+    version: 3.15.1
+    dependencies:
+      '@babel/runtime': registry.npmmirror.com/@babel/runtime/7.22.3
+      copy-text-to-clipboard: registry.npmmirror.com/copy-text-to-clipboard/3.2.0
+      core-js: registry.npmmirror.com/core-js/3.31.1
+      mutation-observer: registry.npmmirror.com/mutation-observer/1.0.3
     dev: false
 
   registry.npmmirror.com/vite-svg-loader/4.0.0:

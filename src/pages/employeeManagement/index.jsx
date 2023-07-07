@@ -1,12 +1,11 @@
 import React from 'react';
-import { Page, View, Modal } from '@disscode/react';
-import { ProDrawer, ProTable } from '@seada/antd-materials';
-import { FormilyForm, FormilyInput, FormilyPassword, FormilyNumberPicker, FormilySelect, FormilySwitch, FormilyCheckbox, FormilyTextArea, FormilyUploadDragger } from '@seada/formily-materials';
-import { Icon } from '@alilc/antd-lowcode-materials';
+import { Page, View } from '@disscode/react';
 import { Page as FDPage, Row as FDRow, Cell as FDCell, P as FDP, Section as FDSection, Block as FDBlock } from '@alifd/layout/lib/index.js';
+import { PageHeader, Space, Button, Icon, Form, Input, InputNumber, Select, Slider, Switch, TimePicker, Rate } from '@alilc/antd-lowcode-materials';
+import { ProTable, ProDrawer } from '@seada/antd-materials';
 import { requestHandle } from '@/utils/dataSource';
-import MyHeader from "../components/MyHeader";
-import Sidebar from "../components/Sidebar";
+import MyHeader from "@/pages/components/MyHeader";
+import Sidebar from "@/pages/components/Sidebar";
 import utils from '@/utils';
 import constants from '@/utils/constants';
 import "./index.scss";
@@ -45,7 +44,8 @@ class EmployeeManagement$Page extends React.Component {
         page: 1,
         pageSize: 10,
         sort: '_id,desc'
-      }
+      },
+      end: 1
     };
   }
 
@@ -97,105 +97,6 @@ class EmployeeManagement$Page extends React.Component {
     const _this = this;
 
     return <Page statusBarMode='light'>
-        <ProDrawer title='高级抽屉' placement='right' destroyOnClose={true} width={760} operations={[{
-        action: 'cancel',
-        type: 'normal',
-        content: '取消',
-        id: 'operation_qo3otaipfi'
-      }, {
-        action: 'submit',
-        type: 'primary',
-        content: '确认',
-        id: 'operation_odvkep700vg'
-      }]} ref={this._refsManager.linkRef('pro_drawer_ivtjcdglvrf')} mask={true} maskClosable={true} autoFocus={true} keyboard={true} closable={true} forceRender={false} closeIcon={<Icon type='CloseOutlined' size={16} />}>
-          <FormilyForm componentProps={{
-          layout: 'horizontal'
-        }} ref={this._refsManager.linkRef('formily_whocoddmvb9')}>
-            <FormilyInput fieldProps={{
-            name: 'username',
-            title: 'Input',
-            'x-validator': []
-          }} componentProps={{
-            'x-component-props': {}
-          }} decoratorProps={{
-            'x-decorator-props': {}
-          }} />
-            <FormilyPassword fieldProps={{
-            name: 'password',
-            title: 'Password',
-            'x-validator': []
-          }} componentProps={{
-            'x-component-props': {}
-          }} decoratorProps={{
-            'x-decorator-props': {}
-          }} />
-            <FormilyNumberPicker fieldProps={{
-            name: 'age',
-            title: 'NumberPicker',
-            'x-validator': []
-          }} componentProps={{
-            'x-component-props': {}
-          }} decoratorProps={{
-            'x-decorator-props': {}
-          }} />
-            <FormilySelect fieldProps={{
-            name: 'habit',
-            title: 'Select',
-            'x-validator': []
-          }} componentProps={{
-            'x-component-props': {}
-          }} decoratorProps={{
-            'x-decorator-props': {}
-          }} />
-            <FormilySwitch fieldProps={{
-            name: 'switch',
-            title: 'Switch',
-            'x-validator': []
-          }} componentProps={{
-            'x-component-props': {}
-          }} decoratorProps={{
-            'x-decorator-props': {}
-          }} />
-            <FormilyCheckbox fieldProps={{
-            name: 'gender',
-            title: 'Checkbox Group',
-            enum: [{
-              label: '选项1',
-              value: 1
-            }, {
-              label: '选项2',
-              value: 2
-            }],
-            'x-validator': []
-          }} componentProps={{
-            'x-component-props': {}
-          }} decoratorProps={{
-            'x-decorator-props': {}
-          }} />
-            <FormilyTextArea fieldProps={{
-            name: 'text',
-            title: 'TextArea',
-            'x-component': 'Input.TextArea',
-            'x-validator': []
-          }} componentProps={{
-            'x-component-props': {}
-          }} decoratorProps={{
-            'x-decorator-props': {}
-          }} />
-            <FormilyUploadDragger fieldProps={{
-            name: 'files',
-            title: 'Drag Upload',
-            type: 'Array<object>',
-            'x-validator': []
-          }} componentProps={{
-            'x-component-props': {
-              textContent: 'Click or drag file to this area to upload'
-            }
-          }} decoratorProps={{
-            'x-decorator-props': {}
-          }} />
-          </FormilyForm>
-        </ProDrawer>
         <FDPage contentProps={{
         style: {
           background: '#f1f1f1'
@@ -211,9 +112,22 @@ class EmployeeManagement$Page extends React.Component {
             </FDRow>
           </FDPageHeader>
           <FDSection gap={12} ref={this._refsManager.linkRef('fdsection-96d15fb1')} title='' className='employeeManagement__region'>
-            <FDBlock span={12} mode='transparent' className='employeeManagement__region__FDBlock'>
-              <FDRow width='' gap={10} className='employeeManagement__row_container_1'>
-                <FDCell align='left' verAlign='top' width='' className='employeeManagement__row_container_1__FDCell'>
+            <FDBlock span={12} mode='transparent' className='employeeManagement__block'>
+              <FDCell>
+                <PageHeader title='员工' subTitle='' ghost={false} extra={<Space align='start' direction='horizontal'>
+                      <Button htmlType='button' type='primary' size='middle' shape='default' icon={<Icon type='PlusOutlined' size={16} rotate={0} spin={false} />} block={false} danger={false} ghost={false} loading={false} disabled={false} onClick={event => {
+                  this.$('pro_drawer_ksynv1gdua')?.show();
+                }}>
+                        新增
+                      </Button>
+                    </Space>} style={{}} />
+              </FDCell>
+            </FDBlock>
+          </FDSection>
+          <FDSection gap={12} ref={this._refsManager.linkRef('fdsection-96d15fb1')} title='' className='employeeManagement__region_1'>
+            <FDBlock span={12} mode='transparent' className='employeeManagement__region_1__FDBlock'>
+              <FDRow width='' gap={10} className='employeeManagement__row_container_2'>
+                <FDCell align='left' verAlign='top' width='' className='employeeManagement__row_container_2__FDCell'>
                   <ProTable cardBordered={true} dataSource={$eval(() => this.state.list)} columns={[{
                   title: '用户名',
                   dataIndex: 'username',
@@ -285,7 +199,227 @@ class EmployeeManagement$Page extends React.Component {
             </View>
           </FDPageNav>
         </FDPage>
-        <Modal style={{}} animate='pop' renderView={props => <View className='employeeManagement__vw' />} visible={false} maskClosable={true} />
+        <ProDrawer title='高级抽屉' placement='right' destroyOnClose={true} width={760} operations={[{
+        action: 'cancel',
+        type: 'normal',
+        content: '取消',
+        id: 'operation_51dkrogs6wt'
+      }, {
+        action: 'submit',
+        type: 'primary',
+        content: '确认',
+        id: 'operation_s43tp88ofsl'
+      }]} ref={this._refsManager.linkRef('pro_drawer_ksynv1gdua')} mask={true} maskClosable={true} autoFocus={true} keyboard={true} closable={true} forceRender={false} closeIcon={<Icon type='CloseOutlined' size={16} />}>
+          <Form labelCol={{
+          span: 6
+        }} wrapperCol={{
+          span: 14
+        }} onValuesChange={function () {
+          const self = this;
+
+          try {
+            return function onValuesChange(changedValues, allValues) {
+              console.log('onValuesChange', changedValues, allValues);
+            }.apply(self, arguments);
+          } catch (e) {
+            logger.warn('call function which parsed by lowcode failed: ', e);
+            return e.message;
+          }
+        }} onFinish={function () {
+          const self = this;
+
+          try {
+            return function onFinish(values) {
+              console.log('onFinish', values);
+            }.apply(self, arguments);
+          } catch (e) {
+            logger.warn('call function which parsed by lowcode failed: ', e);
+            return e.message;
+          }
+        }} onFinishFailed={function () {
+          const self = this;
+
+          try {
+            return function onFinishFailed({
+              values,
+              errorFields,
+              outOfDate
+            }) {
+              console.log('onFinishFailed', values, errorFields, outOfDate);
+            }.apply(self, arguments);
+          } catch (e) {
+            logger.warn('call function which parsed by lowcode failed: ', e);
+            return e.message;
+          }
+        }} name='basic' ref={this._refsManager.linkRef('form_cnsa')} colon={true} hideRequiredMark={false} preserve={true} scrollToFirstError={true} validateMessages={{
+          required: "'${name}' 不能为空"
+        }}>
+            <Form.Item label='表单项' labelAlign='right' colon={true} required={true} noStyle={false} valuePropName='value' name='a' requiredobj={{
+            required: true,
+            message: '必填'
+          }} typeobj={{
+            type: '',
+            message: ''
+          }} lenobj={{
+            max: '',
+            min: '',
+            message: ''
+          }} patternobj={{
+            pattern: '',
+            message: ''
+          }}>
+              <Input placeholder='请输入' bordered={true} disabled={false} size='middle' />
+            </Form.Item>
+            <Form.Item label='表单项' labelAlign='right' colon={true} required={false} noStyle={false} valuePropName='value' requiredobj={{
+            required: '',
+            message: ''
+          }} typeobj={{
+            type: '',
+            message: ''
+          }} lenobj={{
+            max: '',
+            min: '',
+            message: ''
+          }} patternobj={{
+            pattern: '',
+            message: ''
+          }} name='b'>
+              <InputNumber placeholder='请输入' autoFocus={false} disabled={false} controls={true} bordered={true} size='middle' />
+            </Form.Item>
+            <Form.Item label='表单项' labelAlign='right' colon={true} required={false} noStyle={false} valuePropName='value' requiredobj={{
+            required: '',
+            message: ''
+          }} typeobj={{
+            type: '',
+            message: ''
+          }} lenobj={{
+            max: '',
+            min: '',
+            message: ''
+          }} patternobj={{
+            pattern: '',
+            message: ''
+          }} name='c'>
+              <Input.Password bordered={true} disabled={false} visibilityToggle={true} placeholder='请输入' size='middle' />
+            </Form.Item>
+            <Form.Item label='表单项' labelAlign='right' colon={true} required={false} noStyle={false} valuePropName='value' requiredobj={{
+            required: '',
+            message: ''
+          }} typeobj={{
+            type: '',
+            message: ''
+          }} lenobj={{
+            max: '',
+            min: '',
+            message: ''
+          }} patternobj={{
+            pattern: '',
+            message: ''
+          }} name='d'>
+              <Input.TextArea autoSize={{
+              minRows: 3,
+              maxRows: 3
+            }} placeholder='请输入' bordered={true} disabled={false} showCount={false} size='middle' />
+            </Form.Item>
+            <Form.Item label='表单项' name='e' labelAlign='right' colon={true} required={false} noStyle={false} valuePropName='value' requiredobj={{
+            required: '',
+            message: ''
+          }} typeobj={{
+            type: '',
+            message: ''
+          }} lenobj={{
+            max: '',
+            min: '',
+            message: ''
+          }} patternobj={{
+            pattern: '',
+            message: ''
+          }}>
+              <Select options={[{
+              label: 'A',
+              value: 'A'
+            }, {
+              label: 'B',
+              value: 'B'
+            }, {
+              label: 'C',
+              value: 'C'
+            }]} allowClear={false} autoFocus={false} defaultActiveFirstOption={true} disabled={false} labelInValue={false} showSearch={false} size='middle' loading={false} bordered={true} filterOption={true} optionFilterProp='value' tokenSeparators={[]} className='employeeManagement__Select' />
+            </Form.Item>
+            <Form.Item label='表单项' labelAlign='right' colon={true} required={false} noStyle={false} valuePropName='value' requiredobj={{
+            required: '',
+            message: ''
+          }} typeobj={{
+            type: '',
+            message: ''
+          }} lenobj={{
+            max: '',
+            min: '',
+            message: ''
+          }} patternobj={{
+            pattern: '',
+            message: ''
+          }} name='f'>
+              <Slider defaultValue={30} range={false} disabled={false} dots={false} reverse={false} vertical={false} />
+            </Form.Item>
+            <Form.Item label='表单项' labelAlign='right' colon={true} required={false} noStyle={false} valuePropName='checked' requiredobj={{
+            required: '',
+            message: ''
+          }} typeobj={{
+            type: '',
+            message: ''
+          }} lenobj={{
+            max: '',
+            min: '',
+            message: ''
+          }} patternobj={{
+            pattern: '',
+            message: ''
+          }} name='i'>
+              <Switch defaultChecked={false} autoFocus={false} disabled={false} loading={false} size='default' />
+            </Form.Item>
+            <Form.Item label='表单项' labelAlign='right' colon={true} required={false} noStyle={false} valuePropName='value' requiredobj={{
+            required: '',
+            message: ''
+          }} typeobj={{
+            type: '',
+            message: ''
+          }} lenobj={{
+            max: '',
+            min: '',
+            message: ''
+          }} patternobj={{
+            pattern: '',
+            message: ''
+          }} name='j'>
+              <TimePicker allowClear={true} autoFocus={false} bordered={true} disabled={false} hideDisabledOptions={false} inputReadOnly={false} use12Hours={false} />
+            </Form.Item>
+            <Form.Item label='表单项' labelAlign='right' colon={true} required={false} noStyle={false} valuePropName='value' requiredobj={{
+            required: '',
+            message: ''
+          }} typeobj={{
+            type: '',
+            message: ''
+          }} lenobj={{
+            max: '',
+            min: '',
+            message: ''
+          }} patternobj={{
+            pattern: '',
+            message: ''
+          }} name='k'>
+              <Rate defaultValue={3} allowClear={true} allowHalf={false} autoFocus={false} count={5} disabled={false} tooltips={[]} />
+            </Form.Item>
+            <Form.Item wrapperCol={{
+            offset: 6
+          }}>
+              <Button type='primary' htmlType='submit'>
+                提交
+              </Button>
+              <Button className='employeeManagement__Button1'>取消</Button>
+            </Form.Item>
+          </Form>
+        </ProDrawer>
       </Page>;
   }
 

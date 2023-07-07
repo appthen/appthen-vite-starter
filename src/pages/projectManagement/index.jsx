@@ -5,8 +5,8 @@ import static_r3_image from "./images/r3_image.png";
 import ICONS from "./icons";
 import React from 'react';
 import { Page, View, Text, Image, AtIcon } from '@disscode/react';
-import QrcodeApp from "../components/QrcodeApp";
-import ApplicationList from "../components/ApplicationList";
+import QrcodeApp from "@/pages/components/QrcodeApp";
+import ApplicationList from "@/pages/components/ApplicationList";
 import utils from '@/utils';
 import constants from '@/utils/constants';
 import "./index.scss";
@@ -60,7 +60,19 @@ class ProjectManagement$Page extends React.Component {
     win.focus();
   }
 
+  async refreshPersonalInformation() {
+    const userInfo = await this.utils.reloadGlobalData('userInfo');
+    this.setState({
+      userInfo
+    });
+  }
+
   componentDidMount() {
+    if (this.utils.isWeChatBrowser()) {
+      // console.log('url: ', this.constants.runSiteDomain + '/#/mobile');
+      return window.location.href = this.constants.runSiteDomain + '/#/mobile';
+    }
+
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     if (isMobile) {
@@ -73,6 +85,9 @@ class ProjectManagement$Page extends React.Component {
       });
     }).catch(e => {
       console.log('error: ', e);
+    });
+    this.eid = this.utils.event.$on('REFRESH_USER_INFO', () => {
+      this.refreshPersonalInformation();
     });
   }
 
@@ -122,7 +137,7 @@ class ProjectManagement$Page extends React.Component {
                 tab: 'qrcode'
               }]));
             }.bind(this)} className='projectManagement__main_body__vw__vw3 M-gb-click'>
-                <AtIcon color='#fe935f' size={16} svg={ICONS["svg_fcbpqq"]} />
+                <AtIcon color='#fe935f' size={16} svg={ICONS["svg_inkm1k"]} />
                 <Text className='projectManagement__main_body__vw__vw3__tx1'>
                   ArtQR 智绘二维码
                 </Text>
@@ -192,18 +207,24 @@ class ProjectManagement$Page extends React.Component {
               {!!$eval(() => this.state.userInfo?.username) && <View ref={this._refsManager.linkRef('view-2f0112e1')} className='projectManagement__main_body__vw__vw8'>
                   <View className='projectManagement__main_body__vw__vw8__vw M-flex-item'>
                     <Text className='projectManagement__main_body__vw__vw8__vw__tx'>
-                      {$eval(() => this.state.userInfo?.username)}
+                      {$eval(() => `可用点数 ${this.state.userInfo?.totalAmount || 0}`)}
                     </Text>
                     <View className='projectManagement__main_body__vw__vw8__vw__vw1'>
-                      <Text className='projectManagement__main_body__vw__vw8__vw__vw1__tx'>
-                        限时免费
+                      <Text inlineStyle={[{
+                    enable: true,
+                    name: '动态样式1',
+                    style: {
+                      color: '#ffb43d'
+                    }
+                  }]} className='projectManagement__main_body__vw__vw8__vw__vw1__tx'>
+                        {$eval(() => !this.state.userInfo?.vip ? '免费用户' : 'VIP')}
                       </Text>
                     </View>
                   </View>
                   <View className='projectManagement__main_body__vw__vw8__vw1 M-gb-click' onClick={function () {
                 return this.logOut.apply(this, Array.prototype.slice.call(arguments).concat([]));
               }.bind(this)}>
-                    <AtIcon color='#adadad' size={22} svg={ICONS["svg_amcnsh"]} />
+                    <AtIcon color='#adadad' size={22} svg={ICONS["svg_gom3sh"]} />
                   </View>
                 </View>}
               <View className='projectManagement__main_body__vw__vw9' />
@@ -219,7 +240,7 @@ class ProjectManagement$Page extends React.Component {
                 tab: 'qrcode'
               }]));
             }.bind(this)} className='projectManagement__main_body__vw__vw10 M-gb-click'>
-                  <AtIcon color='#fe935f' size={16} svg={ICONS["svg_s8gmrs"]} />
+                  <AtIcon color='#fe935f' size={16} svg={ICONS["svg_8pzbga"]} />
                   <Text className='projectManagement__main_body__vw__vw10__tx1'>
                     系统设置
                   </Text>
@@ -236,7 +257,7 @@ class ProjectManagement$Page extends React.Component {
                 tab: 'qrcode'
               }]));
             }.bind(this)} className='projectManagement__main_body__vw__vw11 M-gb-click'>
-                  <AtIcon color='#fe935f' size={16} svg={ICONS["svg_0z4219"]} />
+                  <AtIcon color='#fe935f' size={16} svg={ICONS["svg_hudbfa"]} />
                   <Text className='projectManagement__main_body__vw__vw11__tx1'>
                     OEM 代理
                   </Text>

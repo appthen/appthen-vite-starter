@@ -1,9 +1,11 @@
 import static_image from "./images/image.png";
+import static_r1_image from "./images/r1_image.png";
 import ICONS from "./icons";
 import React from 'react';
 import { Modal, View, Text, AtIcon, ImageBackground, ScrollView, Image, AtNoticebar, AutoList } from '@disscode/react';
 import { Slider, Row, Col, Input, Upload, Spin } from '@alilc/antd-lowcode-materials';
 import { requestHandle } from '@/utils/dataSource';
+import OpenAMembership from "@/pages/components/OpenAMembership";
 import utils from '@/utils';
 import constants from '@/utils/constants';
 import "./index.scss";
@@ -49,7 +51,11 @@ class QrcodeApp$Page extends React.Component {
       codeText: '',
       requestGenCode: {},
       requestEditCode: {},
-      initing: true
+      initing: true,
+      appInfo: {},
+      currentFee: 10,
+      fetchFree: {},
+      checkFetchFee: {}
     };
   }
 
@@ -124,7 +130,8 @@ class QrcodeApp$Page extends React.Component {
             params: {
               appid: _this.constants.qrCodeAppId
             },
-            headers: {}
+            headers: {},
+            timeout: 15000
           };
         },
         dataHandler: function dataHandler(res) {
@@ -146,7 +153,7 @@ class QrcodeApp$Page extends React.Component {
               prompt: _this.state.prompt
             },
             headers: {},
-            timeout: 15000
+            timeout: 25000
           };
         },
         dataHandler: function dataHandler(res) {
@@ -170,7 +177,8 @@ class QrcodeApp$Page extends React.Component {
                 appId: _this.constants.qrCodeAppId
               }
             },
-            headers: {}
+            headers: {},
+            timeout: 15000
           };
         },
         dataHandler: function dataHandler(res) {
@@ -225,6 +233,69 @@ class QrcodeApp$Page extends React.Component {
         },
         dataHandler: function dataHandler(res) {
           return res.data.data?.new_qrcode;
+        }
+      }, {
+        id: 'appInfo',
+        isInit: function () {
+          return false;
+        },
+        isSync: false,
+        type: 'fetch',
+        options: function () {
+          return {
+            uri: _this.constants.HostDomain + '/system_web-controllers',
+            contentType: 'JSON',
+            method: 'POST',
+            params: {
+              mode: 'systemApp',
+              param: {
+                appId: _this.constants.qrCodeAppId
+              }
+            },
+            headers: {},
+            timeout: 15000
+          };
+        },
+        dataHandler: function dataHandler(res) {
+          return res.data?.data;
+        }
+      }, {
+        id: 'fetchFree',
+        isInit: function () {
+          return false;
+        },
+        isSync: false,
+        type: 'fetch',
+        options: function () {
+          return {
+            uri: _this.constants.HostDomain + '/system_user-receive-record',
+            contentType: 'JSON',
+            method: 'POST',
+            params: {
+              type: 'addUserReceiveRecord'
+            },
+            headers: {},
+            timeout: 15000
+          };
+        }
+      }, {
+        id: 'checkFetchFee',
+        isInit: function () {
+          return false;
+        },
+        isSync: false,
+        type: 'fetch',
+        options: function () {
+          return {
+            uri: _this.constants.HostDomain + '/system_user-receive-record',
+            contentType: 'JSON',
+            method: 'POST',
+            params: {
+              type: 'queryUserReceiveRecord'
+            },
+            headers: {},
+            timeout: 15000
+          };
         }
       }]
     };
@@ -356,18 +427,31 @@ class QrcodeApp$Page extends React.Component {
     this.setState({
       status: 'working'
     }, async () => {
-      const request = await this.dataSourceMap['request']?.load(this.state.lock && this.state.check?.data?.seed ? {
-        seed: this.state.check?.data?.seed
-      } : {});
+      try {
+        const request = await this.dataSourceMap['request']?.load(this.state.lock && this.state.check?.data?.seed ? {
+          seed: this.state.check?.data?.seed
+        } : {});
 
-      if (request?.data?.requestId) {
-        this.utils.message.info('开始绘制，请稍等');
-        setTimeout(() => {
-          this.startTime = Date.now();
-          this.checkGeneratedResults();
-        }, 2000);
-      } else {
-        this.utils.message.error(request.msg || '绘制失败，稍后重试');
+        if (request?.data?.requestId) {
+          this.utils.message.info('开始绘制，请稍等');
+          setTimeout(() => {
+            this.startTime = Date.now();
+            this.checkGeneratedResults();
+          }, 2000);
+        } else {
+          this.utils.message.error(request.msg || '绘制失败，稍后重试');
+          this.setState({
+            status: 'begin'
+          });
+
+          if (request?.code === 901 || request?.code === 902) {
+            setTimeout(() => {
+              this.popUpRecharge();
+            }, 1500);
+          }
+        }
+      } catch (e) {
+        this.utils.message.error('绘制失败，稍后重试');
         this.setState({
           status: 'begin'
         });
@@ -402,6 +486,7 @@ class QrcodeApp$Page extends React.Component {
           status: 'finish'
         });
         this.$('autolist')?.refresh();
+        this.refreshPersonalInformation();
       } else {
         if (typeof this.startTime === 'number' && Date.now() - this.startTime > 180000) {
           this.startTime = null;
@@ -409,6 +494,7 @@ class QrcodeApp$Page extends React.Component {
             status: 'begin'
           });
           this.$('autolist')?.refresh();
+          this.refreshPersonalInformation();
           return this.utils.message.error('生成失败，请稍后重试');
         }
 
@@ -422,6 +508,7 @@ class QrcodeApp$Page extends React.Component {
         status: 'begin'
       });
       this.$('autolist')?.refresh();
+      this.refreshPersonalInformation();
       return this.utils.message.error('生成失败，请稍后重试');
     }
   }
@@ -496,6 +583,7 @@ class QrcodeApp$Page extends React.Component {
         userInfo: this.utils.getGlobalData('userInfo')
       });
       this.queryHistory();
+      this.checkTheNewPerson();
     }).catch(e => {
       this.setState({
         initing: false
@@ -508,6 +596,61 @@ class QrcodeApp$Page extends React.Component {
         }, 2000);
       }
     });
+  }
+
+  calculateThisConsumption() {
+    let currentFee = this.state.currentFee; // 默认以文生图给基准
+
+    const {
+      features
+    } = this.state.appInfo;
+    features?.forEach(feature => {
+      if (feature === 'text2img') {
+        currentFee = feature.count;
+      }
+    });
+    this.setState({
+      currentFee
+    });
+  }
+
+  refreshPersonalInformation() {
+    this.utils.checkForLogin().then(() => {
+      this.setState({
+        initing: false,
+        userInfo: this.utils.getGlobalData('userInfo')
+      });
+      this.utils.event.$emit('REFRESH_USER_INFO');
+    });
+  }
+
+  popUpRecharge() {
+    this.$(this.props?.isMobile ? 'modal4' : 'modal2')?.open();
+  }
+
+  async claimFreePoints(e) {
+    const hide = this.utils.message.loading();
+    const fetchFree = await this.dataSourceMap['fetchFree']?.load();
+    hide();
+    console.log('fetchFree: ', fetchFree);
+
+    if (fetchFree.code === 0) {
+      this.utils.message.success('已领取');
+      setTimeout(() => {
+        this.$('modal5')?.close();
+      }, 1500);
+      this.refreshPersonalInformation();
+    } else {
+      this.utils.message.error(fetchFree.msg || '领取失败，稍后重试');
+    }
+  }
+
+  async checkTheNewPerson() {
+    const checkFetchFee = await this.dataSourceMap['checkFetchFee']?.load();
+
+    if (checkFetchFee?.data?.content && checkFetchFee?.data?.content.length === 0) {
+      this.$('modal5')?.open();
+    }
   }
 
   async async_componentDidMount() {
@@ -523,6 +666,11 @@ class QrcodeApp$Page extends React.Component {
         this.setState({
           templateId: this.state.templates[0]._id
         }, () => {});
+      }
+    });
+    this.dataSourceMap['appInfo']?.load().then(() => {
+      if (this.state.appInfo?.features) {
+        this.calculateThisConsumption();
       }
     });
   }
@@ -547,7 +695,7 @@ class QrcodeApp$Page extends React.Component {
                 <View className='QrcodeApp__vw__vw1__vw'>
                   <View ref={this._refsManager.linkRef('view-f1dd3381')} className='QrcodeApp__vw__vw1__vw__vw'>
                     <View className='QrcodeApp__vw__vw1__vw__vw__vw'>
-                      <AtIcon color='#573de7' size={22} svg={ICONS["svg_hfuh3v"]} />
+                      <AtIcon color='#573de7' size={22} svg={ICONS["svg_hs2c4j"]} />
                       <Text className='QrcodeApp__vw__vw1__vw__vw__vw__tx1'>
                         二维码强调程度（推荐：60-80）
                       </Text>
@@ -597,7 +745,7 @@ class QrcodeApp$Page extends React.Component {
                 });
               }} className='QrcodeApp__vw__vw2__vw__vw__vw1'>
                       <View className='QrcodeApp__vw__vw2__vw__vw__vw1__vw'>
-                        <AtIcon color={$eval(() => _this.state.lock ? '#fff' : '#666')} size={15} svg={ICONS["svg_u9z9fa"]} className='QrcodeApp__vw__vw2__vw__vw__vw1__vw__AtIcon' />
+                        <AtIcon color={$eval(() => _this.state.lock ? '#fff' : '#666')} size={15} svg={ICONS["svg_j743wh"]} className='QrcodeApp__vw__vw2__vw__vw__vw1__vw__AtIcon' />
                         <Text inlineStyle={[{
                     enable: $eval(() => !_this.state.lock),
                     name: '动态样式1',
@@ -644,7 +792,7 @@ class QrcodeApp$Page extends React.Component {
                 <View className='QrcodeApp__vw_1__vw1__vw'>
                   <View ref={this._refsManager.linkRef('view-f1dd3381')} className='QrcodeApp__vw_1__vw1__vw__vw'>
                     <View className='QrcodeApp__vw_1__vw1__vw__vw__vw'>
-                      <AtIcon color='#573de7' size={22} svg={ICONS["svg_kmppdt"]} />
+                      <AtIcon color='#573de7' size={22} svg={ICONS["svg_qo83ph"]} />
                       <Text className='QrcodeApp__vw_1__vw1__vw__vw__vw__tx1'>
                         二维码强调程度（推荐：60-80）
                       </Text>
@@ -694,7 +842,7 @@ class QrcodeApp$Page extends React.Component {
                 });
               }} className='QrcodeApp__vw_1__vw2__vw__vw__vw1'>
                       <View className='QrcodeApp__vw_1__vw2__vw__vw__vw1__vw'>
-                        <AtIcon color={$eval(() => _this.state.lock ? '#fff' : '#666')} size={15} svg={ICONS["svg_8fpr59"]} className='QrcodeApp__vw_1__vw2__vw__vw__vw1__vw__AtIcon' />
+                        <AtIcon color={$eval(() => _this.state.lock ? '#fff' : '#666')} size={15} svg={ICONS["svg_t65djy"]} className='QrcodeApp__vw_1__vw2__vw__vw__vw1__vw__AtIcon' />
                         <Text inlineStyle={[{
                     enable: $eval(() => !_this.state.lock),
                     name: '动态样式1',
@@ -707,6 +855,11 @@ class QrcodeApp$Page extends React.Component {
                       </View>
                     </View>
                   </View>
+                </View>
+                <View ref={this._refsManager.linkRef('view-8028cd47')} className='QrcodeApp__vw_1__vw2__vw1'>
+                  <Text ref={this._refsManager.linkRef('text-779381e8')} className='QrcodeApp__vw_1__vw2__vw1__tx'>
+                    喂！如果图片无法扫码，请调整上方的「二维码强调程度」滚动条，越往右越容易扫码！！！
+                  </Text>
                 </View>
               </View>
               <View className='QrcodeApp__vw_1__vw3'>
@@ -726,30 +879,64 @@ class QrcodeApp$Page extends React.Component {
                 </View>
               </View>
             </View>} visible={false} maskClosable={true} ref={this._refsManager.linkRef('youhua_mobile')} />
-        <View ref={this._refsManager.linkRef('view-91c1eb67')} className='QrcodeApp__two-dimensional_code__vw2'>
-          <View ref={this._refsManager.linkRef('view-aeb47d89')} className='QrcodeApp__two-dimensional_code__vw2__vw M-flex-item'>
-            <View ref={this._refsManager.linkRef('view-2f9901d0')} className='QrcodeApp__two-dimensional_code__vw2__vw__vw M-flex-item'>
-              <View className='QrcodeApp__two-dimensional_code__vw2__vw__vw__vw'>
-                <View ref={this._refsManager.linkRef('view-4572ad61')} className='QrcodeApp__two-dimensional_code__vw2__vw__vw__vw__vw M-flex-item'>
-                  <ImageBackground src='https://file.mengti.cc/FpNeCSgcSyFfVj8PeqQiCjZJYpKf' className='QrcodeApp__two-dimensional_code__vw2__vw__vw__vw__vw__ibg' />
-                  <Text className='QrcodeApp__two-dimensional_code__vw2__vw__vw__vw__vw__tx1'>
+        <Modal style={{}} animate='pop' renderView={props => <View ref={this._refsManager.linkRef('view-9f167e65')} className='QrcodeApp__vw_2'>
+              <OpenAMembership title='' onCharge={() => {
+          _this.refreshPersonalInformation();
+        }} onClose={() => {
+          _this.$('modal2')?.close();
+        }} ref={this._refsManager.linkRef('openamembership-4fc9571a')} isMobile={$eval(() => props?.isMobile)} />
+            </View>} visible={false} maskClosable={true} ref={this._refsManager.linkRef('modal2')} />
+        <View ref={this._refsManager.linkRef('view-91c1eb67')} className='QrcodeApp__two-dimensional_code__vw3'>
+          <View ref={this._refsManager.linkRef('view-aeb47d89')} className='QrcodeApp__two-dimensional_code__vw3__vw M-flex-item'>
+            <View ref={this._refsManager.linkRef('view-2f9901d0')} className='QrcodeApp__two-dimensional_code__vw3__vw__vw M-flex-item'>
+              <View className='QrcodeApp__two-dimensional_code__vw3__vw__vw__vw'>
+                <View ref={this._refsManager.linkRef('view-4572ad61')} className='QrcodeApp__two-dimensional_code__vw3__vw__vw__vw__vw M-flex-item'>
+                  <ImageBackground src='https://file.mengti.cc/FpNeCSgcSyFfVj8PeqQiCjZJYpKf' className='QrcodeApp__two-dimensional_code__vw3__vw__vw__vw__vw__ibg' />
+                  <Text inlineStyle={[{
+                  enable: $eval(() => this.props?.isMobile),
+                  name: '动态样式1',
+                  style: {
+                    fontSize: px(14)
+                  }
+                }]} className='QrcodeApp__two-dimensional_code__vw3__vw__vw__vw__vw__tx1'>
                     ArtQR 智绘二维码
                   </Text>
+                  <View className='QrcodeApp__two-dimensional_code__vw3__vw__vw__vw__vw__vw2 M-flex-item' />
+                  <View>
+                    {!!$eval(() => !!this.state.userInfo?.username) && <View ref={this._refsManager.linkRef('view-deada35c')} className='QrcodeApp__vw_3 M-gb-click' onClick={e => {
+                    this.popUpRecharge();
+                  }}>
+                        <View style={{}}>
+                          <AtIcon color='#f8b546' size={20} svg={ICONS["svg_f9wx0j"]} />
+                        </View>
+                        <View ref={this._refsManager.linkRef('view-e07fb0a1')} className='QrcodeApp__vw_3__vw1 M-flex-item'>
+                          <Text className='QrcodeApp__vw_3__vw1__tx'>
+                            {$eval(() => `剩余${this.state.userInfo?.totalAmount || 0}点`)}
+                          </Text>
+                          <Text className='QrcodeApp__vw_3__vw1__tx1'>
+                            充值去水印
+                          </Text>
+                        </View>
+                        <View ref={this._refsManager.linkRef('view-e07fb0a1')} className='QrcodeApp__vw_3__vw2'>
+                          <AtIcon color='#b3b3b3' size={30} svg={ICONS["svg_x6tex4"]} />
+                        </View>
+                      </View>}
+                  </View>
                 </View>
               </View>
-              <ScrollView ref={this._refsManager.linkRef('scrollview')} className='QrcodeApp__two-dimensional_code__vw2__vw__vw__sv1 M-flex-item'>
-                <View ref={this._refsManager.linkRef('view-395bf5b5')} className='QrcodeApp__two-dimensional_code__vw2__vw__vw__sv1__vw'>
+              <ScrollView ref={this._refsManager.linkRef('scrollview')} className='QrcodeApp__two-dimensional_code__vw3__vw__vw__sv1 M-flex-item'>
+                <View ref={this._refsManager.linkRef('view-395bf5b5')} className='QrcodeApp__two-dimensional_code__vw3__vw__vw__sv1__vw'>
                   <Row align='top' justify='start' wrap={true} h-gutter={20} v-gutter={20} gutter={[20, 20]} ref={this._refsManager.linkRef('row-d8b2893d')}>
                     <Col span={12} order={0} xs={24} sm={24} md={12} lg={12} xl={12} xxl={12}>
                       <View style={{}}>
-                        <View className='QrcodeApp__vw_2'>
+                        <View className='QrcodeApp__vw_4'>
                           {!!$eval(() => !this.state.initing && !this.state.userInfo?.username) && <View onClick={e => {
                           if (this.state.initing) return;
                           this.utils.navigateTo('login');
-                        }} ref={this._refsManager.linkRef('view-ec050aaa')} className='QrcodeApp__vw_2__vw'>
-                              {!!$eval(() => this.state.status === 'begin') && <View className='QrcodeApp__vw_2__vw__vw M-gb-click' ref={this._refsManager.linkRef('view-6c2bb9f8')}>
-                                  <View ref={this._refsManager.linkRef('view-5ff3e1bb')} className='QrcodeApp__vw_2__vw__vw__vw M-flex-item'>
-                                    <AtIcon color='#f98425' size={30} svg={ICONS["svg_gqgv7g"]} />
+                        }} ref={this._refsManager.linkRef('view-ec050aaa')} className='QrcodeApp__vw_4__vw'>
+                              {!!$eval(() => this.state.status === 'begin') && <View className='QrcodeApp__vw_4__vw__vw M-gb-click' ref={this._refsManager.linkRef('view-6c2bb9f8')}>
+                                  <View ref={this._refsManager.linkRef('view-5ff3e1bb')} className='QrcodeApp__vw_4__vw__vw__vw M-flex-item'>
+                                    <AtIcon color='#f98425' size={30} svg={ICONS["svg_e3kyzv"]} />
                                   </View>
                                   <View ref={this._refsManager.linkRef('view-295df367')}>
                                     <Text ref={this._refsManager.linkRef('text-4ee23d1f')} className='QrcodeApp__tx'>
@@ -758,48 +945,48 @@ class QrcodeApp$Page extends React.Component {
                                   </View>
                                 </View>}
                             </View>}
-                          <View className='QrcodeApp__vw_2__vw1'>
-                            <Text className='QrcodeApp__vw_2__vw1__tx'>1.</Text>
-                            <Text className='QrcodeApp__vw_2__vw1__tx1'>
+                          <View className='QrcodeApp__vw_4__vw1'>
+                            <Text className='QrcodeApp__vw_4__vw1__tx'>1.</Text>
+                            <Text className='QrcodeApp__vw_4__vw1__tx1'>
                               原始二维码
                             </Text>
                           </View>
                           <View ref={this._refsManager.linkRef('view-8d7af1d4')}>
                             <View ref={this._refsManager.linkRef('view-d2f5b4de')}>
-                              <View className='QrcodeApp__vw_3'>
-                                <View className='QrcodeApp__vw_3__vw'>
-                                  <View className='QrcodeApp__vw_3__vw__vw'>
-                                    <View className='QrcodeApp__vw_3__vw__vw__vw'>
-                                      {!!false && <View ref={this._refsManager.linkRef('view-b078e8e5')} className='QrcodeApp__vw_3__vw__vw__vw__vw'>
-                                          <View ref={this._refsManager.linkRef('view-d901d310')} className='QrcodeApp__vw_3__vw__vw__vw__vw__vw M-flex-item'>
-                                            <Text className='QrcodeApp__vw_3__vw__vw__vw__vw__vw__tx'>
+                              <View className='QrcodeApp__vw_5'>
+                                <View className='QrcodeApp__vw_5__vw'>
+                                  <View className='QrcodeApp__vw_5__vw__vw'>
+                                    <View className='QrcodeApp__vw_5__vw__vw__vw'>
+                                      {!!false && <View ref={this._refsManager.linkRef('view-b078e8e5')} className='QrcodeApp__vw_5__vw__vw__vw__vw'>
+                                          <View ref={this._refsManager.linkRef('view-d901d310')} className='QrcodeApp__vw_5__vw__vw__vw__vw__vw M-flex-item'>
+                                            <Text className='QrcodeApp__vw_5__vw__vw__vw__vw__vw__tx'>
                                               请上传二维码
                                             </Text>
                                           </View>
                                         </View>}
-                                      {!!$eval(() => !this.state.qrcode_base64) && <View ref={this._refsManager.linkRef('view-b078e8e5')} className='QrcodeApp__vw_3__vw__vw__vw__vw1'>
-                                          <View ref={this._refsManager.linkRef('view-d901d310')} className='QrcodeApp__vw_3__vw__vw__vw__vw1__vw M-flex-item'>
+                                      {!!$eval(() => !this.state.qrcode_base64) && <View ref={this._refsManager.linkRef('view-b078e8e5')} className='QrcodeApp__vw_5__vw__vw__vw__vw1'>
+                                          <View ref={this._refsManager.linkRef('view-d901d310')} className='QrcodeApp__vw_5__vw__vw__vw__vw1__vw M-flex-item'>
                                             <Input type='text' confirmType='done' value={$eval(() => this.state.codeText)} placeholder='可输入网址、文本' password={false} bordered={false} disabled={false} ref={this._refsManager.linkRef('input-44732fb9')} onChange={function () {
                                           return this.setStateValue.apply(this, Array.prototype.slice.call(arguments).concat([{
                                             field: 'codeText',
                                             valueField: 'target.value'
                                           }]));
-                                        }.bind(this)} className='QrcodeApp__vw_3__vw__vw__vw__vw1__vw__Input' />
+                                        }.bind(this)} className='QrcodeApp__vw_5__vw__vw__vw__vw1__vw__Input' />
                                           </View>
                                         </View>}
-                                      {!!$eval(() => this.state.qrcode_base64) && <View ref={this._refsManager.linkRef('view-a1f34fc2')} className='QrcodeApp__vw_3__vw__vw__vw__vw2'>
-                                          <View ref={this._refsManager.linkRef('view-bc336ca3')} className='QrcodeApp__vw_3__vw__vw__vw__vw2__vw M-flex-item'>
-                                            <Image src={$eval(() => 'data:image/png;base64,' + this.state.qrcode_base64)} remote={false} fit={false} ref={this._refsManager.linkRef('image-a3743d54')} className='QrcodeApp__vw_3__vw__vw__vw__vw2__vw__Image' />
+                                      {!!$eval(() => this.state.qrcode_base64) && <View ref={this._refsManager.linkRef('view-a1f34fc2')} className='QrcodeApp__vw_5__vw__vw__vw__vw2'>
+                                          <View ref={this._refsManager.linkRef('view-bc336ca3')} className='QrcodeApp__vw_5__vw__vw__vw__vw2__vw M-flex-item'>
+                                            <Image src={$eval(() => 'data:image/png;base64,' + this.state.qrcode_base64)} remote={false} fit={false} ref={this._refsManager.linkRef('image-a3743d54')} className='QrcodeApp__vw_5__vw__vw__vw__vw2__vw__Image' />
                                           </View>
                                         </View>}
                                     </View>
                                   </View>
-                                  <View className='QrcodeApp__vw_3__vw__vw1'>
-                                    <View ref={this._refsManager.linkRef('view-8e0eb5f6')} className='QrcodeApp__vw_3__vw__vw1__vw M-flex-item'>
-                                      {!!$eval(() => !!this.state.codeText) && <View className='QrcodeApp__vw_3__vw__vw1__vw__vw M-gb-click' ref={this._refsManager.linkRef('view-75407b22')} onClick={function () {
+                                  <View className='QrcodeApp__vw_5__vw__vw1'>
+                                    <View ref={this._refsManager.linkRef('view-8e0eb5f6')} className='QrcodeApp__vw_5__vw__vw1__vw M-flex-item'>
+                                      {!!$eval(() => !!this.state.codeText) && <View className='QrcodeApp__vw_5__vw__vw1__vw__vw M-gb-click' ref={this._refsManager.linkRef('view-75407b22')} onClick={function () {
                                       return this.textToQrCode.apply(this, Array.prototype.slice.call(arguments).concat([]));
                                     }.bind(this)}>
-                                          <Text ref={this._refsManager.linkRef('text-be7e3b3c')} className='QrcodeApp__vw_3__vw__vw1__vw__vw__tx'>
+                                          <Text ref={this._refsManager.linkRef('text-be7e3b3c')} className='QrcodeApp__vw_5__vw__vw1__vw__vw__tx'>
                                             {$eval(() => this.state.qrcode_base64 ? '重新修改' : '立即生成')}
                                           </Text>
                                         </View>}
@@ -809,26 +996,26 @@ class QrcodeApp$Page extends React.Component {
                                       // 上传文件之前的钩子
                                       return false;
                                     }}>
-                                          <View className='QrcodeApp__vw_4 M-gb-click' ref={this._refsManager.linkRef('view-915dfecf')}>
-                                            <AtIcon color='#666' size={22} svg={ICONS["svg_fo6xfn"]} />
-                                            <Text className='QrcodeApp__vw_4__tx1'>
+                                          <View className='QrcodeApp__vw_6 M-gb-click' ref={this._refsManager.linkRef('view-915dfecf')}>
+                                            <AtIcon color='#666' size={22} svg={ICONS["svg_tozkn7"]} />
+                                            <Text className='QrcodeApp__vw_6__tx1'>
                                               上传二维码
                                             </Text>
                                           </View>
                                         </Upload>}
-                                      <View className='QrcodeApp__vw_3__vw__vw1__vw__vw2 M-gb-click' ref={this._refsManager.linkRef('view-dc3e0db4')} onClick={e => {
+                                      <View className='QrcodeApp__vw_5__vw__vw1__vw__vw2 M-gb-click' ref={this._refsManager.linkRef('view-dc3e0db4')} onClick={e => {
                                       this.setState({
                                         // codeText: this.state.qrcode_base64 ? this.state.codeText : '',
                                         codeText: '',
                                         qrcode_base64: ''
                                       });
                                     }}>
-                                        <Text className='QrcodeApp__vw_3__vw__vw1__vw__vw2__tx'>
+                                        <Text className='QrcodeApp__vw_5__vw__vw1__vw__vw2__tx'>
                                           清空
                                         </Text>
                                       </View>
                                     </View>
-                                    <View className='QrcodeApp__vw_3__vw__vw1__vw1' />
+                                    <View className='QrcodeApp__vw_5__vw__vw1__vw1' />
                                   </View>
                                 </View>
                               </View>
@@ -886,8 +1073,8 @@ class QrcodeApp$Page extends React.Component {
                           </View>
                           <View ref={this._refsManager.linkRef('view-8d7af1d4')}>
                             <View ref={this._refsManager.linkRef('view-d2f5b4de')}>
-                              {!!$eval(() => this.state.mode === 'temp') && <View ref={this._refsManager.linkRef('view-b113fd26')} className='QrcodeApp__vw_5'>
-                                  {!!$eval(() => this.state.templates?.length > 0) && <View ref={this._refsManager.linkRef('view-21ff31fa')} className='QrcodeApp__vw_5__vw'>
+                              {!!$eval(() => this.state.mode === 'temp') && <View ref={this._refsManager.linkRef('view-b113fd26')} className='QrcodeApp__vw_7'>
+                                  {!!$eval(() => this.state.templates?.length > 0) && <View ref={this._refsManager.linkRef('view-21ff31fa')} className='QrcodeApp__vw_7__vw'>
                                       {$evalArray(() => this.state.templates).map((item, index) => (_this => <View ref={this._refsManager.linkRef('view-4d763f44')} inlineStyle={[{
                                   enable: $eval(() => item?._id === _this.state.templateId),
                                   name: '动态样式1',
@@ -904,10 +1091,10 @@ class QrcodeApp$Page extends React.Component {
                                     start: 60,
                                     lock: true
                                   });
-                                }} className='QrcodeApp__vw_5__vw__vw M-gb-click'>
-                                            <Image src={$eval(() => item?.url)} remote={false} fit={false} ref={this._refsManager.linkRef('image-dae3023e')} className='QrcodeApp__vw_5__vw__vw__Image' />
-                                            <View className='QrcodeApp__vw_5__vw__vw__vw1'>
-                                              <Text className='QrcodeApp__vw_5__vw__vw__vw1__tx'>
+                                }} className='QrcodeApp__vw_7__vw__vw M-gb-click'>
+                                            <Image src={$eval(() => item?.url)} remote={false} fit={false} ref={this._refsManager.linkRef('image-dae3023e')} className='QrcodeApp__vw_7__vw__vw__Image' />
+                                            <View className='QrcodeApp__vw_7__vw__vw__vw1'>
+                                              <Text className='QrcodeApp__vw_7__vw__vw__vw1__tx'>
                                                 {$eval(() => item?.desc)}
                                               </Text>
                                             </View>
@@ -917,18 +1104,18 @@ class QrcodeApp$Page extends React.Component {
                                 })))}
                                     </View>}
                                 </View>}
-                              {!!$eval(() => this.state.mode === 'prompt') && <View ref={this._refsManager.linkRef('view-fb16809b')} className='QrcodeApp__vw1_6'>
-                                  <View className='QrcodeApp__vw1_6__vw' />
-                                  <View className='QrcodeApp__vw1_6__vw1'>
+                              {!!$eval(() => this.state.mode === 'prompt') && <View ref={this._refsManager.linkRef('view-fb16809b')} className='QrcodeApp__vw1_8'>
+                                  <View className='QrcodeApp__vw1_8__vw' />
+                                  <View className='QrcodeApp__vw1_8__vw1'>
                                     <View style={{}}>
-                                      <Text className='QrcodeApp__tx_7'>
+                                      <Text className='QrcodeApp__tx_9'>
                                         提示词
                                       </Text>
                                     </View>
-                                    <View className='QrcodeApp__vw1_6__vw1__vw1 M-flex-item' />
+                                    <View className='QrcodeApp__vw1_8__vw1__vw1 M-flex-item' />
                                   </View>
-                                  <View className='QrcodeApp__vw1_6__vw2'>
-                                    <View className='QrcodeApp__vw1_6__vw2__vw M-flex-item'>
+                                  <View className='QrcodeApp__vw1_8__vw2'>
+                                    <View className='QrcodeApp__vw1_8__vw2__vw M-flex-item'>
                                       <Input.TextArea autoSize={{
                                     minRows: 4,
                                     maxRows: 3
@@ -942,14 +1129,14 @@ class QrcodeApp$Page extends React.Component {
                                   }.bind(this)} />
                                     </View>
                                   </View>
-                                  {!!$eval(() => !!this.state.engPrompt) && <View ref={this._refsManager.linkRef('view-1aa98743')} className='QrcodeApp__vw1_6__vw3'>
-                                      <View className='QrcodeApp__vw1_6__vw3__vw'>
-                                        <Text className='QrcodeApp__vw1_6__vw3__vw__tx'>
+                                  {!!$eval(() => !!this.state.engPrompt) && <View ref={this._refsManager.linkRef('view-1aa98743')} className='QrcodeApp__vw1_8__vw3'>
+                                      <View className='QrcodeApp__vw1_8__vw3__vw'>
+                                        <Text className='QrcodeApp__vw1_8__vw3__vw__tx'>
                                           自动翻译
                                         </Text>
                                       </View>
-                                      <View className='QrcodeApp__vw1_6__vw3__vw1'>
-                                        <View className='QrcodeApp__vw1_6__vw3__vw1__vw M-flex-item'>
+                                      <View className='QrcodeApp__vw1_8__vw3__vw1'>
+                                        <View className='QrcodeApp__vw1_8__vw3__vw1__vw M-flex-item'>
                                           <Input.TextArea autoSize={{
                                       minRows: 4,
                                       maxRows: 3
@@ -970,36 +1157,48 @@ class QrcodeApp$Page extends React.Component {
                     </Col>
                     <Col span={12} order={0} xs={24} sm={24} md={12} lg={12} xl={12} xxl={12} ref={this._refsManager.linkRef('col-1bffee9b')} className='QrcodeApp__Col1'>
                       <View style={{}}>
-                        <View className='QrcodeApp__vw_8'>
-                          <View className='QrcodeApp__vw_8__vw'>
-                            <View className='QrcodeApp__vw_8__vw__vw'>
-                              <Text className='QrcodeApp__vw_8__vw__vw__tx'>
+                        <View ref={this._refsManager.linkRef('view-d7e75406')} className='QrcodeApp__vw_10'>
+                          <View ref={this._refsManager.linkRef('view-4b887109')} className='QrcodeApp__vw_10__vw'>
+                            <View className='QrcodeApp__vw_10__vw__vw'>
+                              <Text className='QrcodeApp__vw_10__vw__vw__tx'>
                                 3.
                               </Text>
-                              <Text className='QrcodeApp__vw_8__vw__vw__tx1'>
+                              <Text className='QrcodeApp__vw_10__vw__vw__tx1'>
                                 开始绘制
                               </Text>
                             </View>
-                            <View className='QrcodeApp__vw_8__vw__vw1 M-flex-item' />
+                            <View className='QrcodeApp__vw_10__vw__vw1 M-flex-item' />
+                            {!!$eval(() => this.props?.isMobile) && <View ref={this._refsManager.linkRef('view-fa4064fc')} onClick={e => {
+                            this.$('modal3')?.open();
+                          }} className='QrcodeApp__vw_10__vw__vw2'>
+                                <Text ref={this._refsManager.linkRef('text-bf58552f')} className='QrcodeApp__vw_10__vw__vw2__tx'>
+                                  历史记录
+                                </Text>
+                              </View>}
                           </View>
                           <View ref={this._refsManager.linkRef('view-8d7af1d4')}>
                             <View ref={this._refsManager.linkRef('view-d2f5b4de')}>
-                              <View ref={this._refsManager.linkRef('view-4ef577fe')} className='QrcodeApp__vw_9'>
-                                {!!$eval(() => this.state.status !== 'finish') && <View ref={this._refsManager.linkRef('view-7656d2b2')} className='QrcodeApp__vw_9__vw'>
+                              <View ref={this._refsManager.linkRef('view-4ef577fe')} className='QrcodeApp__vw_11'>
+                                {!!$eval(() => this.state.status !== 'finish') && <View ref={this._refsManager.linkRef('view-7656d2b2')} className='QrcodeApp__vw_11__vw'>
                                     {!!$eval(() => this.state.status === 'working') && <View ref={this._refsManager.linkRef('view-49343f2d')}>
                                         <Spin size='large' tip='' delay={0} indicator='' spinning={true} wrapperClassName='' ref={this._refsManager.linkRef('spin-46744f46')} />
                                       </View>}
-                                    {!!$eval(() => this.state.status === 'begin') && <View className='QrcodeApp__vw_9__vw__vw1 M-gb-click' ref={this._refsManager.linkRef('view-6c2bb9f8')} onClick={function () {
+                                    {!!$eval(() => this.state.status === 'begin') && <View className='QrcodeApp__vw_11__vw__vw1 M-gb-click' ref={this._refsManager.linkRef('view-6c2bb9f8')} onClick={function () {
                                   return this.generate.apply(this, Array.prototype.slice.call(arguments).concat([{
                                     lockStyle: false
                                   }]));
                                 }.bind(this)}>
-                                        <View ref={this._refsManager.linkRef('view-5ff3e1bb')} className='QrcodeApp__vw_9__vw__vw1__vw M-flex-item'>
-                                          <AtIcon color='#ffffff' size={30} svg={ICONS["svg_8fnniv"]} ref={this._refsManager.linkRef('aticon-69c1ac27')} />
+                                        <View ref={this._refsManager.linkRef('view-5ff3e1bb')} className='QrcodeApp__vw_11__vw__vw1__vw'>
+                                          <View className='QrcodeApp__vw_11__vw__vw1__vw__vw'>
+                                            <AtIcon color='#ffffff' size={25} svg={ICONS["svg_l4603n"]} ref={this._refsManager.linkRef('aticon-69c1ac27')} />
+                                            <Text ref={this._refsManager.linkRef('text-4ee23d1f')} className='QrcodeApp__vw_11__vw__vw1__vw__vw__tx1'>
+                                              开始绘制
+                                            </Text>
+                                          </View>
                                         </View>
-                                        <View ref={this._refsManager.linkRef('view-295df367')}>
-                                          <Text ref={this._refsManager.linkRef('text-4ee23d1f')} className='QrcodeApp__tx_10'>
-                                            开始绘制
+                                        <View ref={this._refsManager.linkRef('view-295df367')} className='QrcodeApp__vw_11__vw__vw1__vw1'>
+                                          <Text ref={this._refsManager.linkRef('text-4ee23d1f')} className='QrcodeApp__vw_11__vw__vw1__vw1__tx'>
+                                            {$eval(() => `本次消耗${this.state.currentFee || 0}点`)}
                                           </Text>
                                         </View>
                                       </View>}
@@ -1014,38 +1213,38 @@ class QrcodeApp$Page extends React.Component {
                                     this.$('modal')?.open();
                                   });
                                 }
-                              }} className='QrcodeApp__vw_9__vw1'>
-                                  <Image src={static_image} remote={false} fit={false} ref={this._refsManager.linkRef('image-3fcbc46a')} className='QrcodeApp__vw_9__vw1__Image' />
-                                  {!!$eval(() => !!this.state.check?.data?.fileUrl) && <Image src={$eval(() => this.state.check?.data?.fileUrl)} remote={false} fit={false} ref={this._refsManager.linkRef('image-3fcbc46a')} className='QrcodeApp__vw_9__vw1__Image1' />}
+                              }} className='QrcodeApp__vw_11__vw1'>
+                                  <Image src={static_image} remote={false} fit={false} ref={this._refsManager.linkRef('image-3fcbc46a')} className='QrcodeApp__vw_11__vw1__Image' />
+                                  {!!$eval(() => !!this.state.check?.data?.fileUrl) && <Image src={$eval(() => this.state.check?.data?.fileUrl)} remote={false} fit={false} ref={this._refsManager.linkRef('image-3fcbc46a')} className='QrcodeApp__vw_11__vw1__Image1' />}
                                 </View>
                               </View>
-                              {!!false && <View ref={this._refsManager.linkRef('view-f1dd3381')} className='QrcodeApp__vw1_11'>
-                                  <View className='QrcodeApp__vw1_11__vw'>
-                                    <AtIcon color='#573de7' size={22} svg={ICONS["svg_i03lvw"]} />
-                                    <Text className='QrcodeApp__vw1_11__vw__tx1'>
+                              {!!false && <View ref={this._refsManager.linkRef('view-f1dd3381')} className='QrcodeApp__vw1_12'>
+                                  <View className='QrcodeApp__vw1_12__vw'>
+                                    <AtIcon color='#573de7' size={22} svg={ICONS["svg_u9mb2h"]} />
+                                    <Text className='QrcodeApp__vw1_12__vw__tx1'>
                                       二维码强调程度（推荐：60-80）
                                     </Text>
                                   </View>
-                                  <View ref={this._refsManager.linkRef('view-2d063363')} className='QrcodeApp__vw1_11__vw1'>
-                                    <View className='QrcodeApp__vw1_11__vw1__vw'>
-                                      <Text className='QrcodeApp__vw1_11__vw1__vw__tx'>
+                                  <View ref={this._refsManager.linkRef('view-2d063363')} className='QrcodeApp__vw1_12__vw1'>
+                                    <View className='QrcodeApp__vw1_12__vw1__vw'>
+                                      <Text className='QrcodeApp__vw1_12__vw1__vw__tx'>
                                         更艺术
                                       </Text>
                                     </View>
-                                    <View className='QrcodeApp__vw1_11__vw1__vw1 M-flex-item'>
+                                    <View className='QrcodeApp__vw1_12__vw1__vw1 M-flex-item'>
                                       <Slider defaultValue={30} range={false} disabled={false} dots={false} reverse={false} vertical={false} allowClear={false} max={100} min={1} value={$eval(() => this.state.start)} onChange={function () {
                                     return this.setStateValue.apply(this, Array.prototype.slice.call(arguments).concat([{
                                       field: 'start'
                                     }]));
                                   }.bind(this)} />
                                     </View>
-                                    <View className='QrcodeApp__vw1_11__vw1__vw2'>
-                                      <Text className='QrcodeApp__vw1_11__vw1__vw2__tx'>
+                                    <View className='QrcodeApp__vw1_12__vw1__vw2'>
+                                      <Text className='QrcodeApp__vw1_12__vw1__vw2__tx'>
                                         {$eval(() => this.state.start)}
                                       </Text>
                                     </View>
-                                    <View className='QrcodeApp__vw1_11__vw1__vw3'>
-                                      <Text className='QrcodeApp__vw1_11__vw1__vw3__tx'>
+                                    <View className='QrcodeApp__vw1_12__vw1__vw3'>
+                                      <Text className='QrcodeApp__vw1_12__vw1__vw3__tx'>
                                         更易扫码
                                       </Text>
                                     </View>
@@ -1059,10 +1258,10 @@ class QrcodeApp$Page extends React.Component {
                                   }]));
                                 }.bind(this)}>
                                       <View className='QrcodeApp__vw2__vw__vw__vw M-flex-item'>
-                                        <AtIcon color='#519c03' size={24} svg={ICONS["svg_yjjmfx"]} />
+                                        <AtIcon color='#519c03' size={24} svg={ICONS["svg_d3rh5r"]} />
                                       </View>
                                       <View>
-                                        <Text className='QrcodeApp__tx_12'>
+                                        <Text className='QrcodeApp__tx_13'>
                                           微调
                                         </Text>
                                       </View>
@@ -1073,10 +1272,10 @@ class QrcodeApp$Page extends React.Component {
                                   }]));
                                 }.bind(this)}>
                                       <View className='QrcodeApp__vw2__vw__vw1__vw M-flex-item'>
-                                        <AtIcon color='#5249ff' size={30} svg={ICONS["svg_axoizy"]} />
+                                        <AtIcon color='#5249ff' size={30} svg={ICONS["svg_1h1v4t"]} />
                                       </View>
                                       <View>
-                                        <Text className='QrcodeApp__tx_13'>
+                                        <Text className='QrcodeApp__tx_14'>
                                           重新绘制
                                         </Text>
                                       </View>
@@ -1085,10 +1284,10 @@ class QrcodeApp$Page extends React.Component {
                                   this.downloadPicture(this.state.check?.data?.fileUrl);
                                 }}>
                                       <View className='QrcodeApp__vw2__vw__vw2__vw M-flex-item'>
-                                        <AtIcon color='#ff9b42' size={28} svg={ICONS["svg_65yre2"]} />
+                                        <AtIcon color='#ff9b42' size={28} svg={ICONS["svg_v0sadw"]} />
                                       </View>
                                       <View>
-                                        <Text className='QrcodeApp__tx_14'>
+                                        <Text className='QrcodeApp__tx_15'>
                                           下载
                                         </Text>
                                       </View>
@@ -1098,12 +1297,15 @@ class QrcodeApp$Page extends React.Component {
                                     <View className='QrcodeApp__vw2__vw1__vw M-gb-click M-flex-item' ref={this._refsManager.linkRef('view-6c2bb9f8')} onClick={e => {
                                   this.$(this.props.isMobile ? 'youhua_mobile' : 'modal1')?.open();
                                 }}>
-                                      <View className='QrcodeApp__vw2__vw1__vw__vw M-flex-item'>
-                                        <AtIcon color='#5249ff' size={30} svg={ICONS["svg_hgk58t"]} />
-                                      </View>
-                                      <View>
-                                        <Text className='QrcodeApp__tx_15'>
+                                      <View className='QrcodeApp__vw2__vw1__vw__vw'>
+                                        <AtIcon color='#5249ff' size={24} svg={ICONS["svg_h4j2mu"]} />
+                                        <Text className='QrcodeApp__vw2__vw1__vw__vw__tx1'>
                                           重新绘制
+                                        </Text>
+                                      </View>
+                                      <View className='QrcodeApp__vw2__vw1__vw__vw1'>
+                                        <Text className='QrcodeApp__vw2__vw1__vw__vw1__tx'>
+                                          {$eval(() => `本次消耗 ${this.state.currentFee} 点`)}
                                         </Text>
                                       </View>
                                     </View>
@@ -1111,7 +1313,7 @@ class QrcodeApp$Page extends React.Component {
                                   this.downloadPicture(this.state.check?.data?.fileUrl);
                                 }}>
                                       <View className='QrcodeApp__vw2__vw1__vw1__vw M-flex-item'>
-                                        <AtIcon color='#ff9b42' size={28} svg={ICONS["svg_hp75zg"]} />
+                                        <AtIcon color='#ff9b42' size={28} svg={ICONS["svg_8a0hdj"]} />
                                       </View>
                                       <View>
                                         <Text className='QrcodeApp__tx_16'>
@@ -1120,13 +1322,19 @@ class QrcodeApp$Page extends React.Component {
                                       </View>
                                     </View>
                                   </View>}
-                                {!!$eval(() => this.state.status === 'finish') && <View ref={this._refsManager.linkRef('view-e64e418e')} className='QrcodeApp__vw2__vw2'>
+                                {!!false && <View ref={this._refsManager.linkRef('view-e64e418e')} className='QrcodeApp__vw2__vw2'>
                                     <Text className='QrcodeApp__vw2__vw2__tx' />
-                                    <AtNoticebar marquee={true} speed={80} customStyle={{
+                                    <AtNoticebar marquee={false} speed={80} customStyle={{
                                   borderRadius: px(10)
-                                }} ref={this._refsManager.linkRef('atnoticebar-7c354b26')}>
+                                }} ref={this._refsManager.linkRef('atnoticebar-7c354b26')} close={false} single={false} showMore={false}>
                                       图片效果不理想或无法扫码，请点击重新绘制，并调节二维码强调程度
                                     </AtNoticebar>
+                                  </View>}
+                                {!!$eval(() => this.state.status === 'finish') && <View ref={this._refsManager.linkRef('view-e64e418e')} className='QrcodeApp__vw2__vw3'>
+                                    <AtIcon color='#de8c17' size={19} svg={ICONS["svg_ylrapr"]} />
+                                    <Text ref={this._refsManager.linkRef('text-bf58552f')} className='QrcodeApp__vw2__vw3__tx1'>
+                                      图片效果不理想或无法扫码，请点击重新绘制，并调节二维码强调程度
+                                    </Text>
                                   </View>}
                               </View>
                             </View>
@@ -1139,16 +1347,16 @@ class QrcodeApp$Page extends React.Component {
               </ScrollView>
             </View>
           </View>
-          {!!$eval(() => !this.props?.isMobile) && <View ref={this._refsManager.linkRef('view-2d027e0e')} className='QrcodeApp__two-dimensional_code__vw2__vw1'>
-              <View className='QrcodeApp__two-dimensional_code__vw2__vw1__vw'>
-                <View ref={this._refsManager.linkRef('view-4572ad61')} className='QrcodeApp__two-dimensional_code__vw2__vw1__vw__vw M-flex-item'>
-                  <Text className='QrcodeApp__two-dimensional_code__vw2__vw1__vw__vw__tx'>
+          {!!$eval(() => !this.props?.isMobile) && <View ref={this._refsManager.linkRef('view-2d027e0e')} className='QrcodeApp__two-dimensional_code__vw3__vw1'>
+              <View className='QrcodeApp__two-dimensional_code__vw3__vw1__vw'>
+                <View ref={this._refsManager.linkRef('view-4572ad61')} className='QrcodeApp__two-dimensional_code__vw3__vw1__vw__vw M-flex-item'>
+                  <Text className='QrcodeApp__two-dimensional_code__vw3__vw1__vw__vw__tx'>
                     历史记录
                   </Text>
-                  <View className='QrcodeApp__two-dimensional_code__vw2__vw1__vw__vw__vw1 M-gb-click' ref={this._refsManager.linkRef('view-e3ed6a0f')} onClick={e => {
+                  <View className='QrcodeApp__two-dimensional_code__vw3__vw1__vw__vw__vw1 M-gb-click' ref={this._refsManager.linkRef('view-e3ed6a0f')} onClick={e => {
                 this.$('autolist')?.refresh();
               }}>
-                    <AtIcon color='#666' size={24} svg={ICONS["svg_bxqsf8"]} ref={this._refsManager.linkRef('aticon-d4e959d0')} />
+                    <AtIcon color='#666' size={24} svg={ICONS["svg_l3j5i5"]} ref={this._refsManager.linkRef('aticon-d4e959d0')} />
                   </View>
                 </View>
               </View>
@@ -1186,7 +1394,86 @@ class QrcodeApp$Page extends React.Component {
             </View>}
         </View>
         <Modal style={{}} animate='pop' renderView={props => <View className='QrcodeApp__vw_19'>
-              <Image src={$eval(() => _this.state.previewImgUrl)} remote={false} fit={false} className='QrcodeApp__vw_19__Image' />
+              <View style={{}}>
+                <View className='QrcodeApp__vw_20'>
+                  <Image src={static_r1_image} remote={false} fit={false} className='QrcodeApp__vw_20__Image' />
+                  <Text className='QrcodeApp__vw_20__tx1'>新人福利</Text>
+                </View>
+              </View>
+              <View className='QrcodeApp__vw_19__vw1 M-flex-item'>
+                <Text className='QrcodeApp__vw_19__vw1__tx'>300</Text>
+                <Text className='QrcodeApp__vw_19__vw1__tx1'>点</Text>
+              </View>
+              <View ref={this._refsManager.linkRef('view-78aae562')} className='QrcodeApp__vw_19__vw2'>
+                <View ref={this._refsManager.linkRef('view-deada35c')} className='QrcodeApp__vw_19__vw2__vw' onClick={function () {
+            return this.claimFreePoints.apply(this, Array.prototype.slice.call(arguments).concat([]));
+          }.bind(_this)}>
+                  <Text className='QrcodeApp__vw_19__vw2__vw__tx'>
+                    立即领取
+                  </Text>
+                </View>
+              </View>
+            </View>} visible={false} maskClosable={true} ref={this._refsManager.linkRef('modal5')} />
+        <Modal style={{}} animate='slide-bottom' renderView={
+      /* 插槽容器*/
+      props => <View className='QrcodeApp__vw_21 M-flex-item'>
+                <OpenAMembership title='' onCharge={() => {
+          _this.refreshPersonalInformation();
+        }} onClose={() => {
+          _this.$('modal4')?.close();
+        }} ref={this._refsManager.linkRef('openamembership-4fc9571a')} isMobile={true} />
+              </View>} visible={false} maskClosable={true} ref={this._refsManager.linkRef('modal4')} />
+        <Modal style={{
+        height: '100%'
+      }} animate='slide-right' renderView={props => <View className='QrcodeApp__vw_22 M-flex-item'>
+              {!!$eval(() => !props?.isMobile) && <View ref={this._refsManager.linkRef('view-2d027e0e')} className='QrcodeApp__vw_22__vw M-flex-item'>
+                  <View className='QrcodeApp__vw_22__vw__vw'>
+                    <View ref={this._refsManager.linkRef('view-4572ad61')} className='QrcodeApp__vw_22__vw__vw__vw M-flex-item'>
+                      <Text className='QrcodeApp__vw_22__vw__vw__vw__tx'>
+                        历史记录
+                      </Text>
+                      <View className='QrcodeApp__vw_22__vw__vw__vw__vw1 M-gb-click' ref={this._refsManager.linkRef('view-e3ed6a0f')} onClick={e => {
+                _this.$('autolist')?.refresh();
+              }}>
+                        <AtIcon color='#666' size={24} svg={ICONS["svg_n0040s"]} ref={this._refsManager.linkRef('aticon-d4e959d0')} />
+                      </View>
+                    </View>
+                  </View>
+                  <AutoList dataSource={(page, pageSize) => {
+            return _this.dataSourceMap['history'].load({
+              param: {
+                appId: _this.constants.qrCodeAppId,
+                page,
+                pageSize,
+                sort: 'id,asc'
+              }
+            });
+          }} autoFetch={false} mode='scroll' pageMode='auto' emptyText='' footerMarginTop={0} pageSize={10} renderItem={
+          /* 插槽容器*/
+          (item, index, currentPage) => <View>
+                          <View ref={this._refsManager.linkRef('view-8d7af1d4')} className='QrcodeApp__vw_23'>
+                            <View ref={this._refsManager.linkRef('view-d2f5b4de')}>
+                              <View onClick={e => {
+                  if (props.isMobile) return;
+
+                  _this.setStateValue(item?.url?.fileUrl, {
+                    field: 'previewImgUrl'
+                  }, () => {
+                    _this.$('modal')?.open();
+                  });
+                }} className='QrcodeApp__vw_24'>
+                                <View className='QrcodeApp__vw_24__vw'>
+                                  {!!$eval(() => !item?.url?.fileUrl) && <Spin size='default' tip='' delay={0} indicator='' spinning={true} wrapperClassName='' ref={this._refsManager.linkRef('spin-c0b8c832')} />}
+                                </View>
+                                <Image src={$eval(() => item?.url?.fileUrl)} remote={false} fit={false} className='QrcodeApp__vw_24__Image1' />
+                              </View>
+                            </View>
+                          </View>
+                        </View>} renderHeader='' renderFooter='' emptyHideHeader={false} ref={this._refsManager.linkRef('autolist')} />
+                </View>}
+            </View>} visible={false} maskClosable={true} ref={this._refsManager.linkRef('modal3')} />
+        <Modal style={{}} animate='pop' renderView={props => <View className='QrcodeApp__vw_25'>
+              <Image src={$eval(() => _this.state.previewImgUrl)} remote={false} fit={false} className='QrcodeApp__vw_25__Image' />
             </View>} visible={false} maskClosable={true} ref={this._refsManager.linkRef('modal')} />
       </React.Fragment>;
   }

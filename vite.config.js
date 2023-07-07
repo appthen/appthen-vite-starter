@@ -1,13 +1,13 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
-import path from 'node:path';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
+import path from "node:path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
-      '~antd': path.resolve(__dirname, './node_modules/antd'),
+      "~antd": path.resolve(__dirname, "./node_modules/antd"),
     },
   },
   plugins: [react()],
@@ -22,6 +22,18 @@ export default defineConfig({
       },
     },
   },
-  publicDir: './public',
-  base: 'https://qn.iruddock.com/hysli/',
-})
+  experimental: {
+    renderBuiltUrl(filename, { hostType }) {
+      if (hostType === "js") {
+        return {
+          runtime: `window.__toCdnUrl(${JSON.stringify(filename)})`,
+          query: `v=${Date.now().toString()}`,
+        };
+      } else {
+        return { relative: true };
+      }
+    },
+  },
+  publicDir: "./public",
+  base: "https://qn.iruddock.com/hysli/",
+});

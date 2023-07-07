@@ -1,11 +1,11 @@
-import svg_fcbpqq from './svg_fcbpqq.svg?raw';
-import svg_amcnsh from './svg_amcnsh.svg?raw';
-import svg_s8gmrs from './svg_s8gmrs.svg?raw';
-import svg_0z4219 from './svg_0z4219.svg?raw';
+import svg_inkm1k from './svg_inkm1k.svg?raw';
+import svg_gom3sh from './svg_gom3sh.svg?raw';
+import svg_8pzbga from './svg_8pzbga.svg?raw';
+import svg_hudbfa from './svg_hudbfa.svg?raw';
 const ICONS = {
-  svg_fcbpqq,
-  svg_amcnsh,
-  svg_s8gmrs,
-  svg_0z4219,
+  svg_inkm1k,
+  svg_gom3sh,
+  svg_8pzbga,
+  svg_hudbfa,
 }
 export default ICONS;

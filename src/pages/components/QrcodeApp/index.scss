@@ -196,11 +196,11 @@
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  height: 350px;
   border-radius: 0px;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   width: 100%;
+  min-height: 400px;
 }
 .QrcodeApp__vw_1__vw {
   padding-left: 15px;
@@ -336,6 +336,16 @@
   color: #eaeaea;
   margin-right: 3px;
 }
+.QrcodeApp__vw_1__vw2__vw1 {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 15px;
+}
+.QrcodeApp__vw_1__vw2__vw1__tx {
+  font-size: 17px;
+  color: #ff1717;
+  line-height: 23px;
+}
 .QrcodeApp__vw_1__vw3 {
   display: flex;
   flex-direction: row;
@@ -374,21 +384,27 @@
   color: #ffffff;
   font-weight: 700;
 }
-.QrcodeApp__two-dimensional_code__vw2 {
+.QrcodeApp__vw_2 {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  min-height: 500px;
+}
+.QrcodeApp__two-dimensional_code__vw3 {
   display: flex;
   flex-direction: row;
   flex: 1;
-  min-height: calc(100vh- 40px);
+  min-height: 95vh;
 }
-.QrcodeApp__two-dimensional_code__vw2__vw {
+.QrcodeApp__two-dimensional_code__vw3__vw {
   display: flex;
   flex-direction: column;
 }
-.QrcodeApp__two-dimensional_code__vw2__vw__vw {
+.QrcodeApp__two-dimensional_code__vw3__vw__vw {
   display: flex;
   flex-direction: column;
 }
-.QrcodeApp__two-dimensional_code__vw2__vw__vw__vw {
+.QrcodeApp__two-dimensional_code__vw3__vw__vw__vw {
   display: flex;
   flex-direction: row;
   height: 60px;
@@ -396,38 +412,71 @@
   border-bottom-color: #ededed;
   border-bottom-style: solid;
 }
-.QrcodeApp__two-dimensional_code__vw2__vw__vw__vw__vw {
+.QrcodeApp__two-dimensional_code__vw3__vw__vw__vw__vw {
   padding-left: 24px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding-right: 10px;
 }
-.QrcodeApp__two-dimensional_code__vw2__vw__vw__vw__vw__ibg {
+.QrcodeApp__two-dimensional_code__vw3__vw__vw__vw__vw__ibg {
   height: 32px;
   border-radius: 4px;
   width: 32px;
 }
-.QrcodeApp__two-dimensional_code__vw2__vw__vw__vw__vw__tx1 {
+.QrcodeApp__two-dimensional_code__vw3__vw__vw__vw__vw__tx1 {
   font-size: 18px;
   color: #333;
   font-weight: 700;
   margin-left: 15px;
 }
-.QrcodeApp__two-dimensional_code__vw2__vw__vw__sv1 {
+.QrcodeApp__two-dimensional_code__vw3__vw__vw__vw__vw__vw2 {
 }
-.QrcodeApp__two-dimensional_code__vw2__vw__vw__sv1__vw {
+.QrcodeApp__vw_3 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-width: 1px;
+  border-color: #dedede;
+  border-style: solid;
+  height: 44px;
+  padding-left: 10px;
+  border-radius: 22px;
+}
+.QrcodeApp__vw_3__vw1 {
+  padding-left: 8px;
+  display: flex;
+  flex-direction: column;
+}
+.QrcodeApp__vw_3__vw1__tx {
+  font-size: 14px;
+  color: #5b5b5b;
+  font-weight: 500;
+}
+.QrcodeApp__vw_3__vw1__tx1 {
+  font-size: 12px;
+  color: #df4fff;
+  margin-top: 5px;
+}
+.QrcodeApp__vw_3__vw2 {
+  display: flex;
+  flex-direction: column;
+}
+.QrcodeApp__two-dimensional_code__vw3__vw__vw__sv1 {
+}
+.QrcodeApp__two-dimensional_code__vw3__vw__vw__sv1__vw {
   padding-left: 15px;
   padding-right: 15px;
   padding-top: 15px;
 }
-.QrcodeApp__vw_2 {
+.QrcodeApp__vw_4 {
   background-color: #7075ff;
   border-radius: 12px;
   padding-top: 12px;
   position: relative;
   overflow: hidden;
 }
-.QrcodeApp__vw_2__vw {
+.QrcodeApp__vw_4__vw {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -440,7 +489,7 @@
   justify-content: center;
   align-items: center;
 }
-.QrcodeApp__vw_2__vw__vw {
+.QrcodeApp__vw_4__vw__vw {
   border-radius: 30px;
   display: flex;
   flex-direction: column;
@@ -450,7 +499,7 @@
   height: 95px;
   padding-bottom: 18px;
 }
-.QrcodeApp__vw_2__vw__vw__vw {
+.QrcodeApp__vw_4__vw__vw__vw {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -461,45 +510,45 @@
   color: #ef7515;
   font-weight: 600;
 }
-.QrcodeApp__vw_2__vw1 {
+.QrcodeApp__vw_4__vw1 {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   padding-left: 17px;
   padding-bottom: 12px;
 }
-.QrcodeApp__vw_2__vw1__tx {
+.QrcodeApp__vw_4__vw1__tx {
   font-size: 29px;
   color: #ffffff;
   font-weight: 600;
 }
-.QrcodeApp__vw_2__vw1__tx1 {
+.QrcodeApp__vw_4__vw1__tx1 {
   font-size: 20px;
   color: #ffffff;
   margin-left: 10px;
   font-weight: 600;
 }
-.QrcodeApp__vw_3 {
+.QrcodeApp__vw_5 {
   padding-left: 15px;
   padding-right: 15px;
   padding-top: 5px;
   padding-bottom: 15px;
 }
-.QrcodeApp__vw_3__vw {
+.QrcodeApp__vw_5__vw {
   background-color: #fff;
   border-radius: 10px;
   padding-bottom: 3px;
 }
-.QrcodeApp__vw_3__vw__vw {
+.QrcodeApp__vw_5__vw__vw {
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 13px;
 }
-.QrcodeApp__vw_3__vw__vw__vw {
+.QrcodeApp__vw_5__vw__vw__vw {
   background-color: #f8f8f8;
   border-radius: 10px;
 }
-.QrcodeApp__vw_3__vw__vw__vw__vw {
+.QrcodeApp__vw_5__vw__vw__vw__vw {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -508,7 +557,7 @@
   padding-top: 15px;
   padding-bottom: 15px;
 }
-.QrcodeApp__vw_3__vw__vw__vw__vw__vw {
+.QrcodeApp__vw_5__vw__vw__vw__vw__vw {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -516,11 +565,11 @@
   padding-top: 15px;
   padding-bottom: 15px;
 }
-.QrcodeApp__vw_3__vw__vw__vw__vw__vw__tx {
+.QrcodeApp__vw_5__vw__vw__vw__vw__vw__tx {
   font-size: 14px;
   color: #b4b4b4;
 }
-.QrcodeApp__vw_3__vw__vw__vw__vw1 {
+.QrcodeApp__vw_5__vw__vw__vw__vw1 {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -529,14 +578,14 @@
   padding-top: 15px;
   padding-bottom: 15px;
 }
-.QrcodeApp__vw_3__vw__vw__vw__vw1__vw {
+.QrcodeApp__vw_5__vw__vw__vw__vw1__vw {
 }
-.QrcodeApp__vw_3__vw__vw__vw__vw1__vw__Input {
+.QrcodeApp__vw_5__vw__vw__vw__vw1__vw__Input {
   color: #000000;
   font-weight: 600;
   font-size: 16px;
 }
-.QrcodeApp__vw_3__vw__vw__vw__vw2 {
+.QrcodeApp__vw_5__vw__vw__vw__vw2 {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -545,28 +594,28 @@
   padding-top: 15px;
   padding-bottom: 15px;
 }
-.QrcodeApp__vw_3__vw__vw__vw__vw2__vw {
+.QrcodeApp__vw_5__vw__vw__vw__vw2__vw {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.QrcodeApp__vw_3__vw__vw__vw__vw2__vw__Image {
+.QrcodeApp__vw_5__vw__vw__vw__vw2__vw__Image {
   width: 150px;
   height: 150px;
 }
-.QrcodeApp__vw_3__vw__vw1 {
+.QrcodeApp__vw_5__vw__vw1 {
   display: flex;
   flex-direction: row;
   padding-right: 15px;
 }
-.QrcodeApp__vw_3__vw__vw1__vw {
+.QrcodeApp__vw_5__vw__vw1__vw {
   display: flex;
   flex-direction: row;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.QrcodeApp__vw_3__vw__vw1__vw__vw {
+.QrcodeApp__vw_5__vw__vw1__vw__vw {
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 18px;
@@ -579,12 +628,12 @@
   justify-content: center;
   align-items: center;
 }
-.QrcodeApp__vw_3__vw__vw1__vw__vw__tx {
+.QrcodeApp__vw_5__vw__vw1__vw__vw__tx {
   font-size: 14px;
   color: #2723f5;
   font-weight: 700;
 }
-.QrcodeApp__vw_4 {
+.QrcodeApp__vw_6 {
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 18px;
@@ -597,13 +646,13 @@
   justify-content: center;
   align-items: center;
 }
-.QrcodeApp__vw_4__tx1 {
+.QrcodeApp__vw_6__tx1 {
   font-size: 14px;
   color: #f5a623;
   margin-left: 5px;
   font-weight: 700;
 }
-.QrcodeApp__vw_3__vw__vw1__vw__vw2 {
+.QrcodeApp__vw_5__vw__vw1__vw__vw2 {
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 18px;
@@ -617,11 +666,11 @@
   align-items: center;
   margin-left: 8px;
 }
-.QrcodeApp__vw_3__vw__vw1__vw__vw2__tx {
+.QrcodeApp__vw_5__vw__vw1__vw__vw2__tx {
   font-size: 14px;
   color: #cdcbcb;
 }
-.QrcodeApp__vw_3__vw__vw1__vw1 {
+.QrcodeApp__vw_5__vw__vw1__vw1 {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -688,12 +737,12 @@
   color: #333333;
   font-weight: 500;
 }
-.QrcodeApp__vw_5 {
+.QrcodeApp__vw_7 {
   padding-left: 15px;
   padding-top: 15px;
   padding-bottom: 15px;
 }
-.QrcodeApp__vw_5__vw {
+.QrcodeApp__vw_7__vw {
   border-radius: 10px;
   padding-bottom: 3px;
   display: flex;
@@ -701,7 +750,7 @@
   flex-wrap: wrap;
   justify-content: flex-start;
 }
-.QrcodeApp__vw_5__vw__vw {
+.QrcodeApp__vw_7__vw__vw {
   padding-top: 8px;
   padding-right: 8px;
   padding-bottom: 3px;
@@ -715,22 +764,22 @@
   border-style: solid;
   background-color: #ffffff;
 }
-.QrcodeApp__vw_5__vw__vw__Image {
+.QrcodeApp__vw_7__vw__vw__Image {
   width: 100%;
   border-radius: 10px;
 }
-.QrcodeApp__vw_5__vw__vw__vw1 {
+.QrcodeApp__vw_7__vw__vw__vw1 {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 6px;
   padding-bottom: 2px;
 }
-.QrcodeApp__vw_5__vw__vw__vw1__tx {
+.QrcodeApp__vw_7__vw__vw__vw1__tx {
   font-size: 12px;
   color: #333;
 }
-.QrcodeApp__vw1_6 {
+.QrcodeApp__vw1_8 {
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 15px;
@@ -738,29 +787,29 @@
   border-radius: 15px;
   margin-top: 15px;
 }
-.QrcodeApp__vw1_6__vw {
+.QrcodeApp__vw1_8__vw {
   border-radius: 10px;
   padding-bottom: 3px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
-.QrcodeApp__vw1_6__vw1 {
+.QrcodeApp__vw1_8__vw1 {
   display: flex;
   flex-direction: row;
   align-items: center;
   padding-top: 12px;
   padding-bottom: 12px;
 }
-.QrcodeApp__tx_7 {
+.QrcodeApp__tx_9 {
   font-size: 16px;
   color: #8005f1;
   font-weight: 600;
 }
-.QrcodeApp__vw1_6__vw1__vw1 {
+.QrcodeApp__vw1_8__vw1__vw1 {
   padding-left: 5px;
 }
-.QrcodeApp__vw1_6__vw2 {
+.QrcodeApp__vw1_8__vw2 {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -770,13 +819,13 @@
   border-radius: 12px;
   overflow: hidden;
 }
-.QrcodeApp__vw1_6__vw2__vw {
+.QrcodeApp__vw1_8__vw2__vw {
   padding-left: 5px;
 }
-.QrcodeApp__vw1_6__vw3 {
+.QrcodeApp__vw1_8__vw3 {
   overflow: hidden;
 }
-.QrcodeApp__vw1_6__vw3__vw {
+.QrcodeApp__vw1_8__vw3__vw {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -784,11 +833,11 @@
   padding-bottom: 10px;
   overflow: hidden;
 }
-.QrcodeApp__vw1_6__vw3__vw__tx {
+.QrcodeApp__vw1_8__vw3__vw__tx {
   font-size: 14px;
   color: #7e7e7e;
 }
-.QrcodeApp__vw1_6__vw3__vw1 {
+.QrcodeApp__vw1_8__vw3__vw1 {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -798,45 +847,67 @@
   border-radius: 12px;
   overflow: hidden;
 }
-.QrcodeApp__vw1_6__vw3__vw1__vw {
+.QrcodeApp__vw1_8__vw3__vw1__vw {
   padding-left: 5px;
 }
 .QrcodeApp__Col1 {
   padding-bottom: 300px;
 }
-.QrcodeApp__vw_8 {
+.QrcodeApp__vw_10 {
   border-radius: 12px;
   padding-top: 12px;
 }
-.QrcodeApp__vw_8__vw {
+.QrcodeApp__vw_10__vw {
   display: flex;
   flex-direction: row;
   padding-left: 17px;
   padding-bottom: 5px;
+  align-items: flex-end;
 }
-.QrcodeApp__vw_8__vw__vw {
+.QrcodeApp__vw_10__vw__vw {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
 }
-.QrcodeApp__vw_8__vw__vw__tx {
+.QrcodeApp__vw_10__vw__vw__tx {
   font-size: 29px;
   color: #333333;
   font-weight: 600;
 }
-.QrcodeApp__vw_8__vw__vw__tx1 {
+.QrcodeApp__vw_10__vw__vw__tx1 {
   font-size: 20px;
   color: #333333;
   margin-left: 10px;
   font-weight: 500;
 }
-.QrcodeApp__vw_8__vw__vw1 {
+.QrcodeApp__vw_10__vw__vw1 {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   padding-right: 15px;
 }
-.QrcodeApp__vw_9 {
+.QrcodeApp__vw_10__vw__vw2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-width: 1px;
+  border-color: #268bff;
+  border-style: solid;
+  border-radius: 8px;
+}
+.QrcodeApp__vw_10__vw__vw2__tx {
+  font-size: 14px;
+  color: #268bff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.QrcodeApp__vw_11 {
   padding-left: 15px;
   padding-right: 15px;
   padding-top: 15px;
@@ -850,7 +921,7 @@
   border-radius: 15px;
   position: relative;
 }
-.QrcodeApp__vw_9__vw {
+.QrcodeApp__vw_11__vw {
   position: absolute;
   top: 0;
   left: 0;
@@ -864,35 +935,48 @@
   justify-content: center;
   align-items: center;
 }
-.QrcodeApp__vw_9__vw__vw1 {
+.QrcodeApp__vw_11__vw__vw1 {
   background-color: #0756fe;
-  border-radius: 15px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  width: 95px;
+  width: 126px;
   height: 95px;
-  padding-bottom: 14px;
+  justify-content: center;
 }
-.QrcodeApp__vw_9__vw__vw1__vw {
+.QrcodeApp__vw_11__vw__vw1__vw {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.QrcodeApp__tx_10 {
+.QrcodeApp__vw_11__vw__vw1__vw__vw {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.QrcodeApp__vw_11__vw__vw1__vw__vw__tx1 {
   font-size: 14px;
   color: #ffffff;
+  margin-left: 5px;
+  font-weight: 600;
 }
-.QrcodeApp__vw_9__vw1 {
+.QrcodeApp__vw_11__vw__vw1__vw1 {
+  margin-top: 6px;
+}
+.QrcodeApp__vw_11__vw__vw1__vw1__tx {
+  font-size: 12px;
+  color: #d2d2d2;
+}
+.QrcodeApp__vw_11__vw1 {
   position: relative;
 }
-.QrcodeApp__vw_9__vw1__Image {
+.QrcodeApp__vw_11__vw1__Image {
   width: 100%;
   border-radius: 15px;
 }
-.QrcodeApp__vw_9__vw1__Image1 {
+.QrcodeApp__vw_11__vw1__Image1 {
   width: 100%;
   border-radius: 15px;
   position: absolute;
@@ -900,14 +984,14 @@
   left: 0;
   z-index: 5;
 }
-.QrcodeApp__vw1_11 {
+.QrcodeApp__vw1_12 {
   background-color: #efecff;
   border-radius: 10px;
   padding-top: 12px;
   margin-top: 15px;
   padding-bottom: 2px;
 }
-.QrcodeApp__vw1_11__vw {
+.QrcodeApp__vw1_12__vw {
   padding-left: 10px;
   padding-right: 15px;
   display: flex;
@@ -915,12 +999,12 @@
   align-items: center;
   justify-content: flex-start;
 }
-.QrcodeApp__vw1_11__vw__tx1 {
+.QrcodeApp__vw1_12__vw__tx1 {
   font-size: 14px;
   color: #573de7;
   margin-left: 6px;
 }
-.QrcodeApp__vw1_11__vw1 {
+.QrcodeApp__vw1_12__vw1 {
   padding-left: 18px;
   padding-right: 18px;
   display: flex;
@@ -930,12 +1014,12 @@
   padding-top: 5px;
   padding-bottom: 5px;
 }
-.QrcodeApp__vw1_11__vw1__vw {
+.QrcodeApp__vw1_12__vw1__vw {
   display: flex;
   flex-direction: column;
   padding-right: 10px;
 }
-.QrcodeApp__vw1_11__vw1__vw__tx {
+.QrcodeApp__vw1_12__vw1__vw__tx {
   font-size: 14px;
   color: #8b7afe;
   font-weight: 500;
@@ -943,23 +1027,23 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.QrcodeApp__vw1_11__vw1__vw1 {
+.QrcodeApp__vw1_12__vw1__vw1 {
 }
-.QrcodeApp__vw1_11__vw1__vw2 {
+.QrcodeApp__vw1_12__vw1__vw2 {
   display: flex;
   flex-direction: column;
   padding-left: 5px;
 }
-.QrcodeApp__vw1_11__vw1__vw2__tx {
+.QrcodeApp__vw1_12__vw1__vw2__tx {
   font-size: 14px;
   color: #8e77f1;
 }
-.QrcodeApp__vw1_11__vw1__vw3 {
+.QrcodeApp__vw1_12__vw1__vw3 {
   display: flex;
   flex-direction: column;
   padding-left: 10px;
 }
-.QrcodeApp__vw1_11__vw1__vw3__tx {
+.QrcodeApp__vw1_12__vw1__vw3__tx {
   font-size: 14px;
   color: #0e1cd9;
   font-weight: 500;
@@ -990,7 +1074,7 @@
   justify-content: center;
   align-items: center;
 }
-.QrcodeApp__tx_12 {
+.QrcodeApp__tx_13 {
   font-size: 14px;
   color: #519c03;
 }
@@ -1012,7 +1096,7 @@
   justify-content: center;
   align-items: center;
 }
-.QrcodeApp__tx_13 {
+.QrcodeApp__tx_14 {
   font-size: 14px;
   color: #5249ff;
 }
@@ -1033,7 +1117,7 @@
   justify-content: center;
   align-items: center;
 }
-.QrcodeApp__tx_14 {
+.QrcodeApp__tx_15 {
   font-size: 14px;
   color: #f97910;
 }
@@ -1048,21 +1132,28 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   width: 72px;
   height: 80px;
-  padding-bottom: 14px;
   margin-right: 15px;
+  align-items: center;
 }
 .QrcodeApp__vw2__vw1__vw__vw {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
   align-items: center;
 }
-.QrcodeApp__tx_15 {
-  font-size: 14px;
+.QrcodeApp__vw2__vw1__vw__vw__tx1 {
+  font-size: 16px;
   color: #5249ff;
+  margin-left: 5px;
+  font-weight: 500;
+}
+.QrcodeApp__vw2__vw1__vw__vw1 {
+  margin-top: 5px;
+}
+.QrcodeApp__vw2__vw1__vw__vw1__tx {
+  font-size: 12px;
+  color: #6a82fe;
 }
 .QrcodeApp__vw2__vw1__vw1 {
   background-color: #fff6d2;
@@ -1093,7 +1184,25 @@
   font-size: 14px;
   color: #929292;
 }
-.QrcodeApp__two-dimensional_code__vw2__vw1 {
+.QrcodeApp__vw2__vw3 {
+  padding-bottom: 8px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 12px;
+  background-color: #fcf6ed;
+  padding-top: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 12px;
+  align-items: flex-start;
+}
+.QrcodeApp__vw2__vw3__tx1 {
+  font-size: 14px;
+  color: #de8c17;
+  line-height: 18px;
+  margin-left: 6px;
+}
+.QrcodeApp__two-dimensional_code__vw3__vw1 {
   width: 166px;
   background-color: #f8f8f8;
   border-left-width: 1px;
@@ -1102,7 +1211,7 @@
   display: flex;
   flex-direction: column;
 }
-.QrcodeApp__two-dimensional_code__vw2__vw1__vw {
+.QrcodeApp__two-dimensional_code__vw3__vw1__vw {
   display: flex;
   flex-direction: row;
   height: 60px;
@@ -1110,18 +1219,18 @@
   border-bottom-color: #ededed;
   border-bottom-style: solid;
 }
-.QrcodeApp__two-dimensional_code__vw2__vw1__vw__vw {
+.QrcodeApp__two-dimensional_code__vw3__vw1__vw__vw {
   padding-left: 16px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
-.QrcodeApp__two-dimensional_code__vw2__vw1__vw__vw__tx {
+.QrcodeApp__two-dimensional_code__vw3__vw1__vw__vw__tx {
   font-size: 16px;
   color: #333;
 }
-.QrcodeApp__two-dimensional_code__vw2__vw1__vw__vw__vw1 {
+.QrcodeApp__two-dimensional_code__vw3__vw1__vw__vw__vw1 {
   padding-right: 8px;
   padding-top: 3px;
   padding-bottom: -2px;
@@ -1163,12 +1272,157 @@
   display: flex;
   flex-direction: column;
   background-color: #fff;
+  width: 260px;
+  height: 260px;
+  border-radius: 20px;
+  position: relative;
+}
+.QrcodeApp__vw_20 {
+  display: flex;
+  flex-direction: row;
+  padding-top: 14px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+}
+.QrcodeApp__vw_20__Image {
+  width: 109px;
+  height: 100px;
+  position: absolute;
+  top: -40px;
+  right: -38px;
+}
+.QrcodeApp__vw_20__tx1 {
+  font-size: 20px;
+  color: #8b572a;
+}
+.QrcodeApp__vw_19__vw1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.QrcodeApp__vw_19__vw1__tx {
+  font-size: 52px;
+  color: #8b572a;
+  font-weight: 600;
+}
+.QrcodeApp__vw_19__vw1__tx1 {
+  font-size: 20px;
+  color: #8b572a;
+  margin-left: 5px;
+}
+.QrcodeApp__vw_19__vw2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 15px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.QrcodeApp__vw_19__vw2__vw {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 25px;
+  justify-content: center;
+  background-color: #e6c886;
+  width: 100%;
+  cursor: pointer;
+}
+.QrcodeApp__vw_19__vw2__vw__tx {
+  font-size: 18px;
+  color: #ab7a0a;
+  font-weight: 600;
+}
+.QrcodeApp__vw_21 {
+  display: flex;
+  flex-direction: column;
+}
+.QrcodeApp__vw_22 {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  width: 200px;
+}
+.QrcodeApp__vw_22__vw {
+  background-color: #f8f8f8;
+  border-left-width: 1px;
+  border-left-color: #ededed;
+  border-left-style: solid;
+  display: flex;
+  flex-direction: column;
+}
+.QrcodeApp__vw_22__vw__vw {
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+  border-bottom-width: 1px;
+  border-bottom-color: #ededed;
+  border-bottom-style: solid;
+}
+.QrcodeApp__vw_22__vw__vw__vw {
+  padding-left: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.QrcodeApp__vw_22__vw__vw__vw__tx {
+  font-size: 16px;
+  color: #333;
+}
+.QrcodeApp__vw_22__vw__vw__vw__vw1 {
+  padding-right: 8px;
+  padding-top: 3px;
+  padding-bottom: -2px;
+}
+.QrcodeApp__vw_23 {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 15px;
+}
+.QrcodeApp__vw_24 {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ededed;
+  border-radius: 15px;
+  position: relative;
+}
+.QrcodeApp__vw_24__vw {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.QrcodeApp__vw_24__Image1 {
+  width: 100%;
+  border-radius: 15px;
+}
+.QrcodeApp__vw_25 {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
   width: 60vh;
   height: 60vh;
   border-radius: 20px;
   overflow: hidden;
 }
-.QrcodeApp__vw_19__Image {
+.QrcodeApp__vw_25__Image {
   width: 100%;
   height: 100%;
 }

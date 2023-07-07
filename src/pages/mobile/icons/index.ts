@@ -1,15 +1,15 @@
-import svg_me85bm from './svg_me85bm.svg?raw';
-import svg_6qjejn from './svg_6qjejn.svg?raw';
-import svg_kj3x73 from './svg_kj3x73.svg?raw';
-import svg_pch8il from './svg_pch8il.svg?raw';
-import svg_yiqem5 from './svg_yiqem5.svg?raw';
-import svg_ux1ybq from './svg_ux1ybq.svg?raw';
+import svg_u39c0z from './svg_u39c0z.svg?raw';
+import svg_eilrrx from './svg_eilrrx.svg?raw';
+import svg_qyekyx from './svg_qyekyx.svg?raw';
+import svg_p6vghq from './svg_p6vghq.svg?raw';
+import svg_i8txs1 from './svg_i8txs1.svg?raw';
+import svg_qkp8as from './svg_qkp8as.svg?raw';
 const ICONS = {
-  svg_me85bm,
-  svg_6qjejn,
-  svg_kj3x73,
-  svg_pch8il,
-  svg_yiqem5,
-  svg_ux1ybq,
+  svg_u39c0z,
+  svg_eilrrx,
+  svg_qyekyx,
+  svg_p6vghq,
+  svg_i8txs1,
+  svg_qkp8as,
 }
 export default ICONS;

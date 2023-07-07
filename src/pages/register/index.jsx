@@ -36,6 +36,8 @@ class Register$Page extends React.Component {
     this.state = {
       req: {},
       isMobile: false,
+      countdown: 0,
+      getCode: {},
       req_1: {}
     };
   }
@@ -69,10 +71,30 @@ class Register$Page extends React.Component {
             contentType: 'JSON',
             method: 'POST',
             params: {
-              username: _this.state.account,
-              password: _this.state.password
+              password: _this.state.password,
+              phone: _this.state.account,
+              code: _this.state.code
             },
             headers: {}
+          };
+        }
+      }, {
+        id: 'getCode',
+        isInit: function () {
+          return false;
+        },
+        isSync: false,
+        type: 'fetch',
+        options: function () {
+          return {
+            uri: _this.constants.HostDomain + '/system_user_phone',
+            contentType: 'JSON',
+            method: 'POST',
+            params: {
+              phone: _this.state.account
+            },
+            headers: {},
+            timeout: 15000
           };
         }
       }, {
@@ -88,14 +110,19 @@ class Register$Page extends React.Component {
             contentType: 'JSON',
             method: 'POST',
             params: {
-              username: _this.state.account,
-              password: _this.state.password
+              type: 'phone',
+              code: _this.state.code,
+              phone: _this.state.account
             },
             headers: {}
           };
         }
       }]
     };
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
   }
 
   setStateValue(e, {
@@ -150,6 +177,42 @@ class Register$Page extends React.Component {
     }
   }
 
+  async getVerificationCode(e) {
+    if (this.state.account?.length !== 11) {
+      return this.utils.message.error('请输入正确的手机号');
+    }
+
+    if (this.state.countdown > 0) {
+      return this.utils.message.error('请稍等');
+    }
+
+    const hide = this.utils.message.loading();
+    const getCode = await this.dataSourceMap['getCode']?.load();
+    hide();
+
+    if (getCode?.code !== 0) {
+      return this.utils.message.error(this.state.getCode?.msg);
+    }
+
+    this.setState({
+      countdown: 60
+    });
+    this.timer = setInterval(() => {
+      this.decreaseCountdown();
+    }, 1000);
+  }
+
+  decreaseCountdown() {
+    this.setState(prevState => ({
+      countdown: prevState.countdown - 1
+    }), () => {
+      if (this.state.countdown < 1) {
+        clearInterval(this.timer);
+        this.timer = null;
+      }
+    });
+  }
+
   componentDidMount() {
     this._dataSourceEngine.reloadDataSource();
 
@@ -157,6 +220,12 @@ class Register$Page extends React.Component {
       this.setState({
         isMobile: true
       });
+    }
+
+    const loginForm = this.utils.preload('LOGIN_FORM');
+
+    if (loginForm) {
+      this.setState(loginForm);
     }
   }
 
@@ -197,7 +266,8 @@ class Register$Page extends React.Component {
             paddingTop: px(30),
             paddingLeft: px(20),
             paddingRight: px(20),
-            borderBottomLeftRadius: px(0)
+            borderBottomLeftRadius: px(0),
+            borderColor: '#c1c1c1'
           }
         }]} className='register__vw__vw1 M-flex-item'>
             <View inlineStyle={[{
@@ -208,27 +278,67 @@ class Register$Page extends React.Component {
             }
           }]} className='register__vw__vw1__vw'>
               <View>
-                <Text className='register__tx'>新用户注册</Text>
+                <Text className='register__tx'>验证手机号注册</Text>
               </View>
               <View className='register__vw__vw1__vw__vw1'>
                 <Text ref={this._refsManager.linkRef('text-ac6a8287')} className='register__vw__vw1__vw__vw1__tx' />
               </View>
-              <View className='register__vw__vw1__vw__vw2'>
-                <View className='register__vw__vw1__vw__vw2__vw'>
-                  <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_2jsaxq"]} />
+              <View ref={this._refsManager.linkRef('view-fe1bddac')}>
+                <View ref={this._refsManager.linkRef('view-6d99607f')} className='register__vw_1'>
+                  <View className='register__vw_1__vw'>
+                    <AtIcon color='#98b0f5' size={22} svg={ICONS["svg_aila7c"]} />
+                  </View>
+                  <View ref={this._refsManager.linkRef('view-6c65f6d1')} className='register__vw_1__vw1 M-flex-item'>
+                    <Input placeholder='手机号' bordered={false} disabled={false} allowClear={true} value={$eval(() => this.state.account)} onChange={function () {
+                    return this.setStateValue.apply(this, Array.prototype.slice.call(arguments).concat([{
+                      field: 'account',
+                      valueField: 'target.value'
+                    }]));
+                  }.bind(this)} className='register__vw_1__vw1__Input' />
+                  </View>
                 </View>
-                <View className='register__vw__vw1__vw__vw2__vw1 M-flex-item'>
-                  <Input placeholder='用户名' bordered={false} disabled={false} allowClear={true} value={$eval(() => this.state.account)} onChange={function () {
-                  return this.setStateValue.apply(this, Array.prototype.slice.call(arguments).concat([{
-                    field: 'account',
-                    valueField: 'target.value'
-                  }]));
-                }.bind(this)} ref={this._refsManager.linkRef('input-3eae6345')} className='register__vw__vw1__vw__vw2__vw1__Input' />
+                <View ref={this._refsManager.linkRef('view-6d99607f')} className='register__vw1'>
+                  <View className='register__vw1__vw'>
+                    <AtIcon color='#98b0f5' size={22} svg={ICONS["svg_1fnveg"]} />
+                  </View>
+                  <View ref={this._refsManager.linkRef('view-6c65f6d1')} className='register__vw1__vw1 M-flex-item'>
+                    <Input placeholder='验证码' bordered={false} disabled={false} allowClear={true} value={$eval(() => this.state.code)} onChange={function () {
+                    return this.setStateValue.apply(this, Array.prototype.slice.call(arguments).concat([{
+                      field: 'code',
+                      valueField: 'target.value'
+                    }]));
+                  }.bind(this)} className='register__vw1__vw1__Input' />
+                  </View>
+                  <View ref={this._refsManager.linkRef('view-6c65f6d1')} className='register__vw1__vw2'>
+                    <View className='register__vw1__vw2__vw' ref={this._refsManager.linkRef('view-f7d71db3')} onClick={function () {
+                    return this.getVerificationCode.apply(this, Array.prototype.slice.call(arguments).concat([]));
+                  }.bind(this)} inlineStyle={[{
+                    enable: $eval(() => this.state.countdown > 0),
+                    name: '动态样式1',
+                    style: {
+                      backgroundColor: '#eaeaea',
+                      borderColor: '#d6d6d6',
+                      borderWidth: px(1),
+                      borderStyle: 'solid'
+                    }
+                  }]}>
+                      <Text inlineStyle={[{
+                      enable: $eval(() => this.state.countdown > 0),
+                      name: '动态样式1',
+                      style: {
+                        color: '#767676'
+                      }
+                    }]} className='register__vw1__vw2__vw__tx'>
+                        {$eval(() => this.state.countdown > 0 ? `${this.state.countdown} 秒后重新获取` : '获取验证码')}
+                      </Text>
+                      <View className='register__vw1__vw2__vw__vw1' />
+                    </View>
+                  </View>
                 </View>
               </View>
               <View className='register__vw__vw1__vw__vw3'>
                 <View className='register__vw__vw1__vw__vw3__vw'>
-                  <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_v6w4jv"]} />
+                  <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_uiu4w9"]} />
                 </View>
                 <View className='register__vw__vw1__vw__vw3__vw1 M-flex-item'>
                   <Input.Password bordered={false} disabled={false} visibilityToggle={true} placeholder='密码' value={$eval(() => this.state.password)} onChange={function () {
@@ -241,42 +351,21 @@ class Register$Page extends React.Component {
                 }.bind(this)} className='register__vw__vw1__vw__vw3__vw1__Input.Password' />
                 </View>
               </View>
-              {!!false && <View ref={this._refsManager.linkRef('view-4c3d5e36')} className='register__vw__vw1__vw__vw4'>
-                  <View className='register__vw__vw1__vw__vw4__vw'>
-                    <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_8wza2u"]} />
-                  </View>
-                  <View className='register__vw__vw1__vw__vw4__vw1 M-flex-item'>
-                    <Input placeholder='验证码' bordered={false} disabled={false} allowClear={true} value={$eval(() => this.state.code)} onChange={function () {
-                  return this.setStateValue.apply(this, Array.prototype.slice.call(arguments).concat([{
-                    field: 'code',
-                    valueField: 'target.value'
-                  }]));
-                }.bind(this)} className='register__vw__vw1__vw__vw4__vw1__Input' />
-                  </View>
-                  <View className='register__vw__vw1__vw__vw4__vw2'>
-                    <View className='register__vw__vw1__vw__vw4__vw2__vw M-gb-click'>
-                      <Text className='register__vw__vw1__vw__vw4__vw2__vw__tx'>
-                        获取验证码
-                      </Text>
-                      <View className='register__vw__vw1__vw__vw4__vw2__vw__vw1' />
-                    </View>
-                  </View>
-                </View>}
-              <View className='register__vw__vw1__vw__vw5'>
+              <View className='register__vw__vw1__vw__vw4'>
                 <View onClick={e => {
                 this.utils.navigateTo('login');
-              }} className='register__vw__vw1__vw__vw5__vw M-gb-click'>
-                  <Text className='register__vw__vw1__vw__vw5__vw__tx'>
+              }} className='register__vw__vw1__vw__vw4__vw M-gb-click'>
+                  <Text className='register__vw__vw1__vw__vw4__vw__tx'>
                     已有账号？去登录
                   </Text>
                 </View>
-                <View className='register__vw__vw1__vw__vw5__vw1 M-flex-item' />
+                <View className='register__vw__vw1__vw__vw4__vw1 M-flex-item' />
               </View>
               <View onClick={function () {
               return this.register.apply(this, Array.prototype.slice.call(arguments).concat([]));
-            }.bind(this)} className='register__vw__vw1__vw__vw6 M-gb-click'>
-                <Text className='register__vw__vw1__vw__vw6__tx'>确认注册</Text>
-                <View className='register__vw__vw1__vw__vw6__vw1' />
+            }.bind(this)} className='register__vw__vw1__vw__vw5 M-gb-click'>
+                <Text className='register__vw__vw1__vw__vw5__tx'>确认注册</Text>
+                <View className='register__vw__vw1__vw__vw5__vw1' />
               </View>
             </View>
           </View>

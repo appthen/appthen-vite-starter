@@ -5,8 +5,8 @@ import static_r3_image from "./images/r3_image.png";
 import ICONS from "./icons";
 import React from 'react';
 import { Page, Modal, View, Text, ScrollView, Image, AtIcon } from '@disscode/react';
-import QrcodeApp from "../components/QrcodeApp";
-import ApplicationList from "../components/ApplicationList";
+import QrcodeApp from "@/pages/components/QrcodeApp";
+import ApplicationList from "@/pages/components/ApplicationList";
 import utils from '@/utils';
 import constants from '@/utils/constants';
 import "./index.scss";
@@ -22,7 +22,8 @@ class Mobile$Page extends React.Component {
   constructor(props, context) {
     super(props);
     this.state = {
-      currentTab: 'store'
+      currentTab: 'store',
+      userInfo: {}
     };
   }
 
@@ -62,11 +63,45 @@ class Mobile$Page extends React.Component {
     win.focus();
   }
 
+  getCode() {
+    let redirect_uri = window.location.href;
+    redirect_uri = encodeURIComponent(redirect_uri);
+    console.log('getCode: ', window.location.href);
+    window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + this.constants.mpAppId + '&redirect_uri=' + redirect_uri + '&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect';
+  }
+
+  getUrlCode(name) {
+    console.log('getUrlCode name: ', name);
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(window.location.href) || [, ''])[1].replace(/\+/g, '%20')) || null;
+  }
+
   componentDidMount() {
     this.utils.checkForLogin().then(() => {
       this.setState({
         userInfo: this.utils.getGlobalData('userInfo')
       });
+      console.log('isWeChatBrowser: ', this.utils.isWeChatBrowser());
+
+      if (this.utils.isWeChatBrowser()) {
+        console.log('isWeChatBrowser: ', true);
+        this.code = this.getUrlCode('code');
+
+        if (this.code) {
+          // 获取OPENID
+          this.utils.reloadGlobalData('getOpenId', {
+            code: this.code
+          }).then(res => {
+            console.log('res: ', res);
+
+            if (res.code === 0) {
+              window.localStorage.setItem('MP_OPID', res.data.openid);
+            } else {// @TODO: 错误的情况
+            }
+          });
+        } else {
+          this.getCode();
+        }
+      }
     }).catch(e => {
       console.log('error: ', e);
     });
@@ -116,7 +151,7 @@ class Mobile$Page extends React.Component {
                 tab: 'qrcode'
               }]));
             }.bind(_this)} className='mobile__vw_1__vw2 M-gb-click'>
-                    <AtIcon color='#fe935f' size={16} svg={ICONS["svg_me85bm"]} />
+                    <AtIcon color='#fe935f' size={16} svg={ICONS["svg_u39c0z"]} />
                     <Text className='mobile__vw_1__vw2__tx1'>
                       ArtQR 智绘二维码
                     </Text>
@@ -200,7 +235,7 @@ class Mobile$Page extends React.Component {
                       <View className='mobile__vw_1__vw7__vw1 M-gb-click' onClick={function () {
                 return this.logOut.apply(this, Array.prototype.slice.call(arguments).concat([]));
               }.bind(_this)}>
-                        <AtIcon color='#adadad' size={22} svg={ICONS["svg_6qjejn"]} />
+                        <AtIcon color='#adadad' size={22} svg={ICONS["svg_eilrrx"]} />
                       </View>
                     </View>}
                   <View className='mobile__vw_1__vw8' />
@@ -216,7 +251,7 @@ class Mobile$Page extends React.Component {
                 tab: 'qrcode'
               }]));
             }.bind(_this)} className='mobile__vw_1__vw9 M-gb-click'>
-                      <AtIcon color='#fe935f' size={16} svg={ICONS["svg_kj3x73"]} />
+                      <AtIcon color='#fe935f' size={16} svg={ICONS["svg_qyekyx"]} />
                       <Text className='mobile__vw_1__vw9__tx1'>系统设置</Text>
                     </View>}
                   {!!false && <View inlineStyle={[{
@@ -231,7 +266,7 @@ class Mobile$Page extends React.Component {
                 tab: 'qrcode'
               }]));
             }.bind(_this)} className='mobile__vw_1__vw10 M-gb-click'>
-                      <AtIcon color='#fe935f' size={16} svg={ICONS["svg_pch8il"]} />
+                      <AtIcon color='#fe935f' size={16} svg={ICONS["svg_p6vghq"]} />
                       <Text className='mobile__vw_1__vw10__tx1'>OEM 代理</Text>
                     </View>}
                 </View>
@@ -244,7 +279,7 @@ class Mobile$Page extends React.Component {
               this.$('modal')?.open();
             }} className='mobile__main_body__vw__vw'>
                 <View style={{}}>
-                  <AtIcon color='#666' size={25} svg={ICONS["svg_yiqem5"]} />
+                  <AtIcon color='#666' size={25} svg={ICONS["svg_i8txs1"]} />
                 </View>
                 <View className='mobile__main_body__vw__vw__vw1 M-flex-item'>
                   <Text className='mobile__main_body__vw__vw__vw1__tx'>
@@ -255,7 +290,7 @@ class Mobile$Page extends React.Component {
                   </Text>
                 </View>
                 <View ref={this._refsManager.linkRef('view-6ef0fbeb')} className='mobile__main_body__vw__vw__vw2'>
-                  <AtIcon color='#c8c8c8' size={28} svg={ICONS["svg_ux1ybq"]} />
+                  <AtIcon color='#c8c8c8' size={28} svg={ICONS["svg_qkp8as"]} />
                   <Text className='mobile__main_body__vw__vw__vw2__tx1'>
                     导航
                   </Text>

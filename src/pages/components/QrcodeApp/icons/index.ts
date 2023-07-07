@@ -1,31 +1,39 @@
-import svg_hfuh3v from './svg_hfuh3v.svg?raw';
-import svg_u9z9fa from './svg_u9z9fa.svg?raw';
-import svg_kmppdt from './svg_kmppdt.svg?raw';
-import svg_8fpr59 from './svg_8fpr59.svg?raw';
-import svg_gqgv7g from './svg_gqgv7g.svg?raw';
-import svg_fo6xfn from './svg_fo6xfn.svg?raw';
-import svg_8fnniv from './svg_8fnniv.svg?raw';
-import svg_i03lvw from './svg_i03lvw.svg?raw';
-import svg_yjjmfx from './svg_yjjmfx.svg?raw';
-import svg_axoizy from './svg_axoizy.svg?raw';
-import svg_65yre2 from './svg_65yre2.svg?raw';
-import svg_hgk58t from './svg_hgk58t.svg?raw';
-import svg_hp75zg from './svg_hp75zg.svg?raw';
-import svg_bxqsf8 from './svg_bxqsf8.svg?raw';
+import svg_hs2c4j from './svg_hs2c4j.svg?raw';
+import svg_j743wh from './svg_j743wh.svg?raw';
+import svg_qo83ph from './svg_qo83ph.svg?raw';
+import svg_t65djy from './svg_t65djy.svg?raw';
+import svg_f9wx0j from './svg_f9wx0j.svg?raw';
+import svg_x6tex4 from './svg_x6tex4.svg?raw';
+import svg_e3kyzv from './svg_e3kyzv.svg?raw';
+import svg_tozkn7 from './svg_tozkn7.svg?raw';
+import svg_l4603n from './svg_l4603n.svg?raw';
+import svg_u9mb2h from './svg_u9mb2h.svg?raw';
+import svg_d3rh5r from './svg_d3rh5r.svg?raw';
+import svg_1h1v4t from './svg_1h1v4t.svg?raw';
+import svg_v0sadw from './svg_v0sadw.svg?raw';
+import svg_h4j2mu from './svg_h4j2mu.svg?raw';
+import svg_8a0hdj from './svg_8a0hdj.svg?raw';
+import svg_ylrapr from './svg_ylrapr.svg?raw';
+import svg_l3j5i5 from './svg_l3j5i5.svg?raw';
+import svg_n0040s from './svg_n0040s.svg?raw';
 const ICONS = {
-  svg_hfuh3v,
-  svg_u9z9fa,
-  svg_kmppdt,
-  svg_8fpr59,
-  svg_gqgv7g,
-  svg_fo6xfn,
-  svg_8fnniv,
-  svg_i03lvw,
-  svg_yjjmfx,
-  svg_axoizy,
-  svg_65yre2,
-  svg_hgk58t,
-  svg_hp75zg,
-  svg_bxqsf8,
+  svg_hs2c4j,
+  svg_j743wh,
+  svg_qo83ph,
+  svg_t65djy,
+  svg_f9wx0j,
+  svg_x6tex4,
+  svg_e3kyzv,
+  svg_tozkn7,
+  svg_l4603n,
+  svg_u9mb2h,
+  svg_d3rh5r,
+  svg_1h1v4t,
+  svg_v0sadw,
+  svg_h4j2mu,
+  svg_8a0hdj,
+  svg_ylrapr,
+  svg_l3j5i5,
+  svg_n0040s,
 }
 export default ICONS;

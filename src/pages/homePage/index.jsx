@@ -2,7 +2,7 @@ import static_image from "./images/image.png";
 import ICONS from "./icons";
 import React from 'react';
 import { Page, View, Text, AtIcon, Image, Modal, Video } from '@disscode/react';
-import SiteTopBar from "../components/SiteTopBar";
+import SiteTopBar from "@/pages/components/SiteTopBar";
 import utils from '@/utils';
 import constants from '@/utils/constants';
 import "./index.scss";
@@ -71,7 +71,7 @@ class HomePage$Page extends React.Component {
                 this.$('modal-ad5c55ea')?.open();
               }} ref={this._refsManager.linkRef('view-04d71741')} className='homePage__card__vw3__vw M-gb-click'>
                   <View className='homePage__card__vw3__vw__vw'>
-                    <AtIcon color='#cbcbcb' size={20} svg={ICONS["svg_rxe835"]} />
+                    <AtIcon color='#cbcbcb' size={20} svg={ICONS["svg_02q931"]} />
                   </View>
                   <Text ref={this._refsManager.linkRef('text-bd2f6c27')} className='homePage__card__vw3__vw__tx1'>
                     3分钟速览开发
