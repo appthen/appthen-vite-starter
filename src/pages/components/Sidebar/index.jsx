@@ -52,7 +52,7 @@ class Sidebar$Page extends React.Component {
               this.utils.navigateTo('homePage');
             }} className='Sidebar__vw__vw__vw'>
                 <View className='Sidebar__vw__vw__vw__vw'>
-                  <AtIcon color='#5b72ff' size={20} svg={ICONS["svg_qmj8wb"]} />
+                  <AtIcon color='#5b72ff' size={20} svg={ICONS["svg_0z90yj"]} />
                 </View>
                 <View className='Sidebar__vw__vw__vw__vw1 M-flex-item'>
                   <Text className='Sidebar__vw__vw__vw__vw1__tx'>工作平台</Text>
@@ -71,7 +71,7 @@ class Sidebar$Page extends React.Component {
               this.utils.navigateTo('employeeManagement');
             }} className='Sidebar__vw__vw__vw1'>
                 <View className='Sidebar__vw__vw__vw1__vw'>
-                  <AtIcon color='#5b72ff' size={20} svg={ICONS["svg_ywriom"]} />
+                  <AtIcon color='#5b72ff' size={20} svg={ICONS["svg_ubskx4"]} />
                 </View>
                 <View className='Sidebar__vw__vw__vw1__vw1 M-flex-item'>
                   <Text className='Sidebar__vw__vw__vw1__vw1__tx'>
@@ -92,7 +92,7 @@ class Sidebar$Page extends React.Component {
               this.utils.navigateTo('aiConfiguration');
             }} className='Sidebar__vw__vw__vw2'>
                 <View className='Sidebar__vw__vw__vw2__vw'>
-                  <AtIcon color='#5b72ff' size={20} svg={ICONS["svg_yml8v8"]} />
+                  <AtIcon color='#5b72ff' size={20} svg={ICONS["svg_7cpebj"]} />
                 </View>
                 <View className='Sidebar__vw__vw__vw2__vw1 M-flex-item'>
                   <Text className='Sidebar__vw__vw__vw2__vw1__tx'>
@@ -111,7 +111,7 @@ class Sidebar$Page extends React.Component {
               }
             }]} className='Sidebar__vw__vw__vw3'>
                 <View className='Sidebar__vw__vw__vw3__vw'>
-                  <AtIcon color='#5b72ff' size={20} svg={ICONS["svg_jyswg6"]} />
+                  <AtIcon color='#5b72ff' size={20} svg={ICONS["svg_yh70tc"]} />
                 </View>
                 <View className='Sidebar__vw__vw__vw3__vw1 M-flex-item'>
                   <Text className='Sidebar__vw__vw__vw3__vw1__tx'>
@@ -130,7 +130,7 @@ class Sidebar$Page extends React.Component {
               }
             }]} className='Sidebar__vw__vw__vw4'>
                 <View className='Sidebar__vw__vw__vw4__vw'>
-                  <AtIcon color='#5b72ff' size={20} svg={ICONS["svg_u61pyr"]} />
+                  <AtIcon color='#5b72ff' size={20} svg={ICONS["svg_eulpbu"]} />
                 </View>
                 <View className='Sidebar__vw__vw__vw4__vw1 M-flex-item'>
                   <Text className='Sidebar__vw__vw__vw4__vw1__tx'>
@@ -149,7 +149,7 @@ class Sidebar$Page extends React.Component {
               }
             }]} className='Sidebar__vw__vw__vw5'>
                 <View className='Sidebar__vw__vw__vw5__vw'>
-                  <AtIcon color='#5b72ff' size={20} svg={ICONS["svg_o28vdj"]} />
+                  <AtIcon color='#5b72ff' size={20} svg={ICONS["svg_x9zlph"]} />
                 </View>
                 <View className='Sidebar__vw__vw__vw5__vw1 M-flex-item'>
                   <Text className='Sidebar__vw__vw__vw5__vw1__tx'>

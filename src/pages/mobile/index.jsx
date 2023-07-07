@@ -151,7 +151,7 @@ class Mobile$Page extends React.Component {
                 tab: 'qrcode'
               }]));
             }.bind(_this)} className='mobile__vw_1__vw2 M-gb-click'>
-                    <AtIcon color='#fe935f' size={16} svg={ICONS["svg_u39c0z"]} />
+                    <AtIcon color='#fe935f' size={16} svg={ICONS["svg_c2gyxo"]} />
                     <Text className='mobile__vw_1__vw2__tx1'>
                       ArtQR 智绘二维码
                     </Text>
@@ -235,7 +235,7 @@ class Mobile$Page extends React.Component {
                       <View className='mobile__vw_1__vw7__vw1 M-gb-click' onClick={function () {
                 return this.logOut.apply(this, Array.prototype.slice.call(arguments).concat([]));
               }.bind(_this)}>
-                        <AtIcon color='#adadad' size={22} svg={ICONS["svg_eilrrx"]} />
+                        <AtIcon color='#adadad' size={22} svg={ICONS["svg_g3egpz"]} />
                       </View>
                     </View>}
                   <View className='mobile__vw_1__vw8' />
@@ -251,7 +251,7 @@ class Mobile$Page extends React.Component {
                 tab: 'qrcode'
               }]));
             }.bind(_this)} className='mobile__vw_1__vw9 M-gb-click'>
-                      <AtIcon color='#fe935f' size={16} svg={ICONS["svg_qyekyx"]} />
+                      <AtIcon color='#fe935f' size={16} svg={ICONS["svg_rkf9is"]} />
                       <Text className='mobile__vw_1__vw9__tx1'>系统设置</Text>
                     </View>}
                   {!!false && <View inlineStyle={[{
@@ -266,7 +266,7 @@ class Mobile$Page extends React.Component {
                 tab: 'qrcode'
               }]));
             }.bind(_this)} className='mobile__vw_1__vw10 M-gb-click'>
-                      <AtIcon color='#fe935f' size={16} svg={ICONS["svg_p6vghq"]} />
+                      <AtIcon color='#fe935f' size={16} svg={ICONS["svg_gs1f78"]} />
                       <Text className='mobile__vw_1__vw10__tx1'>OEM 代理</Text>
                     </View>}
                 </View>
@@ -279,7 +279,7 @@ class Mobile$Page extends React.Component {
               this.$('modal')?.open();
             }} className='mobile__main_body__vw__vw'>
                 <View style={{}}>
-                  <AtIcon color='#666' size={25} svg={ICONS["svg_i8txs1"]} />
+                  <AtIcon color='#666' size={25} svg={ICONS["svg_ve35yp"]} />
                 </View>
                 <View className='mobile__main_body__vw__vw__vw1 M-flex-item'>
                   <Text className='mobile__main_body__vw__vw__vw1__tx'>
@@ -290,7 +290,7 @@ class Mobile$Page extends React.Component {
                   </Text>
                 </View>
                 <View ref={this._refsManager.linkRef('view-6ef0fbeb')} className='mobile__main_body__vw__vw__vw2'>
-                  <AtIcon color='#c8c8c8' size={28} svg={ICONS["svg_qkp8as"]} />
+                  <AtIcon color='#c8c8c8' size={28} svg={ICONS["svg_vz0c3g"]} />
                   <Text className='mobile__main_body__vw__vw__vw2__tx1'>
                     导航
                   </Text>

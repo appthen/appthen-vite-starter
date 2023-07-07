@@ -695,7 +695,7 @@ class QrcodeApp$Page extends React.Component {
                 <View className='QrcodeApp__vw__vw1__vw'>
                   <View ref={this._refsManager.linkRef('view-f1dd3381')} className='QrcodeApp__vw__vw1__vw__vw'>
                     <View className='QrcodeApp__vw__vw1__vw__vw__vw'>
-                      <AtIcon color='#573de7' size={22} svg={ICONS["svg_hs2c4j"]} />
+                      <AtIcon color='#573de7' size={22} svg={ICONS["svg_k1qkn5"]} />
                       <Text className='QrcodeApp__vw__vw1__vw__vw__vw__tx1'>
                         二维码强调程度（推荐：60-80）
                       </Text>
@@ -745,7 +745,7 @@ class QrcodeApp$Page extends React.Component {
                 });
               }} className='QrcodeApp__vw__vw2__vw__vw__vw1'>
                       <View className='QrcodeApp__vw__vw2__vw__vw__vw1__vw'>
-                        <AtIcon color={$eval(() => _this.state.lock ? '#fff' : '#666')} size={15} svg={ICONS["svg_j743wh"]} className='QrcodeApp__vw__vw2__vw__vw__vw1__vw__AtIcon' />
+                        <AtIcon color={$eval(() => _this.state.lock ? '#fff' : '#666')} size={15} svg={ICONS["svg_ea327u"]} className='QrcodeApp__vw__vw2__vw__vw__vw1__vw__AtIcon' />
                         <Text inlineStyle={[{
                     enable: $eval(() => !_this.state.lock),
                     name: '动态样式1',
@@ -792,7 +792,7 @@ class QrcodeApp$Page extends React.Component {
                 <View className='QrcodeApp__vw_1__vw1__vw'>
                   <View ref={this._refsManager.linkRef('view-f1dd3381')} className='QrcodeApp__vw_1__vw1__vw__vw'>
                     <View className='QrcodeApp__vw_1__vw1__vw__vw__vw'>
-                      <AtIcon color='#573de7' size={22} svg={ICONS["svg_qo83ph"]} />
+                      <AtIcon color='#573de7' size={22} svg={ICONS["svg_j4gi0l"]} />
                       <Text className='QrcodeApp__vw_1__vw1__vw__vw__vw__tx1'>
                         二维码强调程度（推荐：60-80）
                       </Text>
@@ -842,7 +842,7 @@ class QrcodeApp$Page extends React.Component {
                 });
               }} className='QrcodeApp__vw_1__vw2__vw__vw__vw1'>
                       <View className='QrcodeApp__vw_1__vw2__vw__vw__vw1__vw'>
-                        <AtIcon color={$eval(() => _this.state.lock ? '#fff' : '#666')} size={15} svg={ICONS["svg_t65djy"]} className='QrcodeApp__vw_1__vw2__vw__vw__vw1__vw__AtIcon' />
+                        <AtIcon color={$eval(() => _this.state.lock ? '#fff' : '#666')} size={15} svg={ICONS["svg_cli2c6"]} className='QrcodeApp__vw_1__vw2__vw__vw__vw1__vw__AtIcon' />
                         <Text inlineStyle={[{
                     enable: $eval(() => !_this.state.lock),
                     name: '动态样式1',
@@ -907,7 +907,7 @@ class QrcodeApp$Page extends React.Component {
                     this.popUpRecharge();
                   }}>
                         <View style={{}}>
-                          <AtIcon color='#f8b546' size={20} svg={ICONS["svg_f9wx0j"]} />
+                          <AtIcon color='#f8b546' size={20} svg={ICONS["svg_4b8di8"]} />
                         </View>
                         <View ref={this._refsManager.linkRef('view-e07fb0a1')} className='QrcodeApp__vw_3__vw1 M-flex-item'>
                           <Text className='QrcodeApp__vw_3__vw1__tx'>
@@ -918,7 +918,7 @@ class QrcodeApp$Page extends React.Component {
                           </Text>
                         </View>
                         <View ref={this._refsManager.linkRef('view-e07fb0a1')} className='QrcodeApp__vw_3__vw2'>
-                          <AtIcon color='#b3b3b3' size={30} svg={ICONS["svg_x6tex4"]} />
+                          <AtIcon color='#b3b3b3' size={30} svg={ICONS["svg_7zanhs"]} />
                         </View>
                       </View>}
                   </View>
@@ -936,7 +936,7 @@ class QrcodeApp$Page extends React.Component {
                         }} ref={this._refsManager.linkRef('view-ec050aaa')} className='QrcodeApp__vw_4__vw'>
                               {!!$eval(() => this.state.status === 'begin') && <View className='QrcodeApp__vw_4__vw__vw M-gb-click' ref={this._refsManager.linkRef('view-6c2bb9f8')}>
                                   <View ref={this._refsManager.linkRef('view-5ff3e1bb')} className='QrcodeApp__vw_4__vw__vw__vw M-flex-item'>
-                                    <AtIcon color='#f98425' size={30} svg={ICONS["svg_e3kyzv"]} />
+                                    <AtIcon color='#f98425' size={30} svg={ICONS["svg_plelbf"]} />
                                   </View>
                                   <View ref={this._refsManager.linkRef('view-295df367')}>
                                     <Text ref={this._refsManager.linkRef('text-4ee23d1f')} className='QrcodeApp__tx'>
@@ -997,7 +997,7 @@ class QrcodeApp$Page extends React.Component {
                                       return false;
                                     }}>
                                           <View className='QrcodeApp__vw_6 M-gb-click' ref={this._refsManager.linkRef('view-915dfecf')}>
-                                            <AtIcon color='#666' size={22} svg={ICONS["svg_tozkn7"]} />
+                                            <AtIcon color='#666' size={22} svg={ICONS["svg_ngq5zt"]} />
                                             <Text className='QrcodeApp__vw_6__tx1'>
                                               上传二维码
                                             </Text>
@@ -1190,7 +1190,7 @@ class QrcodeApp$Page extends React.Component {
                                 }.bind(this)}>
                                         <View ref={this._refsManager.linkRef('view-5ff3e1bb')} className='QrcodeApp__vw_11__vw__vw1__vw'>
                                           <View className='QrcodeApp__vw_11__vw__vw1__vw__vw'>
-                                            <AtIcon color='#ffffff' size={25} svg={ICONS["svg_l4603n"]} ref={this._refsManager.linkRef('aticon-69c1ac27')} />
+                                            <AtIcon color='#ffffff' size={25} svg={ICONS["svg_rcp5ut"]} ref={this._refsManager.linkRef('aticon-69c1ac27')} />
                                             <Text ref={this._refsManager.linkRef('text-4ee23d1f')} className='QrcodeApp__vw_11__vw__vw1__vw__vw__tx1'>
                                               开始绘制
                                             </Text>
@@ -1220,7 +1220,7 @@ class QrcodeApp$Page extends React.Component {
                               </View>
                               {!!false && <View ref={this._refsManager.linkRef('view-f1dd3381')} className='QrcodeApp__vw1_12'>
                                   <View className='QrcodeApp__vw1_12__vw'>
-                                    <AtIcon color='#573de7' size={22} svg={ICONS["svg_u9mb2h"]} />
+                                    <AtIcon color='#573de7' size={22} svg={ICONS["svg_yvtnf9"]} />
                                     <Text className='QrcodeApp__vw1_12__vw__tx1'>
                                       二维码强调程度（推荐：60-80）
                                     </Text>
@@ -1258,7 +1258,7 @@ class QrcodeApp$Page extends React.Component {
                                   }]));
                                 }.bind(this)}>
                                       <View className='QrcodeApp__vw2__vw__vw__vw M-flex-item'>
-                                        <AtIcon color='#519c03' size={24} svg={ICONS["svg_d3rh5r"]} />
+                                        <AtIcon color='#519c03' size={24} svg={ICONS["svg_4d9jnz"]} />
                                       </View>
                                       <View>
                                         <Text className='QrcodeApp__tx_13'>
@@ -1272,7 +1272,7 @@ class QrcodeApp$Page extends React.Component {
                                   }]));
                                 }.bind(this)}>
                                       <View className='QrcodeApp__vw2__vw__vw1__vw M-flex-item'>
-                                        <AtIcon color='#5249ff' size={30} svg={ICONS["svg_1h1v4t"]} />
+                                        <AtIcon color='#5249ff' size={30} svg={ICONS["svg_48hspt"]} />
                                       </View>
                                       <View>
                                         <Text className='QrcodeApp__tx_14'>
@@ -1284,7 +1284,7 @@ class QrcodeApp$Page extends React.Component {
                                   this.downloadPicture(this.state.check?.data?.fileUrl);
                                 }}>
                                       <View className='QrcodeApp__vw2__vw__vw2__vw M-flex-item'>
-                                        <AtIcon color='#ff9b42' size={28} svg={ICONS["svg_v0sadw"]} />
+                                        <AtIcon color='#ff9b42' size={28} svg={ICONS["svg_7ast12"]} />
                                       </View>
                                       <View>
                                         <Text className='QrcodeApp__tx_15'>
@@ -1298,7 +1298,7 @@ class QrcodeApp$Page extends React.Component {
                                   this.$(this.props.isMobile ? 'youhua_mobile' : 'modal1')?.open();
                                 }}>
                                       <View className='QrcodeApp__vw2__vw1__vw__vw'>
-                                        <AtIcon color='#5249ff' size={24} svg={ICONS["svg_h4j2mu"]} />
+                                        <AtIcon color='#5249ff' size={24} svg={ICONS["svg_dmgo3b"]} />
                                         <Text className='QrcodeApp__vw2__vw1__vw__vw__tx1'>
                                           重新绘制
                                         </Text>
@@ -1313,7 +1313,7 @@ class QrcodeApp$Page extends React.Component {
                                   this.downloadPicture(this.state.check?.data?.fileUrl);
                                 }}>
                                       <View className='QrcodeApp__vw2__vw1__vw1__vw M-flex-item'>
-                                        <AtIcon color='#ff9b42' size={28} svg={ICONS["svg_8a0hdj"]} />
+                                        <AtIcon color='#ff9b42' size={28} svg={ICONS["svg_p8b3a6"]} />
                                       </View>
                                       <View>
                                         <Text className='QrcodeApp__tx_16'>
@@ -1331,7 +1331,7 @@ class QrcodeApp$Page extends React.Component {
                                     </AtNoticebar>
                                   </View>}
                                 {!!$eval(() => this.state.status === 'finish') && <View ref={this._refsManager.linkRef('view-e64e418e')} className='QrcodeApp__vw2__vw3'>
-                                    <AtIcon color='#de8c17' size={19} svg={ICONS["svg_ylrapr"]} />
+                                    <AtIcon color='#de8c17' size={19} svg={ICONS["svg_ifc0c0"]} />
                                     <Text ref={this._refsManager.linkRef('text-bf58552f')} className='QrcodeApp__vw2__vw3__tx1'>
                                       图片效果不理想或无法扫码，请点击重新绘制，并调节二维码强调程度
                                     </Text>
@@ -1356,7 +1356,7 @@ class QrcodeApp$Page extends React.Component {
                   <View className='QrcodeApp__two-dimensional_code__vw3__vw1__vw__vw__vw1 M-gb-click' ref={this._refsManager.linkRef('view-e3ed6a0f')} onClick={e => {
                 this.$('autolist')?.refresh();
               }}>
-                    <AtIcon color='#666' size={24} svg={ICONS["svg_l3j5i5"]} ref={this._refsManager.linkRef('aticon-d4e959d0')} />
+                    <AtIcon color='#666' size={24} svg={ICONS["svg_jh3zf4"]} ref={this._refsManager.linkRef('aticon-d4e959d0')} />
                   </View>
                 </View>
               </View>
@@ -1435,7 +1435,7 @@ class QrcodeApp$Page extends React.Component {
                       <View className='QrcodeApp__vw_22__vw__vw__vw__vw1 M-gb-click' ref={this._refsManager.linkRef('view-e3ed6a0f')} onClick={e => {
                 _this.$('autolist')?.refresh();
               }}>
-                        <AtIcon color='#666' size={24} svg={ICONS["svg_n0040s"]} ref={this._refsManager.linkRef('aticon-d4e959d0')} />
+                        <AtIcon color='#666' size={24} svg={ICONS["svg_ndr9u4"]} ref={this._refsManager.linkRef('aticon-d4e959d0')} />
                       </View>
                     </View>
                   </View>

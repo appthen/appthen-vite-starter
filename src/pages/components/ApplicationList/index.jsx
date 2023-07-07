@@ -165,7 +165,7 @@ class ApplicationList$Page extends React.Component {
                             </View>
                             <View className='ApplicationList__vw_2__vw2__vw1' />
                             <View className='ApplicationList__vw_2__vw2__vw2'>
-                              <AtIcon color='#333333' size={16} svg={ICONS["svg_1iezst"]} />
+                              <AtIcon color='#333333' size={16} svg={ICONS["svg_odndvg"]} />
                             </View>
                           </View>
                         </View>

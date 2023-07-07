@@ -1,7 +1,7 @@
-import svg_9i8aw8 from './svg_9i8aw8.svg?raw';
-import svg_j1b0md from './svg_j1b0md.svg?raw';
+import svg_toknl2 from './svg_toknl2.svg?raw';
+import svg_tfnr7y from './svg_tfnr7y.svg?raw';
 const ICONS = {
-  svg_9i8aw8,
-  svg_j1b0md,
+  svg_toknl2,
+  svg_tfnr7y,
 }
 export default ICONS;

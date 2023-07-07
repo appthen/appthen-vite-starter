@@ -145,6 +145,8 @@ class Login$Page extends React.Component {
           account,
           code
         });
+        this.utils.redirectTo('register');
+        return;
       }
 
       this.utils.message.error(res.msg || '登录失败');
@@ -296,7 +298,7 @@ class Login$Page extends React.Component {
                   <View ref={this._refsManager.linkRef('view-fe1bddac')}>
                     <View ref={this._refsManager.linkRef('view-6d99607f')} className='login__vw_2'>
                       <View className='login__vw_2__vw'>
-                        <AtIcon color='#98b0f5' size={22} svg={ICONS["svg_s3sqia"]} />
+                        <AtIcon color='#98b0f5' size={22} svg={ICONS["svg_vpv5i6"]} />
                       </View>
                       <View ref={this._refsManager.linkRef('view-6c65f6d1')} className='login__vw_2__vw1 M-flex-item'>
                         <Input placeholder='手机号' bordered={false} disabled={false} allowClear={true} value={$eval(() => this.state.account)} onChange={function () {
@@ -309,7 +311,7 @@ class Login$Page extends React.Component {
                     </View>
                     <View ref={this._refsManager.linkRef('view-6d99607f')} className='login__vw1'>
                       <View className='login__vw1__vw'>
-                        <AtIcon color='#98b0f5' size={22} svg={ICONS["svg_wd0w5s"]} />
+                        <AtIcon color='#98b0f5' size={22} svg={ICONS["svg_m3eb0w"]} />
                       </View>
                       <View ref={this._refsManager.linkRef('view-6c65f6d1')} className='login__vw1__vw1 M-flex-item'>
                         <Input placeholder='验证码' bordered={false} disabled={false} allowClear={true} value={$eval(() => this.state.code)} onChange={function () {
@@ -350,7 +352,7 @@ class Login$Page extends React.Component {
               {!!$eval(() => this.state.tab === 'password') && <View ref={this._refsManager.linkRef('view-dc8d1bab')}>
                   <View ref={this._refsManager.linkRef('view-6d99607f')} className='login__vw_3'>
                     <View className='login__vw_3__vw'>
-                      <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_vxqwb8"]} />
+                      <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_0xsu7i"]} />
                     </View>
                     <View ref={this._refsManager.linkRef('view-6c65f6d1')} className='login__vw_3__vw1 M-flex-item'>
                       <Input placeholder='用户名' bordered={false} disabled={false} allowClear={true} value={$eval(() => this.state.account)} onChange={function () {
@@ -363,7 +365,7 @@ class Login$Page extends React.Component {
                   </View>
                   <View ref={this._refsManager.linkRef('view-8c39348d')} className='login__vw1_4'>
                     <View className='login__vw1_4__vw'>
-                      <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_yopqq6"]} />
+                      <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_tp1q89"]} />
                     </View>
                     <View ref={this._refsManager.linkRef('view-45020ec7')} className='login__vw1_4__vw1 M-flex-item'>
                       <Input.Password bordered={false} disabled={false} visibilityToggle={true} placeholder='密码' value={$eval(() => this.state.password)} onChange={function () {

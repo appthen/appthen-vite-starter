@@ -137,7 +137,7 @@ class ProjectManagement$Page extends React.Component {
                 tab: 'qrcode'
               }]));
             }.bind(this)} className='projectManagement__main_body__vw__vw3 M-gb-click'>
-                <AtIcon color='#fe935f' size={16} svg={ICONS["svg_inkm1k"]} />
+                <AtIcon color='#fe935f' size={16} svg={ICONS["svg_vdqe2e"]} />
                 <Text className='projectManagement__main_body__vw__vw3__tx1'>
                   ArtQR 智绘二维码
                 </Text>
@@ -224,7 +224,7 @@ class ProjectManagement$Page extends React.Component {
                   <View className='projectManagement__main_body__vw__vw8__vw1 M-gb-click' onClick={function () {
                 return this.logOut.apply(this, Array.prototype.slice.call(arguments).concat([]));
               }.bind(this)}>
-                    <AtIcon color='#adadad' size={22} svg={ICONS["svg_gom3sh"]} />
+                    <AtIcon color='#adadad' size={22} svg={ICONS["svg_ralvld"]} />
                   </View>
                 </View>}
               <View className='projectManagement__main_body__vw__vw9' />
@@ -240,7 +240,7 @@ class ProjectManagement$Page extends React.Component {
                 tab: 'qrcode'
               }]));
             }.bind(this)} className='projectManagement__main_body__vw__vw10 M-gb-click'>
-                  <AtIcon color='#fe935f' size={16} svg={ICONS["svg_8pzbga"]} />
+                  <AtIcon color='#fe935f' size={16} svg={ICONS["svg_we7erw"]} />
                   <Text className='projectManagement__main_body__vw__vw10__tx1'>
                     系统设置
                   </Text>
@@ -257,7 +257,7 @@ class ProjectManagement$Page extends React.Component {
                 tab: 'qrcode'
               }]));
             }.bind(this)} className='projectManagement__main_body__vw__vw11 M-gb-click'>
-                  <AtIcon color='#fe935f' size={16} svg={ICONS["svg_hudbfa"]} />
+                  <AtIcon color='#fe935f' size={16} svg={ICONS["svg_ce6hnz"]} />
                   <Text className='projectManagement__main_body__vw__vw11__tx1'>
                     OEM 代理
                   </Text>

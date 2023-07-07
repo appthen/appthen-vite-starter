@@ -286,7 +286,7 @@ class Register$Page extends React.Component {
               <View ref={this._refsManager.linkRef('view-fe1bddac')}>
                 <View ref={this._refsManager.linkRef('view-6d99607f')} className='register__vw_1'>
                   <View className='register__vw_1__vw'>
-                    <AtIcon color='#98b0f5' size={22} svg={ICONS["svg_aila7c"]} />
+                    <AtIcon color='#98b0f5' size={22} svg={ICONS["svg_fy94la"]} />
                   </View>
                   <View ref={this._refsManager.linkRef('view-6c65f6d1')} className='register__vw_1__vw1 M-flex-item'>
                     <Input placeholder='手机号' bordered={false} disabled={false} allowClear={true} value={$eval(() => this.state.account)} onChange={function () {
@@ -299,7 +299,7 @@ class Register$Page extends React.Component {
                 </View>
                 <View ref={this._refsManager.linkRef('view-6d99607f')} className='register__vw1'>
                   <View className='register__vw1__vw'>
-                    <AtIcon color='#98b0f5' size={22} svg={ICONS["svg_1fnveg"]} />
+                    <AtIcon color='#98b0f5' size={22} svg={ICONS["svg_p0oz6p"]} />
                   </View>
                   <View ref={this._refsManager.linkRef('view-6c65f6d1')} className='register__vw1__vw1 M-flex-item'>
                     <Input placeholder='验证码' bordered={false} disabled={false} allowClear={true} value={$eval(() => this.state.code)} onChange={function () {
@@ -338,7 +338,7 @@ class Register$Page extends React.Component {
               </View>
               <View className='register__vw__vw1__vw__vw3'>
                 <View className='register__vw__vw1__vw__vw3__vw'>
-                  <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_uiu4w9"]} />
+                  <AtIcon color='#98b0f5' size={24} svg={ICONS["svg_0k3qtn"]} />
                 </View>
                 <View className='register__vw__vw1__vw__vw3__vw1 M-flex-item'>
                   <Input.Password bordered={false} disabled={false} visibilityToggle={true} placeholder='密码' value={$eval(() => this.state.password)} onChange={function () {

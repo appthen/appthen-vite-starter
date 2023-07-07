@@ -1,5 +1,5 @@
-import svg_1iezst from './svg_1iezst.svg?raw';
+import svg_odndvg from './svg_odndvg.svg?raw';
 const ICONS = {
-  svg_1iezst,
+  svg_odndvg,
 }
 export default ICONS;

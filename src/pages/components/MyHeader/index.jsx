@@ -34,14 +34,14 @@ class MyHeader$Page extends React.Component {
     return <React.Fragment>
         <View className='MyHeader__vw'>
           <View className='MyHeader__vw__vw'>
-            <AtIcon color='#fffdfd' size={30} svg={ICONS["svg_9i8aw8"]} />
+            <AtIcon color='#fffdfd' size={30} svg={ICONS["svg_toknl2"]} />
           </View>
           <View className='MyHeader__vw__vw1 M-flex-item'>
             <Text className='MyHeader__vw__vw1__tx'>管理后台</Text>
           </View>
           <View className='MyHeader__vw__vw2'>
             <Badge count={25} color='' dot={false} overflowCount={0} showZero={false} status='success' title='' text='' offset={[]} className='MyHeader__vw__vw2__Badge' />
-            <AtIcon color='#d6d6d6' size={27} svg={ICONS["svg_j1b0md"]} />
+            <AtIcon color='#d6d6d6' size={27} svg={ICONS["svg_tfnr7y"]} />
           </View>
           <View className='MyHeader__vw__vw3' />
         </View>

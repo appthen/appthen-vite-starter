@@ -446,7 +446,7 @@ class OpenAMembership$Page extends React.Component {
             <View onClick={e => {
             this.props?.onClose?.();
           }} className='OpenAMembership__vw__vw__vw1'>
-              <AtIcon color='#ffffff' size={30} svg={ICONS["svg_e8but7"]} />
+              <AtIcon color='#ffffff' size={30} svg={ICONS["svg_ssl3xc"]} />
             </View>
           </View>
           {!!$eval(() => this.state.tab === 'list') && <View ref={this._refsManager.linkRef('view-fb2a99f6')} className='OpenAMembership__list'>
@@ -653,7 +653,7 @@ class OpenAMembership$Page extends React.Component {
                 }
               }]}>
                       <View style={{}}>
-                        <AtIcon color='#6cc901' size={23} svg={ICONS["svg_15phcr"]} />
+                        <AtIcon color='#6cc901' size={23} svg={ICONS["svg_c9zskl"]} />
                       </View>
                       <View className='OpenAMembership__vw2__vw__vw1__vw1 M-flex-item'>
                         <Text className='OpenAMembership__vw2__vw__vw1__vw1__tx'>
@@ -667,7 +667,7 @@ class OpenAMembership$Page extends React.Component {
                     backgroundColor: '#3060fd'
                   }
                 }]} ref={this._refsManager.linkRef('view-c4bc351b')} className='OpenAMembership__vw2__vw__vw1__vw2'>
-                        {!!$eval(() => this.state.pay_type === 'wepay') && <AtIcon color='#ffffff' size={12} svg={ICONS["svg_vxa0hj"]} ref={this._refsManager.linkRef('aticon-2a0ef42f')} />}
+                        {!!$eval(() => this.state.pay_type === 'wepay') && <AtIcon color='#ffffff' size={12} svg={ICONS["svg_mxn88a"]} ref={this._refsManager.linkRef('aticon-2a0ef42f')} />}
                       </View>
                     </View>
                     {!!$eval(() => !this.state.isInWeixin) && <View ref={this._refsManager.linkRef('view-deada35c')} className='OpenAMembership__vw2__vw__vw2 M-gb-click' inlineStyle={[{
@@ -685,7 +685,7 @@ class OpenAMembership$Page extends React.Component {
                           </Text>
                         </View>
                         <View style={{}}>
-                          <AtIcon color='#60abff' size={24} svg={ICONS["svg_6twafx"]} ref={this._refsManager.linkRef('aticon-c4b78913')} />
+                          <AtIcon color='#60abff' size={24} svg={ICONS["svg_25r3ut"]} ref={this._refsManager.linkRef('aticon-c4b78913')} />
                         </View>
                         <View ref={this._refsManager.linkRef('view-e07fb0a1')} className='OpenAMembership__vw2__vw__vw2__vw2 M-flex-item'>
                           <Text className='OpenAMembership__vw2__vw__vw2__vw2__tx'>
@@ -699,7 +699,7 @@ class OpenAMembership$Page extends React.Component {
                     backgroundColor: '#3060fd'
                   }
                 }]} ref={this._refsManager.linkRef('view-c4bc351b')} className='OpenAMembership__vw2__vw__vw2__vw3'>
-                          {!!$eval(() => this.state.pay_type === 'wepay') && <AtIcon color='#ffffff' size={12} svg={ICONS["svg_aid9vl"]} ref={this._refsManager.linkRef('aticon-2a0ef42f')} />}
+                          {!!$eval(() => this.state.pay_type === 'wepay') && <AtIcon color='#ffffff' size={12} svg={ICONS["svg_pzt5xc"]} ref={this._refsManager.linkRef('aticon-2a0ef42f')} />}
                         </View>
                       </View>}
                   </View>
