@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev-force": "vite --force",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -12,17 +13,19 @@
   "dependencies": {
     "@alifd/layout": "^2.1.0",
     "@alilc/antd-lowcode-materials": "^1.2.1",
-    "@disscode/react": "^1.0.1",
+    "@disscode/react": "^1.0.10",
     "@formily/antd": "^2.2.25",
     "@formily/react": "^2.2.25",
     "@nuintun/qrcode": "^3.3.5",
     "@seada/antd-materials": "1.0.0-rc.28",
     "@seada/formily-materials": "1.0.0-rc.28",
     "@tanstack/react-query": "4.29.7",
+    "antd": "^4",
     "axios": "^1.4.0",
     "history": "4.x",
-    "react": "16.14.0",
-    "react-dom": "16.14.0",
+    "laf-client-sdk": "1.0.0-beta.10",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-router-dom": "5.3.4",
     "vconsole": "^3.15.1"
   },

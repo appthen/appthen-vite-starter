@@ -26,7 +26,7 @@ export default defineConfig({
     renderBuiltUrl(filename, { hostType }) {
       if (hostType === "js") {
         return {
-          runtime: `window.__toCdnUrl(${JSON.stringify(filename)})`,
+          // runtime: `window.__toCdnUrl(${JSON.stringify(filename)})`,
           query: `v=${Date.now().toString()}`,
         };
       } else {
@@ -35,5 +35,6 @@ export default defineConfig({
     },
   },
   publicDir: "./public",
-  base: "https://qn.iruddock.com/hysli/",
+  base: './'
+  // base: "https://qn.iruddock.com/hysli/",
 });

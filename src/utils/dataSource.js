@@ -9,7 +9,7 @@ export function requestHandle(config) {
     // hook
     _options = __beforeRequest(options);
     if (_options.then && typeof _options.then === "function") {
-      _options = await _options();
+      _options = await __beforeRequest(options)
     }
     const { contentType, uri, params, method, headers = {} } = _options;
     const data =
@@ -41,7 +41,7 @@ export function requestHandle(config) {
     // hook
     response = __afterRequest(response);
     if (response.then && typeof response.then === "function") {
-      response = await response();
+      response = await __afterRequest(response);
     }
     return response;
   };

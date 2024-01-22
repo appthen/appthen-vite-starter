@@ -4,6 +4,8 @@ import * as dataSource from "./dataSource";
 import { message } from "antd";
 import { history } from './router';
 import syncMap from "../pages/map.json";
+window.message = message;
+console.log('localUtils: ', localUtils);
 export default {
   ...utils,
   ...localUtils,
@@ -11,6 +13,16 @@ export default {
   px: (num) =>{
     return num + 'px';
   },
+  // createRoute: (fileName) => { // @TODO: cross-ui-web 内置的无法在组件中获取参数
+  //   const query = utils.queryToObject(window.location.hash.split('?')[1]);
+  //   const params = utils.preload('PAGE_PARAMS_' + fileName) || {};
+  //   return function () {
+  //     return {
+  //       query,
+  //       params,
+  //     };
+  //   };
+  // },
   message,
   history,
   navigateBack: history.back,
