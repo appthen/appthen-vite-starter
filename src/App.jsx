@@ -6,7 +6,7 @@ import { componentDidMount } from '@/utils/utils';
 import '@/utils/portal';
 
 const login = lazy(async () => import("./pages/login"));
-const index = lazy(async () => import("./pages/index"));
+const index = lazy(async () => import("./pages/pcHomePage"));
 
 const isHttps = document.location.protocol === "https:";
 if (import.meta?.env?.MODE !== "development" && !isHttps) {
@@ -28,7 +28,7 @@ export default function App() {
       <Suspense fallback={<LoadingOrError />}>
         <Switch>
           <Route exact path="/">
-            <Redirect to="/login" />
+            <Redirect to="/index" />
           </Route>
           <Route path="/index" component={index} />
           <Route path="/login" component={login} />
