@@ -5,8 +5,7 @@ import { history } from "@/utils/router";
 import { componentDidMount } from '@/utils/utils';
 import '@/utils/portal';
 
-const login = lazy(async () => import("./pages/login"));
-const index = lazy(async () => import("./pages/pcHomePage"));
+const index = lazy(async () => import("./pages/index"));
 
 const isHttps = document.location.protocol === "https:";
 if (import.meta?.env?.MODE !== "development" && !isHttps) {
@@ -31,7 +30,6 @@ export default function App() {
             <Redirect to="/index" />
           </Route>
           <Route path="/index" component={index} />
-          <Route path="/login" component={login} />
         </Switch>
       </Suspense>
     </HashRouter>

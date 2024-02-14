@@ -1,1 +1,1 @@
-# Disscode Vite Project
+# AppThen Vite Starter Project

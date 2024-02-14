@@ -1,4 +1,5 @@
 import { registerPartalComponent } from "@disscode/react/lib/utils/index.js";
 
-const partalComponentMaps = {};
+const partalComponentMaps = {
+};
 registerPartalComponent(partalComponentMaps);

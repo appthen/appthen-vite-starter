@@ -2,8 +2,8 @@ import * as utils from "@disscode/react/lib/utils/index.js";
 import * as localUtils from "./utils";
 import * as dataSource from "./dataSource";
 import * as routerUtils from "./router";
-import { message } from "antd";
-window.message = message;
+// import { message } from "antd";
+// window.message = message;
 
 export default {
   ...utils,
@@ -13,5 +13,4 @@ export default {
   px: (num) =>{
     return num + 'px';
   },
-  message,
 };
