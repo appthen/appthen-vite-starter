@@ -1,4 +1,4 @@
-import * as utils from "@disscode/react/lib/utils/index.js";
+import * as utils from "@appthen/react/lib/utils/index.js";
 import * as localUtils from "./utils";
 import * as dataSource from "./dataSource";
 import * as routerUtils from "./router";

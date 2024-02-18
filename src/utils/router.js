@@ -1,4 +1,4 @@
-import { objectToQuery } from '@disscode/react/lib/utils/index.js';
+import { objectToQuery } from '@appthen/react/lib/utils/index.js';
 import { createHashHistory } from "history";
 export const history = createHashHistory();
 
