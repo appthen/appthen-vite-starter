@@ -11,8 +11,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@appthen/antd": "^1.0.1",
     "@appthen/react": "^1.0.1",
+    "@appthen/antd": "^1.0.1",
+    "@appthen/antd-pro": "^1.0.1",
     "antd": "^5.9.0",
     "axios": "^1.4.0",
     "history": "4.x",
