@@ -5,8 +5,6 @@ import { history } from "@/utils/router";
 import { componentDidMount } from '@/utils/utils';
 import '@/utils/portal';
 
-const index = lazy(async () => import("./pages/index"));
-
 const isHttps = document.location.protocol === "https:";
 if (import.meta?.env?.MODE !== "development" && !isHttps) {
   // window.location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
@@ -26,10 +24,6 @@ export default function App() {
     <HashRouter history={history}>
       <Suspense fallback={<LoadingOrError />}>
         <Switch>
-          <Route exact path="/">
-            <Redirect to="/index" />
-          </Route>
-          <Route path="/index" component={index} />
         </Switch>
       </Suspense>
     </HashRouter>
