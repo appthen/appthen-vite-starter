@@ -4,12 +4,11 @@ import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { history } from "@/utils/router";
 import { componentDidMount } from "@/utils/utils";
 import "@/utils/portal";
+import "./App.css";
 const isHttps = document.location.protocol === "https:";
-
 if (import.meta?.env?.MODE !== "development" && !isHttps) {
   // window.location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
-} // import VConsole from 'vconsole'
-// const vConsole = new VConsole({ theme: 'dark' })
+}
 
 export default function App() {
   useEffect(() => {
@@ -18,8 +17,7 @@ export default function App() {
   return (
     <HashRouter history={history}>
       <Suspense fallback={<LoadingOrError />}>
-        <Routes>
-        </Routes>
+        <Routes></Routes>
       </Suspense>
     </HashRouter>
   );
