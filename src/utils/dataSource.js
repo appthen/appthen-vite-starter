@@ -15,7 +15,7 @@ export function requestHandle(config) {
     const { contentType, params, method, headers = {} } = _options;
     let uri = _options.uri;
 
-    const { __query, __pathParams } = params;
+    const { __query, __pathParams } = params || {};
     if (__query) {
       if (uri.indexOf('?') > -1) {
         uri += '&';
