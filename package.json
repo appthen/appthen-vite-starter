@@ -1,7 +1,7 @@
 {
   "name": "appthen-vite-starter",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.4",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -39,6 +39,6 @@
   },
   "appthen": {
     "template": "vite",
-    "templateVersion": "0.0.3"
+    "templateVersion": "0.0.4"
   }
 }
