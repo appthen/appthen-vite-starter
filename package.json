@@ -36,5 +36,9 @@
     "sass-loader": "^13.3.1",
     "vite": "^4.3.9",
     "vite-svg-loader": "^4.0.0"
+  },
+  "appthen": {
+    "template": "vite",
+    "templateVersion": "0.0.3"
   }
 }

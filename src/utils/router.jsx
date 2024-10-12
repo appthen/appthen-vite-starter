@@ -1,6 +1,7 @@
 import { objectToQuery } from '@appthen/react/lib/utils/index.js';
 import { createHashHistory } from "history";
 export const history = createHashHistory();
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 export const navigateBack = history.back;
 export const navigateTo = (pageName, { query = {}, params } = {}) => {
@@ -19,3 +20,16 @@ export const redirectTo = (pageName, { query = {}, params } = {}) => {
     }${objectToQuery(query, false)}`
   );
 };
+
+export function withRouter(Component) {
+  function ComponentWithRouterProp(props) {
+      const location = useLocation();
+      const navigate = useNavigate();
+      const params = useParams();
+
+      return <Component {...props} router={{ location, navigate, params }} />;
+  }
+
+  return ComponentWithRouterProp;
+}
+
