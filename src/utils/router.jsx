@@ -1,4 +1,4 @@
-import { objectToQuery } from '@appthen/react/lib/utils/index.js';
+import { objectToQuery } from '@appthen/utils';
 import { createHashHistory } from "history";
 export const history = createHashHistory();
 import { useLocation, useNavigate, useParams } from 'react-router-dom';

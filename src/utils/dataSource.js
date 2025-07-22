@@ -1,5 +1,5 @@
 import axios from "axios";
-import { objectToQuery } from '@appthen/react/lib/utils/index.js';
+import { objectToQuery } from '@appthen/utils';
 
 // import * as utils from "./index";
 import { __beforeRequest, __afterRequest } from "./utils";

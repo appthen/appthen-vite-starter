@@ -1,4 +1,5 @@
-import { registerPartalComponent } from "@appthen/react/lib/utils/index.js";
+import { registerPartalComponent } from "@appthen/react";
 
-const partalComponentMaps = {};
+const partalComponentMaps = {
+};
 registerPartalComponent(partalComponentMaps);
