@@ -1,7 +1,7 @@
 {
   "name": "appthen-vite-starter",
   "private": true,
-  "version": "0.0.6",
+  "version": "0.0.7",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -42,7 +42,7 @@
     "sass": "^1.62.1",
     "sass-loader": "^13.3.1",
     "tailwindcss": "^3.4.17",
-    "vite": "^4.3.9",
+    "vite": "^4.5.14",
     "vite-svg-loader": "^4.0.0"
   },
   "appthen": {
